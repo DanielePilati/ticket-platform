@@ -40,20 +40,20 @@ public class Ticket {
 	@OneToMany(mappedBy = "ticket", cascade = CascadeType.REMOVE)
 	private List<Note> notes;
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public String getTitle() {
 		return title;
 	}
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public List<Note> getNotes() {
-		return notes;
-	}
-
-	public void setNotes(List<Note> notes) {
-		this.notes = notes;
 	}
 
 	public LocalDateTime getCreatedAt() {
@@ -64,28 +64,12 @@ public class Ticket {
 		this.createdAt = createdAt;
 	}
 
-	public User getUser() {
-		return user;
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public LocalDateTime getDate_creation() {
-		return createdAt;
-	}
-
-	public void setDate_creation(LocalDateTime date_creation) {
-		this.createdAt = date_creation;
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
 	}
 
 	public boolean isOpen() {
@@ -96,12 +80,22 @@ public class Ticket {
 		this.isOpen = isOpen;
 	}
 
-	public LocalDateTime getUpdatedAt() {
-		return updatedAt;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUpdatedAt(LocalDateTime updatedAt) {
-		this.updatedAt = updatedAt;
+	public void setUser(User user) {
+		this.user = user;
 	}
+
+	public List<Note> getNotes() {
+		return notes;
+	}
+
+	public void setNotes(List<Note> notes) {
+		this.notes = notes;
+	}
+
+
 
 }

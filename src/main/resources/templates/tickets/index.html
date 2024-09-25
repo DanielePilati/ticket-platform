@@ -5,11 +5,46 @@
 
 <body>
 
-	<header th:replace="~{fragments/page-settings :: header('home')}">
+	<header th:replace="~{fragments/page-settings :: header('tickets')}">
 
 	</header>
 
 	<main>
+
+		<th:block th:if="${tickets.size()} > 0">
+			<table class="table table-striped table-dark">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Title</th>
+						<th scope="col">Operator</th>
+						<th scope="col">Create Date</th>
+						<th scope="col">Update Date</th>
+						<th scope="col">Num Of Notes</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="ticket : ${tickets}">
+						<th scope="row" th:text="${ticket.id}"></th>
+						<td th:text="${ticket.title}"></td>
+						<td th:text="${ticket.user}"></td>
+						<td th:text="${ticket.createdAt}"></td>
+						<td th:text="${ticket.updatedAt}"></td>
+						<td th:text="${ticket.notes.size()}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</th:block>
+
+		<th:block th:unless="${tickets.size()} ">
+			<div class="container">
+				<div class="row justify-content-center">
+					<h2 class="text-center">No Tickets Found</h2>
+					<a class="btn btn-sm btn-dark col-2" th:href="@{/}">Return to Home</a>
+				</div>
+			</div>
+		</th:block>
+
 
 	</main>
 
