@@ -23,7 +23,7 @@ public class Note {
 	
 	@NotNull
 	@NotEmpty
-	@Column(columnDefinition="TEXT")
+	@Column( columnDefinition = "TEXT")
 	private String text;
 	
 	@NotNull
@@ -33,7 +33,7 @@ public class Note {
 	private LocalDateTime createdAt;
 	
 	@ManyToOne
-	@JoinColumn(name = "ticket_id", nullable = false)
+	@JoinColumn( name = "ticket_id", nullable = false)
 	private Ticket ticket;
 	
 	public Ticket getTicket() {

@@ -43,6 +43,8 @@ public class User {
 	@OneToMany( mappedBy = "user", cascade = CascadeType.REMOVE)
 	private List<Ticket> tickets;
 	
+	private boolean notAvalable;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -73,6 +75,30 @@ public class User {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	public boolean isNotAvalable() {
+		return notAvalable;
+	}
+
+	public void setNotAvalable(boolean notAvalable) {
+		this.notAvalable = notAvalable;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public List<Ticket> getTickets() {
+		return tickets;
+	}
+
+	public void setTickets(List<Ticket> tickets) {
+		this.tickets = tickets;
 	}
 
 }
