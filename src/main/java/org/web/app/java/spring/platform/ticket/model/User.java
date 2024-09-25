@@ -1,14 +1,18 @@
 package org.web.app.java.spring.platform.ticket.model;
 
 import java.util.List;
+import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
@@ -27,9 +31,17 @@ public class User {
 	@NotNull
 	@NotEmpty
 	private String password;
+	
+	@NotNull
+	@NotEmpty
+	@Email
+	private String email;
 
 	@ManyToMany( fetch = FetchType.EAGER)
-	private List<Role> roles;
+	private Set<Role> roles;
+	
+	@OneToMany( mappedBy = "user", cascade = CascadeType.REMOVE)
+	private List<Ticket> tickets;
 	
 	public Integer getId() {
 		return id;
@@ -55,11 +67,11 @@ public class User {
 		this.password = password;
 	}
 
-	public List<Role> getRoles() {
+	public Set<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(List<Role> roles) {
+	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
 
