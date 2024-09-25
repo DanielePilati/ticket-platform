@@ -12,10 +12,9 @@ public class UserService {
 
 	@Autowired
 	private UserRepository repo;
-	
-	public Optional<User> getByUsername(String username){
+
+	public Optional<User> getByUsername(String username) {
 		return repo.findByUsername(username);
 	}
-	
-	
+
 }

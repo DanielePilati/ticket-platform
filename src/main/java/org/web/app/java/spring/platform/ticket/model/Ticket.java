@@ -12,29 +12,42 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table( name = "tickets")
+@Table(name = "tickets")
 public class Ticket {
 
 	@Id
-	@GeneratedValue( strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
+	@NotNull
+	@NotEmpty
+	private String title;
+
 	private LocalDateTime createdAt;
-	
+
 	private LocalDateTime updatedAt;
-	
+
 	private boolean isOpen;
-	
+
 	@ManyToOne
-	@JoinColumn( name = "user_id", nullable = false)
+	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 
-	@OneToMany( mappedBy = "ticket", cascade = CascadeType.REMOVE)
+	@OneToMany(mappedBy = "ticket", cascade = CascadeType.REMOVE)
 	private List<Note> notes;
-	
-	
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public List<Note> getNotes() {
 		return notes;
 	}
@@ -90,5 +103,5 @@ public class Ticket {
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	
+
 }

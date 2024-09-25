@@ -17,32 +17,32 @@ public class SecurityConfiguration {
 	@SuppressWarnings("removal")
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		
+
 		http.authorizeHttpRequests()
 		.requestMatchers("/user").hasAuthority("USER")
 		.requestMatchers("/admin").hasAuthority("ADMIN")
 		.requestMatchers("/**").permitAll()
 		.and().formLogin()
 		.and().logout();
-		
+
 		return http.build();
 	}
-	
+
 	@Bean
 	DatabaseUserDetailService userDetailService() {
 		return new DatabaseUserDetailService();
 	}
-	
+
 	@Bean
 	PasswordEncoder passwordEncoder() {
 		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 	}
-	
+
 	@Bean
 	DaoAuthenticationProvider AuthenticationProvider() {
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 		provider.setUserDetailsService(userDetailService());
 		provider.setPasswordEncoder(passwordEncoder());
-		return provider;	
+		return provider;
 	}
 }

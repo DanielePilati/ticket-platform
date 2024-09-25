@@ -17,34 +17,34 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table( name = "users")
+@Table(name = "users")
 public class User {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@NotNull
 	@NotEmpty
 	private String username;
-	
+
 	@NotNull
 	@NotEmpty
 	private String password;
-	
+
 	@NotNull
 	@NotEmpty
 	@Email
 	private String email;
 
-	@ManyToMany( fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Role> roles;
-	
-	@OneToMany( mappedBy = "user", cascade = CascadeType.REMOVE)
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
 	private List<Ticket> tickets;
-	
+
 	private boolean notAvalable;
-	
+
 	public Integer getId() {
 		return id;
 	}

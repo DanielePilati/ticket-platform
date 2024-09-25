@@ -22,7 +22,7 @@ public class DatabaseUserDetails implements UserDetails {
 	private final boolean notAvalable;
 	private final List<Ticket> tickets;
 	private final Set<GrantedAuthority> authorities;
-	
+
 	public DatabaseUserDetails(User user) {
 		this.id = user.getId();
 		this.username = user.getUsername();
@@ -30,15 +30,15 @@ public class DatabaseUserDetails implements UserDetails {
 		this.email = user.getEmail();
 		this.notAvalable = user.isNotAvalable();
 		this.tickets = user.getTickets();
-		
+
 		authorities = new HashSet<GrantedAuthority>();
-		
-		for(Role role : user.getRoles()) {
+
+		for (Role role : user.getRoles()) {
 			authorities.add(new SimpleGrantedAuthority(role.getName()));
 		}
-		
+
 	}
-	
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return authorities;
@@ -46,7 +46,7 @@ public class DatabaseUserDetails implements UserDetails {
 
 	@Override
 	public String getPassword() {
-	
+
 		return this.password;
 	}
 

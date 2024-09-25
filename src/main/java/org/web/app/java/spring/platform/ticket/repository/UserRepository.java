@@ -8,6 +8,5 @@ import org.web.app.java.spring.platform.ticket.model.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
 	Optional<User> findByUsername(String username);
-		
 
 }

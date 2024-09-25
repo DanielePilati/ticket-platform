@@ -10,11 +10,9 @@ import ch.qos.logback.core.model.Model;
 @RequestMapping("/")
 public class MainController {
 
-	
 	@GetMapping()
 	public String home(Model model) {
-		
-		
+
 		return "/pages/home";
 	}
 }
