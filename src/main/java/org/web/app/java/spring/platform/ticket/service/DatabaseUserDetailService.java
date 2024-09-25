@@ -8,19 +8,18 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.web.app.java.spring.platform.ticket.model.User;
-import org.web.app.java.spring.platform.ticket.repository.UserRepository;
 import org.web.app.java.spring.platform.ticket.security.DatabaseUserDetails;
 
 @Service
 public class DatabaseUserDetailService implements UserDetailsService {
 
 	@Autowired
-	private UserRepository userRepo;
+	private UserService userService;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		Optional<User> user = userRepo.findByUsername(username);
+		Optional<User> user = userService.getByUsername(username);
 		
 		if(user.isPresent()) {
 			return new DatabaseUserDetails(user.get());
