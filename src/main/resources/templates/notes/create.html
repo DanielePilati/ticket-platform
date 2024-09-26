@@ -5,7 +5,7 @@
 
 <body>
 
-	<header th:replace="~{fragments/page-settings :: header('notes')}">
+	<header th:replace="~{fragments/page-settings :: header('tickets')}">
 
 	</header>
 
@@ -23,14 +23,14 @@
 						<input type="text" class="form-control my-2" id="inputTitle" aria-describedby="emailHelp"
 							placeholder="Insert text..." th:field="*{author}">
 						<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
-							<li th:each="err : ${#fields.errors('author')}" th:text="${err}" class="error " />
+							<li th:each="err : ${#fields.errors('author')}" th:text="${err}" class="error" />
 						</ul>
 					</div>
 					<div class="form-group">
 						<label for="ticketText"><b>Insert Text: </b></label>
 						<textarea class="form-control my-2" id="ticketText" rows="3" th:field="*{text}"></textarea>
 						<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
-							<li th:each="err : ${#fields.errors('text')}" th:text="${err}" class="error " />
+							<li th:each="err : ${#fields.errors('text')}" th:text="${err}" class="error" />
 						</ul>
 					</div>
 					<hr>
