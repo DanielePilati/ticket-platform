@@ -5,19 +5,21 @@
 
 <body>
 
-	<header th:replace="~{fragments/page-settings :: header('home')}">
+	<header th:replace="~{fragments/page-settings :: header('tickets')}">
 
 	</header>
 
 	<main>
 
 		<div class="container">
-			<div class="row">
+			<div class="row justify-content-center">
 				<h1 class="text-center mb-3">Ticket Creation</h1>
+				<hr>
 				<form id="ticketform" method="POST" th:action="@{/tickets/create}" th:object="${ticket}">
 					<div class="form-group mb-2">
+						<label for="inputTitle ms-2"><b>Title: </b></label>
 						<input type="text" class="form-control" id="inputTitle" aria-describedby="emailHelp"
-							placeholder="Enter Title" th:field="*{title}">
+							placeholder="Insert text..." th:field="*{title}">
 						<small id="inputTitleHelp" class="form-text text-muted ms-3">Try to be clear in your
 							explanation.</small>
 						<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
@@ -26,10 +28,10 @@
 					</div>
 					<hr>
 					<div class="form-check1 mb-2">
-					<label for="form-check1 me-2"><b>Select Statement: </b></label>
+						<label for="form-check1 me-2"><b>Select Statement: </b></label>
 						<th:block th:each="state : ${states}">
-							<input class="form-check-input" type="radio" th:name="|flexRadio_${state}|" th:id="|flexRadio_${state}|"
-								th:value="${state}" th:field="${ticket.state}">
+							<input class="form-check-input" type="radio" th:name="|flexRadio_${state}|"
+								th:id="|flexRadio_${state}|" th:value="${state}" th:field="${ticket.state}">
 							<label class="form-check-label me-2" th:for="|flexRadio_${state}|">
 								[[${state}]]
 							</label>
@@ -37,10 +39,10 @@
 					</div>
 					<hr>
 					<div class="form-check2 mb-2">
-					<label for="form-check2 me-2"><b>Assign Operator: </b></label>
+						<label for="form-check2 me-2"><b>Assign Operator: </b></label>
 						<th:block th:each="user : ${availableUsers}">
-							<input class="form-check-input" type="radio" th:name="|flexRadio_${user.username}|" th:id="|flexRadio_${user.username}|"
-								th:value="${user.id}" th:field="${ticket.user}">
+							<input class="form-check-input" type="radio" th:name="|flexRadio_${user.username}|"
+								th:id="|flexRadio_${user.username}|" th:value="${user.id}" th:field="${ticket.user}">
 							<label class="form-check-label me-2" th:for="|flexRadio_${user.username}|">
 								[[${user.username}]]
 							</label>

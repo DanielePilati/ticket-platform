@@ -47,10 +47,10 @@ public class TicketController {
 	}
 	
 	@GetMapping("/search/")
-	public String search(@RequestParam(name = "title") String title, Model model) {
+	public String search(@RequestParam(name = "title") String title, Model model,RedirectAttributes attributes) {
 
 		model.addAttribute("search", new Ticket());
-		model.addAttribute("tickets", ticketService.getByTitle(title));
+		model.addAttribute("tickets", ticketService.getByTitle(title));		
 
 		return "/tickets/index";
 	}
