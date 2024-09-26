@@ -19,7 +19,7 @@ public class DatabaseUserDetails implements UserDetails {
 	private final String username;
 	private final String password;
 	private final String email;
-	private final boolean notAvalable;
+	private final boolean notAvailable;
 	private final List<Ticket> tickets;
 	private final Set<GrantedAuthority> authorities;
 
@@ -28,7 +28,7 @@ public class DatabaseUserDetails implements UserDetails {
 		this.username = user.getUsername();
 		this.password = user.getPassword();
 		this.email = user.getEmail();
-		this.notAvalable = user.isNotAvalable();
+		this.notAvailable = user.isNotAvailable();
 		this.tickets = user.getTickets();
 
 		authorities = new HashSet<GrantedAuthority>();
@@ -63,8 +63,8 @@ public class DatabaseUserDetails implements UserDetails {
 		return this.email;
 	}
 
-	public boolean isNotAvalable() {
-		return this.notAvalable;
+	public boolean isNotAvailable() {
+		return this.notAvailable;
 	}
 
 	public List<Ticket> getTickets() {

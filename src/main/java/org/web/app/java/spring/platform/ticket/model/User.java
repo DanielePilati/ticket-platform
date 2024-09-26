@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -43,7 +44,8 @@ public class User {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
 	private List<Ticket> tickets;
 
-	private boolean notAvalable;
+	@Column(name = "not_available")
+	private boolean notAvailable;
 
 	public Integer getId() {
 		return id;
@@ -77,12 +79,12 @@ public class User {
 		this.roles = roles;
 	}
 
-	public boolean isNotAvalable() {
-		return notAvalable;
+	public boolean isNotAvailable() {
+		return notAvailable;
 	}
 
-	public void setNotAvalable(boolean notAvalable) {
-		this.notAvalable = notAvalable;
+	public void setNotAvailable(boolean notAvailable) {
+		this.notAvailable = notAvailable;
 	}
 
 	public String getEmail() {

@@ -28,7 +28,7 @@ public class TicketService {
 		return repo.findById(id);
 	}
 
-	public Optional<Ticket> getByTitle(String title) {
+	public List<Ticket> getByTitle(String title) {
 		return repo.findByTitleIgnoreCaseContains(title);
 	}
 
@@ -38,7 +38,7 @@ public class TicketService {
 
 		if (ticket.getUser() == null) {
 			for (User user : userRepo.findAll()) {
-				if (!user.isNotAvalable()) {
+				if (!user.isNotAvailable()) {
 					ticket.setUser(user);
 					break;
 				}

@@ -10,40 +10,55 @@
 	</header>
 
 	<main>
-
-		<th:block th:if="${tickets.size()} > 0">
-			<table class="table table-striped table-dark">
-				<thead>
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">Title</th>
-						<th scope="col">Operator</th>
-						<th scope="col">Create Date</th>
-						<th scope="col">Num Of Notes</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="ticket : ${tickets}">
-						<th scope="row" th:text="${ticket.id}"></th>
-						<td th:text="${ticket.title}"></td>
-						<td th:text="${ticket.user.username}"></td>
-						<td th:text="${ticket.createdAt}"></td>
-						<td th:text="${ticket.notes.size()}"></td>
-					</tr>
-				</tbody>
-			</table>
-		</th:block>
-
-		<th:block th:unless="${tickets.size()} ">
-			<div class="container">
-				<div class="row justify-content-center">
-					<h2 class="text-center">No Tickets Found</h2>
-					<a class="btn btn-sm btn-dark col-2" th:href="@{/}">Return to Home</a>
-				</div>
+		<div class="container">
+			<div class="row">
+				<h1 class="text-center mb-3">Tickets List</h1>
+				<th:block th:if="${tickets.size()} > 0">
+					<!--SEARCH-->
+					<div class="row my-3 ms-2 justify-content-end">
+						<a class="col-auto btn btn-dark" th:href="@{/tickets/create}" data-toggle="tooltip"
+							title="Add Ticket">&#43; &#127915;</a>
+						<form class="col-auto d-flex ms-auto" th:action="@{/tickets/search/}" method="get">
+							<a class="col-auto btn btn-dark me-2" th:href="@{/tickets}" data-toggle="tooltip"
+								title="Reset Research">&#10227; Reset</a>
+							<input class="form-control me-2" placeholder="Search" aria-label="Search" value=""
+								th:field="${search.title}">
+							<button class="btn btn-dark" type="submit">Submit</button>
+						</form>
+					</div>
+					<table class="table table-striped table-dark mb-3">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Title</th>
+								<th scope="col">Operator</th>
+								<th scope="col">Notes</th>
+								<th scope="col">State</th>
+								<th scope="col">Create Date</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="ticket : ${tickets}">
+								<th scope="row" th:text="${ticket.id}"></th>
+								<td th:text="${ticket.title}"></td>
+								<td th:text="${ticket.user.username}"></td>
+								<td th:text="${ticket.notes.size()}"></td>
+								<td th:text="${ticket.state}"></td>
+								<td th:text="${ticket.createdAt}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</th:block>
+				<th:block th:unless="${tickets.size()} ">
+					<div class="container">
+						<div class="row justify-content-center">
+							<h2 class="text-center mb-3">No Tickets Found</h2>
+							<a class="btn btn-sm btn-dark col-2 mb-3" th:href="@{/}">Return to Home</a>
+						</div>
+					</div>
+				</th:block>
 			</div>
-		</th:block>
-
-
+		</div>
 	</main>
 
 	<footer>

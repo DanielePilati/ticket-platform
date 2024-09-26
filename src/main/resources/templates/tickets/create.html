@@ -13,29 +13,44 @@
 
 		<div class="container">
 			<div class="row">
+				<h1 class="text-center mb-3">Ticket Creation</h1>
 				<form id="ticketform" method="POST" th:action="@{/tickets/create}" th:object="${ticket}">
-					<div class="form-group">
-						<label for="inputTitle">Insert Title</label>
+					<div class="form-group mb-2">
 						<input type="text" class="form-control" id="inputTitle" aria-describedby="emailHelp"
 							placeholder="Enter Title" th:field="*{title}">
-						<small id="inputTitleHelp" class="form-text text-muted">Try to be clear in your
+						<small id="inputTitleHelp" class="form-text text-muted ms-3">Try to be clear in your
 							explanation.</small>
 						<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
 							<li th:each="err : ${#fields.errors('title')}" th:text="${err}" class="error " />
 						</ul>
 					</div>
-					<th:block th:each="state : ${states}">
-						<label for="form-check">Insert Title</label>
-						<div class="form-check">
-							<input class="form-check-input" type="radio" name="flexRadio" id="flexRadio"
+					<hr>
+					<div class="form-check1 mb-2">
+					<label for="form-check1 me-2"><b>Select Statement: </b></label>
+						<th:block th:each="state : ${states}">
+							<input class="form-check-input" type="radio" th:name="|flexRadio_${state}|" th:id="|flexRadio_${state}|"
 								th:value="${state}" th:field="${ticket.state}">
-							<label class="form-check-label" for="flexRadio">
+							<label class="form-check-label me-2" th:for="|flexRadio_${state}|">
 								[[${state}]]
 							</label>
-						</div>
-					</th:block>
-					<button type="submit" class="btn btn-dark">Submit</button>
-					<button type="reset" class="btn btn-dark">Reset</button>
+						</th:block>
+					</div>
+					<hr>
+					<div class="form-check2 mb-2">
+					<label for="form-check2 me-2"><b>Assign Operator: </b></label>
+						<th:block th:each="user : ${availableUsers}">
+							<input class="form-check-input" type="radio" th:name="|flexRadio_${user.username}|" th:id="|flexRadio_${user.username}|"
+								th:value="${user.id}" th:field="${ticket.user}">
+							<label class="form-check-label me-2" th:for="|flexRadio_${user.username}|">
+								[[${user.username}]]
+							</label>
+						</th:block>
+					</div>
+					<hr>
+					<div class="">
+						<button type="submit" class="btn btn-dark">Submit</button>
+						<a th:href="@{/tickets/create}" class="btn btn-dark">Reset</a>
+					</div>
 				</form>
 			</div>
 		</div>

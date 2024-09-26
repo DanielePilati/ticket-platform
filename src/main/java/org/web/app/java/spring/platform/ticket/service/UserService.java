@@ -1,5 +1,6 @@
 package org.web.app.java.spring.platform.ticket.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,10 @@ public class UserService {
 
 	public Optional<User> getByUsername(String username) {
 		return repo.findByUsername(username);
+	}
+	
+	public List<User> getUsersAvailable(){
+		return repo.findAvailableUser();
 	}
 
 }
