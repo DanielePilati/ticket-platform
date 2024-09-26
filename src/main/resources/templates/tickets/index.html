@@ -11,11 +11,11 @@
 
 	<main>
 		<div class="container">
-			<class="row justify-content-center">
+			<div class="row justify-content-center">
 				<h1 class="text-center mb-3">Tickets List</h1>
 				<hr>
 				<!--SEARCH-->
-				<form class="d-flex ms-auto row-wrap gap-2" th:action="@{/tickets/search/}" method="get">
+				<form class="d-flex ms-auto row-wrap mb-3 gap-2" th:action="@{/tickets/search/}" method="get">
 					<a class="col-auto btn btn-dark" th:href="@{/tickets/create}" data-toggle="tooltip"
 						title="Add Ticket">&#43; &#127915;</a>
 					<input class="form-control" placeholder="Insert a new ticket to search..." aria-label="Search"
@@ -24,7 +24,6 @@
 					<a class="col-auto btn btn-dark" th:href="@{/tickets}" data-toggle="tooltip"
 						title="Reset Research">&#10227; Reset</a>
 				</form>
-				</br>
 				<th:block th:if="${tickets.size()} > 0">
 					<table class="table table-striped table-dark mb-3">
 						<thead>
@@ -64,7 +63,7 @@
 				<th:block th:unless="${tickets.size()}">
 					<h2 class="text-center">No Tickets Found</b></h2>
 				</th:block>
-		</div>
+			</div>
 		</div>
 	</main>
 

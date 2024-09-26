@@ -20,36 +20,42 @@
 						<label for="inputTitle ms-2"><b>Title: </b></label>
 						<input type="text" class="form-control" id="inputTitle" aria-describedby="emailHelp"
 							placeholder="Insert text..." th:field="*{title}">
-						<small id="inputTitleHelp" class="form-text text-muted ms-3">Try to be clear in your
-							explanation.</small>
 						<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
 							<li th:each="err : ${#fields.errors('title')}" th:text="${err}" class="error " />
 						</ul>
 					</div>
 					<hr>
-					<div class="form-check1 mb-2">
-						<label for="form-check1 me-2"><b>Select Statement: </b></label>
+					<div class="form-group">
+						<label for="ticketText"><b>Insert Text: </b></label>
+						<textarea class="form-control" id="ticketText" rows="3" th:field="*{text}"></textarea>
+						<small id="inputTextHelp" class="form-text text-muted ms-3">Try to be clear in your
+							explanation.</small>
+						<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
+							<li th:each="err : ${#fields.errors('text')}" th:text="${err}" class="error " />
+						</ul>
+					</div>
+					<hr>
+					<label for="form-check1"><b>Select Statement:</b></label>
+					<div class="form-check1 my-2">
 						<th:block th:each="state : ${states}">
-							<input class="form-check-input" type="radio" th:name="|flexRadio_${state}|"
-								th:id="|flexRadio_${state}|" th:value="${state}" th:field="${ticket.state}">
-							<label class="form-check-label me-2" th:for="|flexRadio_${state}|">
-								[[${state}]]
-							</label>
+							<input type="radio" class="btn-check" name="|options_${state}|" th:id="|option_${state}|"
+								autocomplete="off" th:value="${state}" th:field="${ticket.state}">
+							<label class="btn btn-sm btn-outline-dark" th:for="|option_${state}|">[[${state}]]</label>
 						</th:block>
 					</div>
 					<hr>
-					<div class="form-check2 mb-2">
-						<label for="form-check2 me-2"><b>Assign Operator: </b></label>
+					<label for="form-check2"><b>Available Operators:</b></label>
+					<div class="form-check2 my-2">
 						<th:block th:each="user : ${availableUsers}">
-							<input class="form-check-input" type="radio" th:name="|flexRadio_${user.username}|"
-								th:id="|flexRadio_${user.username}|" th:value="${user.id}" th:field="${ticket.user}">
-							<label class="form-check-label me-2" th:for="|flexRadio_${user.username}|">
-								[[${user.username}]]
-							</label>
+							<input type="radio" class="btn-check" name="|options_${user.username}|"
+								th:id="|option_${user.username}|" autocomplete="off" th:value="${user.id}"
+								th:field="${ticket.user}">
+							<label class="btn btn-sm btn-outline-dark"
+								th:for="|option_${user.username}|">[[${user.username}]]</label>
 						</th:block>
 					</div>
 					<hr>
-					<div class="">
+					<div>
 						<button type="submit" class="btn btn-dark">Submit</button>
 						<a th:href="@{/tickets/create}" class="btn btn-dark">Reset</a>
 					</div>

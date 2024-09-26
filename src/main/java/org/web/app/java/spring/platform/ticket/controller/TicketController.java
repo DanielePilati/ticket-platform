@@ -38,10 +38,10 @@ public class TicketController {
 		return "/tickets/index";
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/show/{id}")
 	public String show(@PathVariable(name = "id") Integer id, Model model) {
 
-		model.addAttribute("tickets", ticketService.getById(id).get());
+		model.addAttribute("ticket", ticketService.getById(id).get());
 
 		return "/tickets/show";
 	}
@@ -82,6 +82,7 @@ public class TicketController {
 		return "redirect:/tickets";
 
 	}
+
 	
 	
 
