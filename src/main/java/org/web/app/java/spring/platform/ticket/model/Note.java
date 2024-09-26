@@ -11,7 +11,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table( name = "notes")
@@ -21,12 +20,10 @@ public class Note {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@NotNull
 	@NotEmpty
 	@Column( columnDefinition = "TEXT")
 	private String text;
 	
-	@NotNull
 	@NotEmpty
 	private String author;
 	

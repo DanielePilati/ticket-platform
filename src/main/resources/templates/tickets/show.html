@@ -11,35 +11,50 @@
 	<main>
 		<div class="container">
 			<div class="row justify-content-center">
-				<h1 class="text-center mb-3">Ticket view</h1>
+				<h1 class="col-12 text-center mb-3">Ticket view</h1>
 				<hr>
-				<div class="card text-center" style="width: 30rem;" th:object="${ticket}">
-					<div class="card-header bg-white">
-						Showing Ticket: #[[*{id}]]
-					</div>
-					<div class="card-body">
-						<h5 class="card-title">[[*{title}]]</h5>
-						<p class="card-text">[[*{text}]]</p>
-						<th:block th:if="*{notes.size()} > 0">
-							<hr>
-							<ul th:each="note : *{notes}">
-								<li>Author: [[${note.author}]]</li>
-								<li>Note: [[${note.text}]]</li>
-								<li>Created at: [[${note.createdAt}]]</li>
-							</ul>
-						</th:block>
-						<hr>
-						<div class="row wrap justify-content-center gap-2">
-							<a class="col-auto btn btn-sm btn-dark" th:href="@{/notes/create}" data-toggle="tooltip"
-								title="Add Note">&#43; &#128456;</a>
-							<a class="col-auto btn btn-sm btn-dark" th:href="@{/tickets/edit/{id}(id=${ticket.id})}"
-								data-toggle="tooltip" title="Edit">&#9998;</a>
-							<a class="col-auto btn btn-sm btn-dark" th:href="@{/tickets/delete/{id}(id=${ticket.id})}"
-								data-toggle="tooltip" title="Delete">&#x1F5D1;</a>
+				<div class="col-auto">
+					<div class="card text-center" style="width: 30rem;" th:object="${ticket}">
+						<div class="card-header bg-white">
+							Showing Ticket: #[[*{id}]]
+						</div>
+						<div class="card-body">
+							<h5 class="card-title">[[*{title}]]</h5>
+							<p class="card-text">[[*{text}]]</p>
+						</div>
+						<div class="card-footer bg-white text-muted">
+							<div class="row justify-content-between">
+								<h6 class="col-auto">Created at: [[*{createdAt}]]</h6>
+								<div class="col-auto">
+									<a class=" btn btn-sm btn-dark" th:href="@{/tickets/edit/{id}(id=${ticket.id})}"
+										data-toggle="tooltip" title="Edit">&#9998;</a>
+									<a class="btn btn-sm btn-dark" th:href="@{/tickets/delete/{id}(id=${ticket.id})}"
+										data-toggle="tooltip" title="Delete">&#x1F5D1;</a>
+								</div>
+							</div>
 						</div>
 					</div>
-					<div class="card-footer bg-white text-muted">
-						Created at: [[*{createdAt}]]
+				</div>
+				<div class="col-auto">
+					<div class="card text-center" style="width: 30rem;" th:object="${ticket}">
+						<div class="card-header bg-white mb-3">
+							Notes
+						</div>
+						<th:block th:if="*{notes.size()} > 0">
+							<ul class="col-12 text-start" th:each="note : *{notes}">
+								<li><b>Author:</b> [[${note.author}]]</li>
+								<li><b>Note:</b> [[${note.text}]]</li>
+								<li><b>Created at:</b> [[${note.createdAt}]]</li>
+							</ul>
+						</th:block>
+						<th:block th:unless="*{notes.size()} > 0">
+							<h5> No notes present</h5>
+						</th:block>
+						<div class="card-footer bg-white text-end">
+							<a class="btn btn-sm btn-dark" th:href="@{/tickets/show/{id}/addnote(id=${ticket.id})}"
+								data-toggle="tooltip" title="Add Note">&#43;
+								&#128456;</a>
+						</div>
 					</div>
 				</div>
 			</div>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.web.app.java.spring.platform.ticket.model.Note;
 import org.web.app.java.spring.platform.ticket.model.Ticket;
 import org.web.app.java.spring.platform.ticket.service.TicketService;
 import org.web.app.java.spring.platform.ticket.service.UserService;
@@ -45,7 +46,17 @@ public class TicketController {
 
 		return "/tickets/show";
 	}
-
+	
+	@GetMapping("/show/{id}/addnote")
+	public String createNote(@PathVariable(name = "id") Integer id, Model model) {
+		
+		Note note = new Note();
+		note.setTicket(ticketService.getById(id).get());
+		model.addAttribute("note", note );
+		
+		return "/notes/create";
+	}
+	
 	@GetMapping("/search/")
 	public String search(@RequestParam(name = "title") String title, Model model) {
 

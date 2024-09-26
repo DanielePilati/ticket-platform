@@ -17,6 +17,7 @@
 				<hr>
 				<form id="ticketform" method="POST" th:action="@{/tickets/edit/{id}(id=${ticket.id})}" th:object="${ticket}"
 					style="width: 30rem;">
+					<input type="hidden" th:field="*{createdAt}"></input>
 					<!--TITLE-->
 					<div class="form-group mb-2">
 						<label for="inputTitle ms-2"><b>Title: </b></label>
