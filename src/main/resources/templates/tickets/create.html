@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/page-settings :: head}"></head>
+
+<body>
+
+	<header th:replace="~{fragments/page-settings :: header('home')}">
+
+	</header>
+
+	<main>
+
+		<div class="container">
+			<div class="row">
+				<form id="ticketform" method="POST" th:action="@{/tickets/create}" th:object="${ticket}">
+					<div class="form-group">
+						<label for="inputTitle">Insert Title</label>
+						<input type="text" class="form-control" id="inputTitle" aria-describedby="emailHelp"
+							placeholder="Enter Title" th:field="*{title}">
+						<small id="inputTitleHelp" class="form-text text-muted">Try to be clear in your
+							explanation.</small>
+						<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
+							<li th:each="err : ${#fields.errors('title')}" th:text="${err}" class="error " />
+						</ul>
+					</div>
+					<th:block th:each="state : ${states}">
+						<label for="form-check">Insert Title</label>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="flexRadio" id="flexRadio"
+								th:value="${state}" th:field="${ticket.state}">
+							<label class="form-check-label" for="flexRadio">
+								[[${state}]]
+							</label>
+						</div>
+					</th:block>
+					<button type="submit" class="btn btn-dark">Submit</button>
+					<button type="reset" class="btn btn-dark">Reset</button>
+				</form>
+			</div>
+		</div>
+
+	</main>
+
+	<footer>
+
+	</footer>
+</body>
+
+<th:block th:replace="~{fragments/page-settings :: scripts}"></th:block>
+
+</html>

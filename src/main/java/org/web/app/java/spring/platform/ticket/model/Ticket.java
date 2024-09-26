@@ -29,9 +29,7 @@ public class Ticket {
 
 	private LocalDateTime createdAt;
 
-	private LocalDateTime updatedAt;
-
-	private boolean isOpen;
+	private String state;
 
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
@@ -64,22 +62,6 @@ public class Ticket {
 		this.createdAt = createdAt;
 	}
 
-	public LocalDateTime getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(LocalDateTime updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-
-	public boolean isOpen() {
-		return isOpen;
-	}
-
-	public void setOpen(boolean isOpen) {
-		this.isOpen = isOpen;
-	}
-
 	public User getUser() {
 		return user;
 	}
@@ -94,6 +76,14 @@ public class Ticket {
 
 	public void setNotes(List<Note> notes) {
 		this.notes = notes;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 

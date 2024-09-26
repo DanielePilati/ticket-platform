@@ -19,7 +19,6 @@
 						<th scope="col">Title</th>
 						<th scope="col">Operator</th>
 						<th scope="col">Create Date</th>
-						<th scope="col">Update Date</th>
 						<th scope="col">Num Of Notes</th>
 					</tr>
 				</thead>
@@ -27,9 +26,8 @@
 					<tr th:each="ticket : ${tickets}">
 						<th scope="row" th:text="${ticket.id}"></th>
 						<td th:text="${ticket.title}"></td>
-						<td th:text="${ticket.user}"></td>
+						<td th:text="${ticket.user.username}"></td>
 						<td th:text="${ticket.createdAt}"></td>
-						<td th:text="${ticket.updatedAt}"></td>
 						<td th:text="${ticket.notes.size()}"></td>
 					</tr>
 				</tbody>
