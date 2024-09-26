@@ -51,5 +51,9 @@ public class TicketService {
 	public Ticket updateTicket(Ticket ticket) {
 		return repo.save(ticket);
 	}
+	
+	public void deleteById(Integer id) {
+		 repo.deleteById(id);;
+	}
 
 }

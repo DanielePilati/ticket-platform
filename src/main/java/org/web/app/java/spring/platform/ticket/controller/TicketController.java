@@ -47,7 +47,7 @@ public class TicketController {
 	}
 
 	@GetMapping("/search/")
-	public String search(@RequestParam(name = "title") String title, Model model, RedirectAttributes attributes) {
+	public String search(@RequestParam(name = "title") String title, Model model) {
 
 		model.addAttribute("search", new Ticket());
 		model.addAttribute("tickets", ticketService.getByTitle(title));
@@ -104,6 +104,15 @@ public class TicketController {
 		}
 
 		ticketService.updateTicket(formTicket);
+
+		return "redirect:/tickets";
+	}
+	
+
+	@GetMapping("/delete/{id}")
+	public String delete(Model model, @PathVariable("id") Integer id, RedirectAttributes attributes) {
+
+		ticketService.deleteById(id);
 
 		return "redirect:/tickets";
 	}
