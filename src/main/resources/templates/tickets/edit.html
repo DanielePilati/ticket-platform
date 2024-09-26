@@ -15,8 +15,9 @@
 			<div class="row justify-content-center">
 				<h1 class="text-center mb-3">Ticket Creation</h1>
 				<hr>
-				<form id="ticketform" method="POST" th:action="@{/tickets/create}" th:object="${ticket}"
+				<form id="ticketform" method="POST" th:action="@{/tickets/edit/{id}(id=${ticket.id})}" th:object="${ticket}"
 					style="width: 30rem;">
+					<!--TITLE-->
 					<div class="form-group mb-2">
 						<label for="inputTitle ms-2"><b>Title: </b></label>
 						<input type="text" class="form-control my-2" id="inputTitle" aria-describedby="emailHelp"
@@ -25,6 +26,7 @@
 							<li th:each="err : ${#fields.errors('title')}" th:text="${err}" class="error " />
 						</ul>
 					</div>
+					<!--TEXT-->
 					<div class="form-group">
 						<label for="ticketText"><b>Insert Text: </b></label>
 						<textarea class="form-control my-2" id="ticketText" rows="3" th:field="*{text}"></textarea>
@@ -35,6 +37,7 @@
 						</ul>
 					</div>
 					<hr>
+					<!--STATE-->
 					<label for="form-check1"><b>Select Statement:</b></label>
 					<div class="form-check1 my-2">
 						<th:block th:each="state : ${states}">
@@ -44,6 +47,7 @@
 						</th:block>
 					</div>
 					<hr>
+					<!--OPERATORS-->
 					<th:block th:if="${availableUsers.size()} > 0">
 						<label for="form-check2"><b>Available Operators:</b></label>
 						<div class="form-check2 my-2">
@@ -55,10 +59,11 @@
 									th:for="|option_${user.username}|">[[${user.username}]]</label>
 							</th:block>
 						</div>
+					</th:block>
 					<hr>
 					<div>
 						<button type="submit" class="btn btn-dark">Submit</button>
-						<a th:href="@{/tickets/create}" class="btn btn-dark">Reset</a>
+						<a th:href="@{/tickets/edit/{id}(id=*{id})}" class="btn btn-dark">Reset</a>
 					</div>
 				</form>
 			</div>

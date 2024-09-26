@@ -23,11 +23,11 @@ public class TicketController {
 
 	@Autowired
 	private TicketService ticketService;
-	
+
 	@Autowired
 	private UserService userService;
-	
-	private final String[] TICKET_STATES = {"ToDo", "InProgress", "Completed"};
+
+	private final String[] TICKET_STATES = { "ToDo", "InProgress", "Completed" };
 
 	@GetMapping()
 	public String index(Model model, RedirectAttributes attributes) {
@@ -45,26 +45,26 @@ public class TicketController {
 
 		return "/tickets/show";
 	}
-	
+
 	@GetMapping("/search/")
-	public String search(@RequestParam(name = "title") String title, Model model,RedirectAttributes attributes) {
+	public String search(@RequestParam(name = "title") String title, Model model, RedirectAttributes attributes) {
 
 		model.addAttribute("search", new Ticket());
-		model.addAttribute("tickets", ticketService.getByTitle(title));		
+		model.addAttribute("tickets", ticketService.getByTitle(title));
 
 		return "/tickets/index";
 	}
-	
+
 	@GetMapping("/create")
 	public String create(Model model) {
 
 		model.addAttribute("ticket", new Ticket());
 		model.addAttribute("states", this.TICKET_STATES);
 		model.addAttribute("availableUsers", userService.getUsersAvailable());
-		
+
 		return "/tickets/create";
 	}
-	
+
 	@PostMapping("/create")
 	public String store(@Valid @ModelAttribute("ticket") Ticket formTicket, BindingResult br, Model model,
 			RedirectAttributes attributes) {
@@ -74,16 +74,38 @@ public class TicketController {
 			model.addAttribute("availableUsers", userService.getUsersAvailable());
 			return "/tickets/create";
 		}
-		
+
 		ticketService.saveTicket(formTicket);
-		
-		attributes.addFlashAttribute("tickets", ticketService.getAll());	
-		
+
+		attributes.addFlashAttribute("tickets", ticketService.getAll());
+
 		return "redirect:/tickets";
 
 	}
 
-	
-	
+	@GetMapping("/edit/{id}")
+	public String edit(@PathVariable(name = "id") Integer id, Model model) {
+
+		model.addAttribute("ticket", ticketService.getById(id).get());
+		model.addAttribute("states", this.TICKET_STATES);
+		model.addAttribute("availableUsers", userService.getUsersAvailable());
+
+		return "/tickets/edit";
+	}
+
+	@PostMapping("/edit/{id}")
+	public String update(@Valid @ModelAttribute("ticket") Ticket formTicket, BindingResult br, Model model,
+			RedirectAttributes attributes) {
+		
+		if (br.hasErrors()) {
+			model.addAttribute("states", this.TICKET_STATES);
+			model.addAttribute("availableUsers", userService.getUsersAvailable());
+			return "/tickets/edit";
+		}
+
+		ticketService.updateTicket(formTicket);
+
+		return "redirect:/tickets";
+	}
 
 }
