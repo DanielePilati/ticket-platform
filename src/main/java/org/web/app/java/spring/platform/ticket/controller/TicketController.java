@@ -1,6 +1,7 @@
 package org.web.app.java.spring.platform.ticket.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -48,10 +49,11 @@ public class TicketController {
 	}
 	
 	@GetMapping("/show/{id}/addnote")
-	public String createNote(@PathVariable(name = "id") Integer id, Model model) {
+	public String createNote(@PathVariable(name = "id") Integer id, Model model, Authentication authentication) {
 		
 		Note note = new Note();
 		note.setTicket(ticketService.getById(id).get());
+		note.setAuthor(authentication.getName());
 		model.addAttribute("note", note );
 		
 		return "/notes/create";

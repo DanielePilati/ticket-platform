@@ -1,6 +1,7 @@
 package org.web.app.java.spring.platform.ticket.model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -95,6 +96,13 @@ public class Ticket {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+	
+	public String getDateFormatted() {
+			
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyy");
+	
+		return  this.getCreatedAt().format(formatter);
 	}
 
 

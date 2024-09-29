@@ -1,6 +1,7 @@
 package org.web.app.java.spring.platform.ticket.model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -71,6 +72,13 @@ public class Note {
 
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
+	}
+	
+	public String getDateFormatted() {
+		
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyy");
+	
+		return  this.getCreatedAt().format(formatter);
 	}
 
 }
