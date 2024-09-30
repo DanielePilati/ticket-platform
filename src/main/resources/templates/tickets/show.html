@@ -5,69 +5,97 @@
 
 <body>
 
-	<header th:replace="~{fragments/page-settings :: header('tickets')}">
-	</header>
+	<!--HEADER-->
+	<header th:replace="~{fragments/page-settings :: header('tickets')}"></header>
 
 	<main>
 		<div class="container">
 			<div class="row justify-content-center">
+
+				<!--TITLE-->
 				<h1 class="col-12 text-center mb-3">Ticket view</h1>
 				<hr>
+
+				<!--ACTION BAR-->
 				<div class="col-12 text-center mb-3">
+					<!--BACK BUTTON-->
+					<a class="btn btn-sm btn-dark" th:href="@{/tickets}" style="width: 15rem;" data-toggle="tooltip"
+						title="Back">&#8629;</a>
+					<!--ADD NOTE BUTTON-->
 					<a class="btn btn-sm btn-dark" th:href="@{/tickets/show/{id}/addnote(id=${ticket.id})}"
 						style="width: 15rem;" data-toggle="tooltip" title="Add Note">&#43;
 						&#128456;</a>
+					<!--EDIT TICKET BUTTON-->
 					<a sec:authorize="hasAuthority('ADMIN')" class=" btn btn-sm btn-dark" style="width: 15rem;"
-						th:href="@{/tickets/edit/{id}(id=${ticket.id})}" data-toggle="tooltip" title="Edit">&#9998;</a>
+						th:href="@{/tickets/edit/{id}(id=${ticket.id})}" data-toggle="tooltip"
+						title="Edit Ticket">&#9998;</a>
+					<!--DELETE TICKET BUTTON-->
 					<a sec:authorize="hasAuthority('ADMIN')" class="btn btn-sm btn-dark" style="width: 15rem;"
 						th:href="@{/tickets/delete/{id}(id=${ticket.id})}" data-toggle="tooltip"
 						title="Delete">&#x1F5D1;</a>
 				</div>
+
+				<!--TICKET CARD-->
 				<div class="col-auto">
 					<div class="card text-center" style="width: 30rem;" th:object="${ticket}">
+						<!--TICKET CARD HEADER-->
 						<div class="card-header bg-white">
 							<h6 class="card-title">Operator: <span sec:authentication="name"></span></a></h6>
 						</div>
+						<!--TICKET CARD BODY-->
 						<div class="card-body">
 							<h5 class="card-title">[[*{title}]]</h5>
 							<p class="card-text">[[*{text}]]</p>
 						</div>
+						<!--TICKET CARD FOOTER-->
 						<div class="card-footer bg-white text-muted">
 							<div class="row justify-content-between">
 								<h6 class="col-auto">Created at: [[*{getDateFormatted()}]]</h6>
-								<span class="col-auto">Status: <b th:classappend="${ticket.state == 'Complete' ? 'text-success' : 'text-danger'}">[[*{state}]]</b></span>
+								<!--STATUS COLOR SWITCH-->
+								<th:block th:switch="${ticket.state}">
+									<span th:case="'Completed'" class="col-auto">Status: <b
+											class="text-success">[[*{state}]]</b></span>
+									<span th:case="'ToDo'" class="col-auto">Status: <b
+											class="text-danger">[[*{state}]]</b></span>
+									<span th:case="'InProgress'" class="col-auto">Status: <b
+											class="text-warning">[[*{state}]]</b></span>
+								</th:block>
 							</div>
 						</div>
 					</div>
 				</div>
+
+				<!--NOTE CARD-->
 				<div class="col-auto">
 					<div class="card text-center" style="width: 30rem;" th:object="${ticket}">
+						<!--NOTE CARD HEADER-->
 						<div class="card-header bg-white mb-3">
 							<h5>Notes</h5>
 						</div>
+						<!--NOTE CARD BODY-->
 						<th:block th:if="*{notes.size()} > 0">
-							<ul class="col-12 text-start" th:each="note : *{notes}">
-								<li><b>Author:</b> [[${note.author}]]</li>
-								<li><b>Note:</b> [[${note.text}]]</li>
-								<li><b>Created at:</b> [[${note.getDateFormatted()}]]</li>
-							</ul>
+							<div class="card-body">
+								<ul class="col-12 text-start" th:each="note : *{notes}">
+									<li><b>Author:</b> [[${note.author}]]</li>
+									<li><b>Note:</b> [[${note.text}]]</li>
+									<li><b>Created at:</b> [[${note.getDateFormatted()}]]</li>
+								</ul>
+							</div>
 						</th:block>
 						<th:block th:unless="*{notes.size()} > 0">
 							<h6> No notes present</h6>
 						</th:block>
-						<div class="card-footer bg-white text-end"></div>
 					</div>
 				</div>
+
 			</div>
-		</div>
 		</div>
 	</main>
 
-	<footer>
-
-	</footer>
+	<footer></footer>
 </body>
 
+<!--SCRIPTS-->
 <th:block th:replace="~{fragments/page-settings :: scripts}"></th:block>
 
 </html>

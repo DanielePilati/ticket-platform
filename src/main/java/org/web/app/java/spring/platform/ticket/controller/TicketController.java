@@ -32,7 +32,7 @@ public class TicketController {
 	private final String[] TICKET_STATES = { "ToDo", "InProgress", "Completed" };
 
 	@GetMapping()
-	public String index(Model model, RedirectAttributes attributes) {
+	public String index(Model model) {
 
 		model.addAttribute("search", new Ticket());
 		model.addAttribute("tickets", ticketService.getAll());
@@ -90,6 +90,8 @@ public class TicketController {
 
 		ticketService.saveTicket(formTicket);
 
+		attributes.addFlashAttribute("message", "Created");
+		attributes.addFlashAttribute("class", "success");
 		attributes.addFlashAttribute("tickets", ticketService.getAll());
 
 		return "redirect:/tickets";
@@ -117,6 +119,8 @@ public class TicketController {
 		}
 
 		ticketService.updateTicket(formTicket);
+		attributes.addFlashAttribute("message", "Updated");
+		attributes.addFlashAttribute("class", "warning");
 
 		return "redirect:/tickets";
 	}
@@ -126,6 +130,8 @@ public class TicketController {
 	public String delete(Model model, @PathVariable("id") Integer id, RedirectAttributes attributes) {
 
 		ticketService.deleteById(id);
+		attributes.addFlashAttribute("message", "Deleted");
+		attributes.addFlashAttribute("class", "danger");
 
 		return "redirect:/tickets";
 	}

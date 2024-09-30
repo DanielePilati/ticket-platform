@@ -6,7 +6,7 @@
 <!-- fragments/page-settings :: head -->
 
 <head th:fragment="head">
-	<!-- BOOTSTRAP CSS -->
+	<!-- bootstrap css -->
 	<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
 	<title>Ticket Platform</title>
 </head>
@@ -25,31 +25,41 @@
 		<!-- collapse list -->
 		<div class="collapse navbar-collapse flex-row justify-content-between" id="navbarSupportedContent">
 			<ul class="navbar-nav col-auto">
+				<!-- home -->
 				<li class="nav-item">
 					<a class="nav-link" th:href="@{/}"
 						th:classappend="${route == 'home' ? 'active' : 'non-active'}">Home</a>
 				</li>
+				<!-- tickets -->
 				<li class="nav-item">
 					<a class="nav-link" th:href="@{/tickets}"
 						th:classappend="${route == 'tickets' ? 'active' : 'non-active'}">Tickets</a>
 				</li>
 			</ul>
+			<!-- user authenticated -->
 			<div sec:authorize="isAuthenticated()" class="navbar-nav col-auto">
 				<a class="nav-link" th:href="@{/logout}">
 					<span class="text-white" sec:authentication="name"></span>
-					<span sec:authentication="principal.authorities"></span></a>				
+					<span class="text-warning" sec:authentication="principal.authorities"></span></a>
 			</div>
+			<!-- user not authenticated -->
 			<div sec:authorize="!isAuthenticated()" class="navbar-nav col-auto">
 				<a class="nav-link" th:href="@{/login}">
-					<span class="text-white">Log in</span></a>
+					<span class="text-white">Log in </span><span class="bg-warning">&#128100;</span></a>
 			</div>
 		</div>
 	</nav>
 </header>
 
+<!-- fragments/page-settings :: alert -->
+<div th:fragment="ticket-alert(message, class)" th:class="|alert alert-${class} alert-dismissible fade show|" role="alert">
+	<p><strong>[[${message}]]!!</strong> Your ticket is [[${message}]] successfully. </p>
+</div>
+
 <!-- fragments/page-settings :: scripts -->
 <th:block th:fragment="scripts">
-	<!-- BOOTSTRAP SCRIPT -->
+	<!-- bootstrap script -->
 	<script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}" defer></script>
 </th:block>
+
 </body>
