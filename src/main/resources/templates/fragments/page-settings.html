@@ -46,7 +46,7 @@
 		</div>
 		<!-- user not authenticated -->
 		<div sec:authorize="!isAuthenticated()" class="navbar-nav">
-			<a class="nav-link" th:href="@{/}">
+			<a class="nav-link" th:href="@{/login}">
 				<span class="text-white">Log in </span><span class="bg-warning">&#128100;</span></a>
 		</div>
 	</nav>

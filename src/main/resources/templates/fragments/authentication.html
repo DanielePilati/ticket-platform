@@ -4,16 +4,32 @@
 </body>
 
 <!-- fragments/authentication :: login -->
-<form th:fragment="login" class="col-auto form-signin" method="POST" th:action="@{/login}">
-	<div class="form-group">
-		<label for="username" class="sr-only">Username</label>
-		<input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+<div th:fragment="login" class="col-4 row wrap justify-content-center">
+	<!--FORM TITLE-->
+	<h2 class="col-12 text-center">Please Log in:</h2>
+	<!--ERRORS-->
+	<div class="col-12 text-center">
+		<!--ALERT-->
+		<th:block th:if="${param.error}">
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">
+				<p><strong>ERROR!!</strong> Invalid Username or Password.</p>
+			</div>
+		</th:block>
 	</div>
-	<div class="form-group mb-2">
-		<label for="password" class="sr-only">Password</label>
-		<input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
-	</div>
-	<button type="submit" class="btn btn-sm btn-dark">Submit</button>
-</form>
+	<!--FORM-->
+	<form class="col-auto form-signin" method="POST" th:action="@{/login}">
+		<div class="form-group">
+			<label for="username" class="sr-only">Username</label>
+			<input type="text" id="username" name="username" class="form-control" placeholder="Username" required
+				autofocus>
+		</div>
+		<div class="form-group mb-2">
+			<label for="password" class="sr-only">Password</label>
+			<input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+		</div>
+		<button type="submit" class="btn btn-sm btn-dark">Submit</button>
+	</form>
+</div>
+
 
 </body>
