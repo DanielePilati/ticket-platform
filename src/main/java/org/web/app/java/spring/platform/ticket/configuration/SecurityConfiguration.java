@@ -24,7 +24,6 @@ public class SecurityConfiguration {
         .formLogin((login) -> login
                 .loginPage("/")
                 .loginProcessingUrl("/process-login")
-
                 .defaultSuccessUrl("/login/success_handler")
                 .failureUrl("/login?error=true")
                 .failureForwardUrl("/login/failure_handler"))
