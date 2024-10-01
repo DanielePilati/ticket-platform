@@ -3,7 +3,6 @@ package org.web.app.java.spring.platform.ticket.configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -22,7 +21,14 @@ public class SecurityConfiguration {
                 .requestMatchers("/tickets/**").hasAnyAuthority("USER", "ADMIN")
                 .requestMatchers("/notes/**").hasAnyAuthority("USER", "ADMIN")
                 .requestMatchers("/**").permitAll())
-        .formLogin(Customizer.withDefaults())
+        .formLogin((login) -> login
+                .loginPage("/")
+                .loginProcessingUrl("/process-login")
+                .successForwardUrl("/login/success_handler")
+                .defaultSuccessUrl("/")
+                .failureUrl("/login?error=true")
+                .failureForwardUrl("/login/failure_handler")
+                .permitAll())
         .logout((logout) -> logout.logoutSuccessUrl("/"));
  
 

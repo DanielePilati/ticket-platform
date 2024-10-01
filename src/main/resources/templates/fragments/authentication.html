@@ -7,10 +7,12 @@
 <div th:fragment="login" class="col-4 row wrap justify-content-center">
 	<!--FORM TITLE-->
 	<h2 class="col-12 text-center">Please Log in:</h2>
-	<!--ERRORS-->
-
+	<!--ERROR ALERT-->
+	<div th:if="${class == 'danger'}">
+		<div th:replace="~{fragments/page-settings :: login-alert(${message}, ${class})}"></div>
+	</div>
 	<!--FORM-->
-	<form class="col-auto form-signin" method="POST" th:action="@{/login}">
+	<form class="col-auto form-signin" method="POST" th:action="@{/process-login}">
 		<div class="form-group">
 			<label for="username" class="sr-only">Username</label>
 			<input type="text" id="username" name="username" class="form-control" placeholder="Username" required

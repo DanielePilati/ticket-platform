@@ -17,9 +17,10 @@
 					<!--TITLE-->
 					<h1 class="col-12 text-center">Welcome to Ticket Platform</h1>
 					<hr>
-					
+
 					<!--LOGIN FORM-->
 					<div th:replace="~{fragments/authentication :: login}"></div>
+
 				</th:block>
 
 				<!--USER-->
@@ -28,6 +29,11 @@
 					<!--TITLE-->
 					<h1 class="col-12 text-center">Welcome your Home</h1>
 					<hr>
+
+					<!--LOGIN ALERT-->
+					<div th:if="${message != null}">
+						<div th:replace="~{fragments/page-settings :: login-alert(${message}, ${class})}"></div>
+					</div>
 
 					<!--LOGOUT FORM-->
 					<form class="col-auto form-signin" method="POST" th:action="@{/logout}">
