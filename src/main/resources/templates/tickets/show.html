@@ -23,8 +23,7 @@
 						title="Back">&#8629;</a>
 					<!--ADD NOTE BUTTON-->
 					<a class="btn btn-sm btn-dark" th:href="@{/tickets/show/{id}/addnote(id=${ticket.id})}"
-						style="width: 15rem;" data-toggle="tooltip" title="Add Note">&#43;
-						&#128456;</a>
+						style="width: 15rem;" data-toggle="tooltip" title="Add Note">&#43; &#128196;</a>
 					<!--EDIT TICKET BUTTON-->
 					<a sec:authorize="hasAuthority('ADMIN')" class=" btn btn-sm btn-dark" style="width: 15rem;"
 						th:href="@{/tickets/edit/{id}(id=${ticket.id})}" data-toggle="tooltip"
@@ -39,7 +38,7 @@
 				<div class="col-auto">
 					<div class="card text-center" style="width: 30rem;" th:object="${ticket}">
 						<!--TICKET CARD HEADER-->
-						<div class="card-header bg-white">
+						<div class="card-header bg-warning-subtle">
 							<h6 class="card-title">Operator: [[*{user.username}]]</h6>
 						</div>
 						<!--TICKET CARD BODY-->
@@ -48,18 +47,12 @@
 							<p class="card-text">[[*{text}]]</p>
 						</div>
 						<!--TICKET CARD FOOTER-->
-						<div class="card-footer bg-white text-muted">
+						<div class="card-footer bg-light-subtle text-muted">
 							<div class="row justify-content-between">
 								<h6 class="col-auto">Created at: [[*{getDateFormatted()}]]</h6>
-								<!--STATUS COLOR SWITCH-->
-								<th:block th:switch="${ticket.state}">
-									<span th:case="'Completed'" class="col-auto">Status: <b
-											class="text-success">[[*{state}]]</b></span>
-									<span th:case="'ToDo'" class="col-auto">Status: <b
-											class="text-danger">[[*{state}]]</b></span>
-									<span th:case="'InProgress'" class="col-auto">Status: <b
-											class="text-warning">[[*{state}]]</b></span>
-								</th:block>
+								<h6 class="col-auto"><b>Status:</b>
+									<th:block th:replace="~{fragments/page-settings :: stateColor(${ticket.state})}"></th:block>
+								</h6>
 							</div>
 						</div>
 					</div>
@@ -69,22 +62,27 @@
 				<div class="col-auto">
 					<div class="card text-center" style="width: 30rem;" th:object="${ticket}">
 						<!--NOTE CARD HEADER-->
-						<div class="card-header bg-white mb-3">
+						<div class="card-header bg-warning-subtle mb-3">
 							<h5>Notes</h5>
 						</div>
 						<!--NOTE CARD BODY-->
-						<th:block th:if="*{notes.size()} > 0">
-							<div class="card-body">
-								<ul class="col-12 text-start" th:each="note : *{notes}">
-									<li><b>Author:</b> [[${note.author}]]</li>
-									<li><b>Note:</b> [[${note.text}]]</li>
-									<li><b>Created at:</b> [[${note.getDateFormatted()}]]</li>
-								</ul>
-							</div>
-						</th:block>
-						<th:block th:unless="*{notes.size()} > 0">
-							<h6> No notes present</h6>
-						</th:block>
+						<div class="card-body">
+							<!--NOTE PRESENT-->
+							<th:block th:if="*{notes.size()} > 0">
+								<th:block th:each="note : *{notes}">
+									<ul class="col-12 text-start">
+										<li><b>Author:</b> [[${note.author}]]</li>
+										<li><b>Note:</b> [[${note.text}]]</li>
+										<li><b>Created at:</b> [[${note.getDateFormatted()}]]</li>
+									</ul>
+									<hr>
+								</th:block>
+							</th:block>
+							<!--NOTE NOT PRESENT-->
+							<th:block th:unless="*{notes.size()} > 0">
+								<h6> No notes present</h6>
+							</th:block>
+						</div>
 					</div>
 				</div>
 

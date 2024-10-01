@@ -45,14 +45,7 @@
 						<th:block th:each="state : ${states}">
 							<input type="radio" class="btn-check" name="|options_${state}|" th:id="|option_${state}|"
 								autocomplete="off" th:value="${state}" th:field="${ticket.state}">
-							<th:block th:switch="${state}">
-								<label th:case="'Completed'" class="btn btn-sm btn-outline-success"
-									th:for="|option_${state}|">[[${state}]]</label>
-								<label th:case="'ToDo'" class="btn btn-sm btn-outline-danger"
-									th:for="|option_${state}|">[[${state}]]</label>
-								<label th:case="'InProgress'" class="btn btn-sm btn-outline-warning"
-									th:for="|option_${state}|">[[${state}]]</label>
-							</th:block>
+							<th:block th:replace="~{fragments/page-settings :: stateColorButton(${state})}"></th:block>
 						</th:block>
 						<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
 							<li th:each="err : ${#fields.errors('state')}" th:text="${err}" class="error " />

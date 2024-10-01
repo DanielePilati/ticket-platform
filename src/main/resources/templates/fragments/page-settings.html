@@ -11,7 +11,7 @@
 	<title>Ticket Platform</title>
 </head>
 
-<!-- fragments/page-settings :: header -->
+<!-- fragments/page-settings :: header('route') -->
 <header th:fragment="header(route)">
 	<!-- navbar -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3 mb-3">
@@ -52,11 +52,25 @@
 	</nav>
 </header>
 
-<!-- fragments/page-settings :: alert -->
+<!-- fragments/page-settings :: alert('message', 'class') -->
 <div th:fragment="ticket-alert(message, class)" th:class="|alert alert-${class} alert-dismissible fade show|"
 	role="alert">
 	<p><strong>[[${message}]]!!</strong> Your ticket is [[${message}]] successfully. </p>
 </div>
+
+<!-- fragments/page-settings :: stateColorButton('state') -->
+<th:block th:fragment="stateColorButton(state)" th:switch="${state}">
+	<label th:case="'Completed'" class="btn btn-sm btn-outline-success" th:for="|option_${state}|">[[${state}]]</label>
+	<label th:case="'ToDo'" class="btn btn-sm btn-outline-danger" th:for="|option_${state}|">[[${state}]]</label>
+	<label th:case="'InProgress'" class="btn btn-sm btn-outline-warning" th:for="|option_${state}|">[[${state}]]</label>
+</th:block>
+
+<!-- fragments/page-settings :: stateColor('state') -->
+<th:block th:fragment="stateColor(state)" th:switch="${state}">
+	<span th:case="'Completed'" class="text-success" th:for="|option_${state}|">[[${state}]]</span>
+	<span th:case="'ToDo'" class="text-danger" th:for="|option_${state}|">[[${state}]]</span>
+	<span th:case="'InProgress'" class="text-warning" th:for="|option_${state}|">[[${state}]]</span>
+</th:block>
 
 <!-- fragments/page-settings :: scripts -->
 <th:block th:fragment="scripts">
