@@ -17,7 +17,7 @@
 					<!--TITLE-->
 					<h1 class="col-12 text-center">Welcome to Ticket Platform</h1>
 					<hr>
-
+					
 					<!--LOGIN FORM-->
 					<div th:replace="~{fragments/authentication :: login}"></div>
 
@@ -27,12 +27,21 @@
 				<th:block sec:authorize="isAuthenticated()">
 
 					<!--TITLE-->
-					<h1 class="col-12 text-center">Welcome your Home</h1>
+					<h1 class="col-12 text-center">Welcome to your Home</h1>
 					<hr>
 
 					<!--LOGIN ALERT-->
 					<div th:if="${message != null}">
 						<div th:replace="~{fragments/page-settings :: login-alert(${message}, ${class})}"></div>
+					</div>
+					
+					
+					<!--USER DETAILS-->
+					<div th:if="${user.username != null}">
+						<h3><strong>Username: </strong><span>[[${user.username}]]</span></h3>
+						<h3><strong>Email: </strong><span>[[${user.email}]]</span></h3>
+						<h3><strong>Roles: </strong><span>[[${user.roles.toString()}]]</span></h3>
+						<h3><strong>Not Available: </strong><span>[[${user.notAvailable}]]</span></h3>
 					</div>
 
 					<!--LOGOUT FORM-->
