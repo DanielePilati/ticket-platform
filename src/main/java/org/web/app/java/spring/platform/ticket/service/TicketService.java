@@ -1,6 +1,7 @@
 package org.web.app.java.spring.platform.ticket.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +23,16 @@ public class TicketService {
 
 	public List<Ticket> getAll() {
 		return repo.findAll();
+	}
+
+	public List<Ticket> getAllByUsername(String username) {
+		List<Ticket> tickets = new ArrayList<Ticket>();
+		for (Ticket ticket : repo.findAll()) {
+			if (ticket.getUser().getUsername().equals(username)) {
+				tickets.add(ticket);
+			}
+		}
+		return tickets;
 	}
 
 	public Optional<Ticket> getById(Integer id) {
@@ -51,9 +62,10 @@ public class TicketService {
 	public Ticket updateTicket(Ticket ticket) {
 		return repo.save(ticket);
 	}
-	
+
 	public void deleteById(Integer id) {
-		 repo.deleteById(id);;
+		repo.deleteById(id);
+		;
 	}
 
 }

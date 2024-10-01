@@ -54,6 +54,9 @@
 									th:for="|option_${state}|">[[${state}]]</label>
 							</th:block>
 						</th:block>
+						<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
+							<li th:each="err : ${#fields.errors('state')}" th:text="${err}" class="error " />
+						</ul>
 					</div>
 					<hr>
 					<!--OPERATORS-->
@@ -76,7 +79,7 @@
 							<a th:href="@{/tickets}" class="btn btn-dark" title="Back">&#8626;</a>
 						</div>
 				</form>
-				
+
 			</div>
 		</div>
 	</main>

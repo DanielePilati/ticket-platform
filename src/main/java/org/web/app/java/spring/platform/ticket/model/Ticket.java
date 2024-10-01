@@ -14,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 
 @Entity
@@ -24,15 +25,16 @@ public class Ticket {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@NotEmpty
+	@NotBlank(message = "The content must contain at least one non-whitespace character")
 	private String title;
-	
-	@NotEmpty
+
+	@NotBlank(message = "The content must contain at least one non-whitespace character")
 	@Column(columnDefinition = "TEXT")
 	private String text;
 
 	private LocalDateTime createdAt;
 
+	@NotEmpty(message = "The content must not be empty")
 	private String state;
 
 	@ManyToOne
@@ -97,14 +99,12 @@ public class Ticket {
 	public void setText(String text) {
 		this.text = text;
 	}
-	
+
 	public String getDateFormatted() {
-			
-	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyy");
-	
-		return  this.getCreatedAt().format(formatter);
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyy");
+
+		return this.getCreatedAt().format(formatter);
 	}
-
-
 
 }
