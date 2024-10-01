@@ -36,8 +36,7 @@ public class TicketController {
 	public String index(Model model, Authentication authentication) {
 
 		model.addAttribute("search", new Ticket());
-		model.addAttribute("states", this.TICKET_STATES);
-		
+
 		for (GrantedAuthority authority : authentication.getAuthorities()) {
 			if (authority.getAuthority().equals("ADMIN")) {
 				model.addAttribute("tickets", ticketService.getAll());
@@ -45,7 +44,6 @@ public class TicketController {
 				model.addAttribute("tickets", ticketService.getAllByUsername(authentication.getName()));
 			}
 		}
-
 		return "/tickets/index";
 	}
 
