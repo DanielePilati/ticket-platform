@@ -24,11 +24,10 @@ public class SecurityConfiguration {
         .formLogin((login) -> login
                 .loginPage("/")
                 .loginProcessingUrl("/process-login")
-                .successForwardUrl("/login/success_handler")
-                .defaultSuccessUrl("/")
+
+                .defaultSuccessUrl("/login/success_handler")
                 .failureUrl("/login?error=true")
-                .failureForwardUrl("/login/failure_handler")
-                .permitAll())
+                .failureForwardUrl("/login/failure_handler"))
         .logout((logout) -> logout.logoutSuccessUrl("/"));
  
 

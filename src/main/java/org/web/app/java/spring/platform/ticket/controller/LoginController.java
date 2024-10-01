@@ -18,7 +18,7 @@ public class LoginController {
 		return "/pages/home";
 	}
 	
-	  @PostMapping("/success_handler")
+	  @GetMapping("/success_handler")
 	  public String loginSuccessHandler(RedirectAttributes attributes, Authentication authentication) {
 	 
 			// ALERT
