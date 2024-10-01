@@ -17,34 +17,21 @@
 					<!--TITLE-->
 					<h1 class="col-12 text-center">Welcome to Ticket Platform</h1>
 					<hr>
+					
 					<!--LOGIN FORM-->
 					<div th:replace="~{fragments/authentication :: login}"></div>
-					<th:block th:if="${param.logout}">
-						<div class="alert alert-success alert-dismissible fade show" role="alert">
-							<p><strong>SUCCESS!!</strong> You have been logged out.</p>
-						</div>
-					</th:block>
 				</th:block>
-<<<<<<< HEAD
-				<!--GUEST-->
-				<th:block sec:authorize="!isAuthenticated()">
-=======
 
 				<!--USER-->
 				<th:block sec:authorize="isAuthenticated()">
->>>>>>> parent of 8e55ada (add fragment colorstate)
+
 					<!--TITLE-->
 					<h1 class="col-12 text-center">Welcome your Home</h1>
 					<hr>
-<<<<<<< HEAD
-					<!--FORM-->
+
+					<!--LOGOUT FORM-->
 					<form class="col-auto form-signin" method="POST" th:action="@{/logout}">
 						<button type="submit" class="btn btn-sm btn-dark">Logout</button>
-=======
-					<!--LOGOUT FORM-->
-					<form class="col-auto form-logout" method="POST" th:action="@{/logout}">
-						<button type="submit" class="btn btn-sm btn-dark">Log out</button>
->>>>>>> parent of 8e55ada (add fragment colorstate)
 					</form>
 				</th:block>
 

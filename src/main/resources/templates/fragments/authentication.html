@@ -8,14 +8,7 @@
 	<!--FORM TITLE-->
 	<h2 class="col-12 text-center">Please Log in:</h2>
 	<!--ERRORS-->
-	<div class="col-12 text-center">
-		<!--ALERT-->
-		<th:block th:if="${param.error}">
-			<div class="alert alert-danger alert-dismissible fade show" role="alert">
-				<p><strong>ERROR!!</strong> Invalid Username or Password.</p>
-			</div>
-		</th:block>
-	</div>
+
 	<!--FORM-->
 	<form class="col-auto form-signin" method="POST" th:action="@{/login}">
 		<div class="form-group">
