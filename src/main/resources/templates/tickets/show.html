@@ -23,8 +23,7 @@
 						title="Back">&#8629;</a>
 					<!--ADD NOTE BUTTON-->
 					<a class="btn btn-sm btn-dark" th:href="@{/tickets/show/{id}/addnote(id=${ticket.id})}"
-						style="width: 15rem;" data-toggle="tooltip" title="Add Note">&#43;
-						&#128456;</a>
+						style="width: 15rem;" data-toggle="tooltip" title="Add Note">&#43; &#128196;</a>
 					<!--EDIT TICKET BUTTON-->
 					<a sec:authorize="hasAuthority('ADMIN')" class=" btn btn-sm btn-dark" style="width: 15rem;"
 						th:href="@{/tickets/edit/{id}(id=${ticket.id})}" data-toggle="tooltip"

@@ -77,6 +77,9 @@
 									<!--SHOW-->
 									<a th:href="@{/tickets/show/{id}(id=${ticket.id})}" class="btn btn-sm "
 										data-toggle="tooltip" title="View">&#128270;</a>
+									<!--ADD NOTE BUTTON-->
+									<a th:href="@{/tickets/show/{id}/addnote(id=${ticket.id})}" class="btn btn-sm"
+										data-toggle="tooltip" title="Add Note">&#128196;</a>
 									<!--EDIT-->
 									<a sec:authorize="hasAuthority('ADMIN')"
 										th:href="@{/tickets/edit/{id}(id=${ticket.id})}" class="btn btn-sm ml-2"
