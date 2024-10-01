@@ -7,12 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ch.qos.logback.core.model.Model;
 
 @Controller
-@RequestMapping()
+@RequestMapping("/")
 public class MainController {
 
-	@GetMapping("/")
+	@GetMapping()
 	public String home(Model model) {
 
 		return "/pages/home";
 	}
+	
 }

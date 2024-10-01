@@ -12,16 +12,22 @@
 		<div class="container">
 			<div class="row justify-content-center">
 
-				<!--TITLE-->
-				<h1 class="col-12 text-center">Welcome to Ticket Platform</h1>
-				<hr>
+				<!--GUEST-->
 				<th:block sec:authorize="!isAuthenticated()">
+					<!--TITLE-->
+					<h1 class="col-12 text-center">Welcome to Ticket Platform</h1>
+					<hr>
 					<!--FORM TITLE-->
 					<h2 class="col-12 text-center">Please Log in:</h2>
 					<!--LOGIN FORM-->
 					<form th:replace="~{fragments/authentication :: login}"></form>
 				</th:block>
+
+				<!--USER-->
 				<th:block sec:authorize="isAuthenticated()">
+					<!--TITLE-->
+					<h1 class="col-12 text-center">Welcome to your Home</h1>
+					<hr>
 					<!--LOGOUT FORM-->
 					<form class="col-auto form-logout" method="POST" th:action="@{/logout}">
 						<button type="submit" class="btn btn-sm btn-dark">Log out</button>

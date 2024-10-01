@@ -23,7 +23,8 @@ public class SecurityConfiguration {
                 .requestMatchers("/notes/**").hasAnyAuthority("USER", "ADMIN")
                 .requestMatchers("/**").permitAll())
         .formLogin(Customizer.withDefaults())
-        .logout(Customizer.withDefaults());
+        .logout((logout) -> logout.logoutSuccessUrl("/"));
+ 
 
 		return http.build();
 	}
