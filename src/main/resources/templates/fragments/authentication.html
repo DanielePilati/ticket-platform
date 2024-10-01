@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+</body>
+
+<!-- fragments/authentication :: login -->
+<form th:fragment="login" class="col-auto form-signin" method="POST" th:action="@{/login}">
+	<div class="form-group">
+		<label for="username" class="sr-only">Username</label>
+		<input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+	</div>
+	<div class="form-group mb-2">
+		<label for="password" class="sr-only">Password</label>
+		<input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+	</div>
+	<button type="submit" class="btn btn-sm btn-dark">Submit</button>
+</form>
+
+</body>

@@ -18,9 +18,10 @@
 		<!-- logo -->
 		<a class="navbar-brand" th:href="@{/}">&#127915; Ticket Platform</a>
 		<!-- toggler -->
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
+		<button class="align-self-end navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="text-center">Menù</span>
 		</button>
 		<!-- collapse list -->
 		<div class="collapse navbar-collapse flex-row justify-content-between" id="navbarSupportedContent">
@@ -36,23 +37,24 @@
 						th:classappend="${route == 'tickets' ? 'active' : 'non-active'}">Tickets</a>
 				</li>
 			</ul>
-			<!-- user authenticated -->
-			<div sec:authorize="isAuthenticated()" class="navbar-nav col-auto">
-				<a class="nav-link" th:href="@{/logout}">
-					<span class="text-white" sec:authentication="name"></span>
-					<span class="text-warning" sec:authentication="principal.authorities"></span></a>
-			</div>
-			<!-- user not authenticated -->
-			<div sec:authorize="!isAuthenticated()" class="navbar-nav col-auto">
-				<a class="nav-link" th:href="@{/login}">
-					<span class="text-white">Log in </span><span class="bg-warning">&#128100;</span></a>
-			</div>
+		</div>
+		<!-- user authenticated -->
+		<div sec:authorize="isAuthenticated()" class="navbar-nav">
+			<a class="nav-link" th:href="@{/}">
+				<span class="text-white" sec:authentication="name"></span>
+				<span class="text-warning" sec:authentication="principal.authorities"></span></a>
+		</div>
+		<!-- user not authenticated -->
+		<div sec:authorize="!isAuthenticated()" class="navbar-nav">
+			<a class="nav-link" th:href="@{/}">
+				<span class="text-white">Log in </span><span class="bg-warning">&#128100;</span></a>
 		</div>
 	</nav>
 </header>
 
 <!-- fragments/page-settings :: alert -->
-<div th:fragment="ticket-alert(message, class)" th:class="|alert alert-${class} alert-dismissible fade show|" role="alert">
+<div th:fragment="ticket-alert(message, class)" th:class="|alert alert-${class} alert-dismissible fade show|"
+	role="alert">
 	<p><strong>[[${message}]]!!</strong> Your ticket is [[${message}]] successfully. </p>
 </div>
 

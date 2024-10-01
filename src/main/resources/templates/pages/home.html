@@ -10,19 +10,24 @@
 
 	<main>
 		<div class="container">
-			<div class="row">
-				
+			<div class="row justify-content-center">
+
 				<!--TITLE-->
 				<h1 class="col-12 text-center">Welcome to Ticket Platform</h1>
 				<hr>
-				
-				<!--LOGIN FORM-->
-				<div class="col-auto">
-					<form>
-						
+				<th:block sec:authorize="!isAuthenticated()">
+					<!--FORM TITLE-->
+					<h2 class="col-12 text-center">Please Log in:</h2>
+					<!--LOGIN FORM-->
+					<form th:replace="~{fragments/authentication :: login}"></form>
+				</th:block>
+				<th:block sec:authorize="isAuthenticated()">
+					<!--LOGOUT FORM-->
+					<form class="col-auto form-logout" method="POST" th:action="@{/logout}">
+						<button type="submit" class="btn btn-sm btn-dark">Log out</button>
 					</form>
-				</div>
-					
+				</th:block>
+
 			</div>
 		</div>
 	</main>
