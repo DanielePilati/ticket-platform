@@ -27,7 +27,9 @@ public class SecurityConfiguration {
                 .defaultSuccessUrl("/login/success_handler")
                 .failureUrl("/login?error=true")
                 .failureForwardUrl("/login/failure_handler"))
-        .logout((logout) -> logout.logoutSuccessUrl("/"));
+        .logout((logout) -> logout
+        		.logoutSuccessUrl("/")
+        		.logoutUrl("/login/logout"));
  
 
 		return http.build();

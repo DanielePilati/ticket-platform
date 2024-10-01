@@ -17,7 +17,12 @@
 					<!--TITLE-->
 					<h1 class="col-12 text-center">Welcome to Ticket Platform</h1>
 					<hr>
-					
+
+					<!--LOGOUT ALERT-->
+					<div th:if="${message != null}">
+						<div th:replace="~{fragments/page-settings :: login-alert(${message}, ${class})}"></div>
+					</div>
+
 					<!--LOGIN FORM-->
 					<div th:replace="~{fragments/authentication :: login}"></div>
 
@@ -34,19 +39,20 @@
 					<div th:if="${message != null}">
 						<div th:replace="~{fragments/page-settings :: login-alert(${message}, ${class})}"></div>
 					</div>
-					
-					
+
 					<!--USER DETAILS-->
 					<div th:if="${user.username != null}">
 						<h3><strong>Username: </strong><span>[[${user.username}]]</span></h3>
 						<h3><strong>Email: </strong><span>[[${user.email}]]</span></h3>
 						<h3><strong>Role: </strong><span>[[${user.roles.toString()}]]</span></h3>
-						<h3 sec:authorize="hasAuthority('USER')"><strong>Tickets: </strong><span>[[${user.tickets.size()}]]</span></h3>
-						<h3 sec:authorize="hasAuthority('USER')"><strong>Not Available: </strong><span>[[${user.notAvailable}]]</span></h3>
+						<h3 sec:authorize="hasAuthority('USER')"><strong>Tickets:
+							</strong><span>[[${user.tickets.size()}]]</span></h3>
+						<h3 sec:authorize="hasAuthority('USER')"><strong>Not Available:
+							</strong><span>[[${user.notAvailable}]]</span></h3>
 					</div>
 
 					<!--LOGOUT FORM-->
-					<form class="col-auto form-signin" method="POST" th:action="@{/logout}">
+					<form class="col-auto form-signin" method="POST" th:action="@{/login/logout}">
 						<button type="submit" class="btn btn-sm btn-dark">Logout</button>
 					</form>
 				</th:block>
