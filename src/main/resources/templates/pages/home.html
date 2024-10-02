@@ -19,7 +19,7 @@
 					<hr>
 
 					<!--LOGOUT ALERT-->
-					<div th:if="${message != null}">
+					<div th:if="${class == 'success'}">
 						<div th:replace="~{fragments/page-settings :: login-alert(${message}, ${class})}"></div>
 					</div>
 
@@ -49,6 +49,7 @@
 							<strong>Tickets:</strong>
 							<span>[[${user.tickets.size()}]]</span>
 						</h3>
+						<!-- !!! NOT RUN TODO !!!-->
 						<h3 sec:authorize="hasAuthority('USER')">
 							<strong>Not Available:</strong>
 							<form class="form-check form-switch ms-3" action="" method="POST">
@@ -57,6 +58,7 @@
 									th:attr="value=#{user.tickets.size() > 0 ? 'disabled' : 'disabled'}">
 							</form>
 						</h3>
+
 					</div>
 
 					<!--LOGOUT FORM-->

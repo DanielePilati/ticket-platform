@@ -25,7 +25,6 @@ public class SecurityConfiguration {
                 .loginPage("/")
                 .loginProcessingUrl("/process-login")
                 .defaultSuccessUrl("/login/success_handler")
-                .failureUrl("/login?error=true")
                 .failureForwardUrl("/login/failure_handler"))
         .logout((logout) -> logout
         		.logoutSuccessUrl("/")
