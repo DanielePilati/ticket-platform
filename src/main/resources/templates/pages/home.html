@@ -62,7 +62,7 @@
 					</div>
 
 					<!--LOGOUT FORM-->
-					<form sec:authorize="hasAuthority('ADMIN')" class="col-auto form-signin" method="POST"
+					<form sec:authorize="isAuthenticated()" class="col-auto form-signin" method="POST"
 						th:action="@{/login/logout}">
 						<!-- Button trigger modal -->
 						<button type="button" class="btn btn-sm btn-dark" data-bs-toggle="modal"
