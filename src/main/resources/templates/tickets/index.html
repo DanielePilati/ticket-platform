@@ -85,9 +85,39 @@
 										th:href="@{/tickets/edit/{id}(id=${ticket.id})}" class="btn btn-sm ml-2"
 										data-toggle="tooltip" title="Edit">&#9998;</a>
 									<!--DELETE-->
-									<a sec:authorize="hasAuthority('ADMIN')"
-										th:href="@{/tickets/delete/{id}(id=${ticket.id})}" class="btn btn-sm ml-2"
-										data-toggle="tooltip" title="Delete">&#x1F5D1;</a>
+									<form sec:authorize="hasAuthority('ADMIN')" class="d-inline  text-start" method="GET"
+										th:action="@{/tickets/delete/{id}(id=${ticket.id})}">
+										<!-- Button trigger modal -->
+										<button type="button" class="btn btn-sm" data-bs-toggle="modal"
+											data-bs-target="#staticBackdrop" title="Delete">&#x1F5D1;</button>
+										<!-- Modal -->
+										<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+											data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+											aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered modal-sm">
+												<div class="modal-content">
+													<!-- header -->
+													<div class="modal-header bg-dark">
+														<h5 class="modal-title fs-5" id="staticBackdropLabel">
+															&#x26A0; WARNING &#x26A0;
+														</h5>
+														<button type="button" class="btn-close" data-bs-dismiss="modal"
+															aria-label="Close"></button>
+													</div>
+													<!-- body -->
+													<div class="modal-body text-black">
+														Are you shure you want remove "<b>[[${ticket.title}]]</b>"?
+													</div>
+													<!-- footer -->
+													<div class="modal-footer bg-dark">
+														<button type="button" class="btn btn-success"
+															data-bs-dismiss="modal">Return</button>
+														<button type="submit" class="btn btn-danger">Continue</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</form>
 								</td>
 							</tr>
 						</tbody>
@@ -106,9 +136,8 @@
 	<!--FOOTER-->
 	<footer></footer>
 
+	<!--SCRIPTS-->
+	<th:block th:replace="~{fragments/page-settings :: scripts}"></th:block>
 </body>
-
-<!--SCRIPTS-->
-<th:block th:replace="~{fragments/page-settings :: scripts}"></th:block>
 
 </html>

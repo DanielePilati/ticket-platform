@@ -6,6 +6,7 @@
 <!-- HEAD -->
 
 <!-- fragments/page-settings :: head -->
+
 <head th:fragment="head">
 	<!-- bootstrap css -->
 	<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
@@ -63,13 +64,19 @@
 	<p><strong>[[${message}]]!!</strong> Your ticket is [[${message}]] successfully. </p>
 </div>
 
+<!-- fragments/page-settings :: note-alert('message', 'class') -->
+<div th:fragment="note-alert(message, class)" th:class="|alert alert-${class} alert-dismissible fade show|"
+	role="alert">
+	<p><strong>[[${message}]]!!</strong> Your note is [[${message}]] successfully. </p>
+</div>
+
 <!-- fragments/page-settings :: login-alert('message', 'class') -->
 <div th:fragment="login-alert(message, class)" th:class="|alert alert-${class} alert-dismissible fade show text-center|"
 	role="alert">
 	<p><strong th:switch="${class}">
-		<span th:case="'danger'">ERROR!! </span>
-		<span th:case="'success'">SUCCESS!! </span>
-	</strong>[[${message}]]</p>
+			<span th:case="'danger'">ERROR!! </span>
+			<span th:case="'success'">SUCCESS!! </span>
+		</strong>[[${message}]]</p>
 </div>
 
 <!-- SCRIPTS -->

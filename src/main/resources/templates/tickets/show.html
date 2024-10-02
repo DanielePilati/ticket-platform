@@ -16,6 +16,12 @@
 				<h1 class="col-12 text-center mb-3">Ticket view</h1>
 				<hr>
 
+				<!--NOTE ALERT-->
+				<th:block th:if="${message != null}">
+					<div th:insert="fragments/page-settings :: note-alert(${message},${class})">
+					</div>
+				</th:block>
+
 				<!--ACTION BAR-->
 				<div class="col-12 text-center mb-3">
 					<!--BACK BUTTON-->
@@ -28,10 +34,39 @@
 					<a sec:authorize="hasAuthority('ADMIN')" class=" btn btn-sm btn-dark" style="width: 15rem;"
 						th:href="@{/tickets/edit/{id}(id=${ticket.id})}" data-toggle="tooltip"
 						title="Edit Ticket">&#9998;</a>
-					<!--DELETE TICKET BUTTON-->
-					<a sec:authorize="hasAuthority('ADMIN')" class="btn btn-sm btn-dark" style="width: 15rem;"
-						th:href="@{/tickets/delete/{id}(id=${ticket.id})}" data-toggle="tooltip"
-						title="Delete">&#x1F5D1;</a>
+					<!--DELETE TICKET FORM-->
+					<form sec:authorize="hasAuthority('ADMIN')" class="d-inline  text-start" method="GET"
+						th:action="@{/tickets/delete/{id}(id=${ticket.id})}">
+						<!-- Button trigger modal -->
+						<button type="button" class="btn btn-sm btn-dark" style="width: 15rem;" data-bs-toggle="modal"
+							data-bs-target="#staticBackdrop" title="Delete">&#x1F5D1;</button>
+						<!-- Modal -->
+						<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+							tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered modal-sm">
+								<div class="modal-content">
+									<!-- header -->
+									<div class="modal-header bg-dark">
+										<h5 class="modal-title fs-5" id="staticBackdropLabel">
+											&#x26A0; WARNING &#x26A0;
+										</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal"
+											aria-label="Close"></button>
+									</div>
+									<!-- body -->
+									<div class="modal-body text-black">
+										Are you shure you want remove "<b>[[${ticket.title}]]</b>"?
+									</div>
+									<!-- footer -->
+									<div class="modal-footer bg-dark">
+										<button type="button" class="btn btn-success"
+											data-bs-dismiss="modal">Return</button>
+										<button type="submit" class="btn btn-danger">Continue</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
 				</div>
 
 				<!--TICKET CARD-->
@@ -92,9 +127,9 @@
 	</main>
 
 	<footer></footer>
-</body>
 
-<!--SCRIPTS-->
-<th:block th:replace="~{fragments/page-settings :: scripts}"></th:block>
+	<!--SCRIPTS-->
+	<th:block th:replace="~{fragments/page-settings :: scripts}"></th:block>
+</body>
 
 </html>

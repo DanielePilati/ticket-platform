@@ -21,8 +21,7 @@ public class NoteController {
 	private NoteService noteService;
 
 	@PostMapping("/create")
-	public String store(@Valid @ModelAttribute("note") Note formNote, BindingResult br, Model model,
-			RedirectAttributes attributes) {
+	public String store(@Valid @ModelAttribute("note") Note formNote, BindingResult br, Model model, RedirectAttributes attributes) {
 
 		if (br.hasErrors()) {
 			Note note = new Note();
@@ -32,6 +31,9 @@ public class NoteController {
 		}
 
 		noteService.saveNote(formNote);
+		// ALERT
+		attributes.addFlashAttribute("message", "Created");
+		attributes.addFlashAttribute("class", "success");
 
 		return "redirect:/tickets/show/" + formNote.getTicket().getId();
 	}

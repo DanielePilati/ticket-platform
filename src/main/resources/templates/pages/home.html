@@ -45,15 +45,52 @@
 						<h3><strong>Username: </strong><span>[[${user.username}]]</span></h3>
 						<h3><strong>Email: </strong><span>[[${user.email}]]</span></h3>
 						<h3><strong>Role: </strong><span>[[${user.roles.toString()}]]</span></h3>
-						<h3 sec:authorize="hasAuthority('USER')"><strong>Tickets:
-							</strong><span>[[${user.tickets.size()}]]</span></h3>
-						<h3 sec:authorize="hasAuthority('USER')"><strong>Not Available:
-							</strong><span>[[${user.notAvailable}]]</span></h3>
+						<h3 sec:authorize="hasAuthority('USER')">
+							<strong>Tickets:</strong>
+							<span>[[${user.tickets.size()}]]</span>
+						</h3>
+						<h3 sec:authorize="hasAuthority('USER')">
+							<strong>Not Available:</strong>
+							<form class="form-check form-switch ms-3" action="" method="POST">
+								<input class="form-check-input" type="checkbox" id="notAvailableCheck"
+									th:value="${user.notAvailable}"
+									th:attr="value=#{user.tickets.size() > 0 ? 'disabled' : 'disabled'}">
+							</form>
+						</h3>
 					</div>
 
 					<!--LOGOUT FORM-->
-					<form class="col-auto form-signin" method="POST" th:action="@{/login/logout}">
-						<button type="submit" class="btn btn-sm btn-dark">Logout</button>
+					<form sec:authorize="hasAuthority('ADMIN')" class="col-auto form-signin" method="POST"
+						th:action="@{/login/logout}">
+						<!-- Button trigger modal -->
+						<button type="button" class="btn btn-sm btn-dark" data-bs-toggle="modal"
+							data-bs-target="#staticBackdrop" title="Delete">Logout</button>
+						<!-- Modal -->
+						<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+							tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered modal-sm">
+								<div class="modal-content">
+									<!-- header -->
+									<div class="modal-header bg-dark text-white">
+										<h5 class="modal-title fs-5" id="staticBackdropLabel">
+											Logging out..
+										</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal"
+											aria-label="Close"></button>
+									</div>
+									<!-- body -->
+									<div class="modal-body text-black">
+										Are you shure you want log out?
+									</div>
+									<!-- footer -->
+									<div class="modal-footer bg-dark">
+										<button type="button" class="btn btn-success"
+											data-bs-dismiss="modal">Return</button>
+										<button type="submit" class="btn btn-warning">Log out</button>
+									</div>
+								</div>
+							</div>
+						</div>
 					</form>
 				</th:block>
 
@@ -62,9 +99,9 @@
 	</main>
 
 	<footer></footer>
-</body>
 
-<!--SCRIPTS-->
-<th:block th:replace="~{fragments/page-settings :: scripts}"></th:block>
+	<!--SCRIPTS-->
+	<th:block th:replace="~{fragments/page-settings :: scripts}"></th:block>
+</body>
 
 </html>
