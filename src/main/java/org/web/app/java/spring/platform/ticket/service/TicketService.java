@@ -19,7 +19,7 @@ public class TicketService {
 	private TicketRepository repo;
 
 	@Autowired
-	private UserRepository userRepo;
+	private UserRepository userRepo;	
 
 	public List<Ticket> getAll() {
 		return repo.findAll();
@@ -33,6 +33,11 @@ public class TicketService {
 			}
 		}
 		return tickets;
+	}
+	
+	public List<Ticket> getAllByType(String typeIn){
+
+		return repo.findByType(typeIn);
 	}
 	
 	public List<Ticket> getByState(String state){

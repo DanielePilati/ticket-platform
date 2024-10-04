@@ -29,5 +29,12 @@ public class TicketRestController {
 		return ticketService.getByState(state);
 
 	}
+	
+	@GetMapping("/category/{type}")
+	public List<Ticket> showByType(@PathVariable(name = "type") String type) {
+
+		return ticketService.getAllByType(type);
+
+	}
 
 }

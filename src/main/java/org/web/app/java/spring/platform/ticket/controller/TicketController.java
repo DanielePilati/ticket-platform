@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.web.app.java.spring.platform.ticket.model.Note;
 import org.web.app.java.spring.platform.ticket.model.Ticket;
 import org.web.app.java.spring.platform.ticket.service.TicketService;
+import org.web.app.java.spring.platform.ticket.service.TypeService;
 import org.web.app.java.spring.platform.ticket.service.UserService;
 
 import jakarta.validation.Valid;
@@ -29,6 +30,9 @@ public class TicketController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private TypeService typeService;
 
 	private final String[] TICKET_STATES = { "ToDo", "InProgress", "Completed" };
 
@@ -78,6 +82,7 @@ public class TicketController {
 	@GetMapping("/create")
 	public String create(Model model) {
 
+		model.addAttribute("types", typeService.getAll());
 		model.addAttribute("ticket", new Ticket());
 		model.addAttribute("states", this.TICKET_STATES);
 		model.addAttribute("availableUsers", userService.getUsersAvailable());
@@ -92,6 +97,7 @@ public class TicketController {
 		if (br.hasErrors()) {
 			model.addAttribute("states", this.TICKET_STATES);
 			model.addAttribute("availableUsers", userService.getUsersAvailable());
+			model.addAttribute("types", typeService.getAll());
 			return "/tickets/create";
 		}
 
@@ -112,6 +118,7 @@ public class TicketController {
 		model.addAttribute("ticket", ticketService.getById(id).get());
 		model.addAttribute("states", this.TICKET_STATES);
 		model.addAttribute("availableUsers", userService.getUsersAvailable());
+		model.addAttribute("types", typeService.getAll());
 
 		return "/tickets/edit";
 	}
@@ -123,6 +130,7 @@ public class TicketController {
 		if (br.hasErrors()) {
 			model.addAttribute("states", this.TICKET_STATES);
 			model.addAttribute("availableUsers", userService.getUsersAvailable());
+			model.addAttribute("types", typeService.getAll());
 			return "/tickets/edit";
 		}
 

@@ -39,6 +39,18 @@
 						</ul>
 					</div>
 					<hr>
+					<!--TYPES-->
+					<th:block th:if="${types.size() > 0}">
+						<label for="type_list mb-2"><b>Select Category:</b></label>
+						<ul class="list-group" id="type_list">
+							<li class="list-group-item" th:each="type : ${types}">
+								<input class="form-check-input me-1" type="checkbox" th:id="|type_${type.id}|"
+									th:value="${type.id}" th:field="${ticket.types}">
+								[[${type.name}]]
+							</li>
+						</ul>
+					</th:block>
+					<hr>
 					<!--STATE-->
 					<label for="form-check1"><b>Select Statement:</b></label>
 					<div class="form-check1 my-2">
@@ -60,24 +72,23 @@
 					</div>
 					<hr>
 					<!--OPERATORS-->
-					<th:block th:if="${availableUsers.size()} > 0">
-						<label for="form-check2"><b>Available Operators:</b></label>
-						<div class="form-check2 my-2">
-							<th:block th:each="user : ${availableUsers}">
-								<input type="radio" class="btn-check" name="|options_${user.username}|"
-									th:id="|option_${user.username}|" autocomplete="off" th:value="${user.id}"
-									th:field="${ticket.user}">
-								<label class="btn btn-sm btn-outline-dark"
-									th:for="|option_${user.username}|">[[${user.username}]]</label>
-							</th:block>
-						</div>
-						<hr>
-						<!--BUTTONS-->
-						<div>
-							<button type="submit" class="btn btn-dark">Create</button>
-							<a th:href="@{/tickets/create}" class="btn btn-dark">Reset</a>
-							<a th:href="@{/tickets}" class="btn btn-dark" title="Back">&#8626;</a>
-						</div>
+					<label for="form-check2"><b>Available Operators:</b></label>
+					<div class="form-check2 my-2">
+						<th:block th:each="user : ${availableUsers}">
+							<input type="radio" class="btn-check" name="|options_${user.username}|"
+								th:id="|option_${user.username}|" autocomplete="off" th:value="${user.id}"
+								th:field="${ticket.user}">
+							<label class="btn btn-sm btn-outline-dark"
+								th:for="|option_${user.username}|">[[${user.username}]]</label>
+						</th:block>
+					</div>
+					<hr>
+					<!--BUTTONS-->
+					<div>
+						<button type="submit" class="btn btn-dark">Create</button>
+						<a th:href="@{/tickets/create}" class="btn btn-dark">Reset</a>
+						<a th:href="@{/tickets}" class="btn btn-dark" title="Back">&#8626;</a>
+					</div>
 				</form>
 
 			</div>
@@ -85,10 +96,10 @@
 	</main>
 
 	<footer></footer>
-	
+
 	<!--SCRIPTS-->
 	<th:block th:replace="~{fragments/page-settings :: scripts}"></th:block>
-	
+
 </body>
 
 </html>

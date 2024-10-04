@@ -74,11 +74,17 @@
 					<div class="card text-center" style="width: 30rem;" th:object="${ticket}">
 						<!--TICKET CARD HEADER-->
 						<div class="card-header bg-white">
-							<h6 class="card-title">Operator: [[*{user.username}]]</h6>
+							<h6 class="card-title row justify-content-between">
+								<span class="col-auto">Operator: [[*{user.username}]]</span>
+								<span class="col-auto">Category:
+									<span th:each="type : ${ticket.types}">[[${type.name}]]</span>
+								</span>
+							</h6>
 						</div>
 						<!--TICKET CARD BODY-->
-						<div class="card-body">
-							<h5 class="card-title">[[*{title}]]</h5>
+						<div class="card-body text-start">
+							<h5 class="card-title"><b>Title: </b>[[*{title}]]</h5>
+							<h6 class="card-text"><b>Description: </b></h6>
 							<p class="card-text">[[*{text}]]</p>
 						</div>
 						<!--TICKET CARD FOOTER-->

@@ -41,6 +41,18 @@
 						</ul>
 					</div>
 					<hr>
+					<!--TYPES-->
+					<th:block th:if="${types.size() > 0}">
+						<label for="type_list mb-2"><b>Select Category:</b></label>
+						<ul class="list-group" id="type_list">
+							<li class="list-group-item" th:each="type : ${types}">
+								<input class="form-check-input me-1" type="checkbox" th:id="|type_${type.id}|"
+									th:value="${type.id}" th:field="${ticket.types}">
+								[[${type.name}]]
+							</li>
+						</ul>
+					</th:block>
+					<hr>
 					<!--STATE-->
 					<label for="form-check1"><b>Select Statement:</b></label>
 					<div class="form-check1 my-2">
@@ -85,7 +97,7 @@
 	</main>
 
 	<footer></footer>
-	
+
 	<!--SCRIPTS-->
 	<th:block th:replace="~{fragments/page-settings :: scripts}"></th:block>
 </body>

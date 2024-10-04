@@ -49,6 +49,7 @@
 								<th scope="col">Notes</th>
 								<th scope="col">State</th>
 								<th scope="col">Date Create</th>
+								<th scope="col">Category</th>
 								<th scope="col" class="text-end">Actions</th>
 							</tr>
 						</thead>
@@ -72,6 +73,9 @@
 									</div>
 								</th:block>
 								<td th:text="${ticket.getDateFormatted()}"></td>
+								<td>
+									<span th:each="type : ${ticket.types}">[[${type.name}]] </span>
+								</td>
 								<!--ACTION BUTTONS-->
 								<td class="text-end">
 									<!--SHOW-->
@@ -85,8 +89,8 @@
 										th:href="@{/tickets/edit/{id}(id=${ticket.id})}" class="btn btn-sm ml-2"
 										data-toggle="tooltip" title="Edit">&#9998;</a>
 									<!--DELETE-->
-									<form sec:authorize="hasAuthority('ADMIN')" class="d-inline  text-start" method="GET"
-										th:action="@{/tickets/delete/{id}(id=${ticket.id})}">
+									<form sec:authorize="hasAuthority('ADMIN')" class="d-inline  text-start"
+										method="GET" th:action="@{/tickets/delete/{id}(id=${ticket.id})}">
 										<!-- Button trigger modal -->
 										<button type="button" class="btn btn-sm" data-bs-toggle="modal"
 											data-bs-target="#staticBackdrop" title="Delete">&#x1F5D1;</button>
