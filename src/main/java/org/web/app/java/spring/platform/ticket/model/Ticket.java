@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -13,6 +14,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -47,6 +50,16 @@ public class Ticket {
 	@OneToMany(mappedBy = "ticket", cascade = CascadeType.REMOVE)
 	@JsonBackReference
 	private List<Note> notes;
+
+	@ManyToMany(cascade = CascadeType.MERGE)
+	@JoinTable( 
+			name = "ticket_type", 
+			joinColumns = @JoinColumn(name = "ticket_id"), 
+			inverseJoinColumns = @JoinColumn(name = "type_id")
+			)
+	@JsonManagedReference
+	private List<Type> types;
+
 
 	public Integer getId() {
 		return id;
@@ -109,6 +122,14 @@ public class Ticket {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyy");
 
 		return this.getCreatedAt().format(formatter);
+	}
+
+	public List<Type> getTypes() {
+		return types;
+	}
+
+	public void setTypes(List<Type> types) {
+		this.types = types;
 	}
 
 }
