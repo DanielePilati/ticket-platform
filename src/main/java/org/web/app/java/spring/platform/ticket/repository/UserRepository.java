@@ -11,7 +11,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 	Optional<User> findByUsername(String username);
 	
-	@Query(value = "SELECT * FROM users u WHERE u.not_available = 0 AND u.username NOT LIKE 'Operator Not Available'", nativeQuery = true)
+	@Query(value = "SELECT * FROM users u WHERE u.not_available = 0", nativeQuery = true)
 	List<User> findAvailableUser();
 
 }

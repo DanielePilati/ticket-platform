@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -39,9 +41,11 @@ public class Ticket {
 
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
+	@JsonBackReference
 	private User user;
 
 	@OneToMany(mappedBy = "ticket", cascade = CascadeType.REMOVE)
+	@JsonBackReference
 	private List<Note> notes;
 
 	public Integer getId() {

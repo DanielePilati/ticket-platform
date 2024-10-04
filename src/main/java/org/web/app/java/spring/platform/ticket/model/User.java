@@ -3,6 +3,8 @@ package org.web.app.java.spring.platform.ticket.model;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -40,9 +42,11 @@ public class User {
 	private String email;
 
 	@ManyToMany(fetch = FetchType.EAGER)
+	@JsonManagedReference
 	private Set<Role> roles;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+	@JsonManagedReference
 	private List<Ticket> tickets;
 
 	@Column(name = "not_available")
