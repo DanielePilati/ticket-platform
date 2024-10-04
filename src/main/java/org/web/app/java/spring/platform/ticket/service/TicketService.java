@@ -34,6 +34,10 @@ public class TicketService {
 		}
 		return tickets;
 	}
+	
+	public List<Ticket> getByState(String state){
+		return repo.findByState(state);
+	}
 
 	public Optional<Ticket> getById(Integer id) {
 		return repo.findById(id);
