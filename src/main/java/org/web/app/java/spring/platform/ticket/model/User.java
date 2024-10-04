@@ -1,5 +1,6 @@
 package org.web.app.java.spring.platform.ticket.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -106,6 +107,16 @@ public class User {
 
 	public void setTickets(List<Ticket> tickets) {
 		this.tickets = tickets;
+	}
+
+	public List<Ticket> getOpenTickets() {
+		List<Ticket> openTickets = new ArrayList<Ticket>();
+		for (Ticket ticket : this.tickets) {
+			if (!ticket.getState().equals("Completed")) {
+				openTickets.add(ticket);
+			}
+		}
+		return openTickets;
 	}
 
 }

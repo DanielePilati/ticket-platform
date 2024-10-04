@@ -41,13 +41,13 @@
 						<h3><strong>Email: </strong><span>[[${user.email}]]</span></h3>
 						<h3><strong>Role: </strong><span>[[${user.roles.toString()}]]</span></h3>
 						<h3 sec:authorize="hasAuthority('USER')">
-							<strong>Tickets:</strong>
-							<span>[[${user.tickets.size()}]]</span>
+							<strong>Open Tickets:</strong>
+							<span>[[${user.getOpenTickets().size()}]]</span>
 						</h3>
 						<!-- is available -->
 						<h3 sec:authorize="hasAuthority('USER')">
 							<strong>Not Available:</strong><span>[[${user.notAvailable}]]</span>
-							<form th:if="${user.tickets.size() == 0 && !user.notAvailable}" class="form-check form-switch ms-3" th:action="@{/user/changestatus}" method="POST">
+							<form th:if="${user.getOpenTickets().size() == 0 && !user.notAvailable}" class="form-check form-switch ms-3" th:action="@{/user/changestatus}" method="POST">
 								<button type="submit" class="btn btn-sm btn-dark" title="Not Available">Set Not Available</button>
 							</form>
 						</h3>

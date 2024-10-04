@@ -21,5 +21,8 @@ public class UserService {
 	public List<User> getUsersAvailable(){
 		return repo.findAvailableUser();
 	}
+	public User updateUser(User user) {
+		return repo.save(user);
+	}
 
 }

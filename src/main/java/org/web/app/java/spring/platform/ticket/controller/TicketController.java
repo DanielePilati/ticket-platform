@@ -55,9 +55,30 @@ public class TicketController {
 	public String show(@PathVariable(name = "id") Integer id, Model model) {
 
 		model.addAttribute("ticket", ticketService.getById(id).get());
+		model.addAttribute("states", this.TICKET_STATES);
 
 		return "/tickets/show";
 	}
+	
+	@PostMapping("/{id}/changestatus")
+	public String changeStatus(@PathVariable(name="id")Integer id,@ModelAttribute("ticket") Ticket formTicket, BindingResult br, Model model,
+			RedirectAttributes attributes) {
+		
+		if(br.hasErrors()) {
+			model.addAttribute("ticket", ticketService.getById(id).get());
+			model.addAttribute("states", this.TICKET_STATES);
+			return "/tickets/show";
+		}
+		Ticket ticket = ticketService.getById(id).get();
+		ticket.setState(formTicket.getState());
+		ticketService.updateTicket(ticket);
+		// ALERT
+		attributes.addFlashAttribute("message", "Updated");
+		attributes.addFlashAttribute("class", "warning");
+
+		return "redirect:/tickets";
+	}
+	
 
 	@GetMapping("/show/{id}/addnote")
 	public String createNote(@PathVariable(name = "id") Integer id, Model model, Authentication authentication) {

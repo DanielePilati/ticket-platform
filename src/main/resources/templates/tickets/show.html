@@ -27,9 +27,6 @@
 					<!--BACK BUTTON-->
 					<a class="btn btn-sm btn-dark" th:href="@{/tickets}" style="width: 15rem;" data-toggle="tooltip"
 						title="Back">&#8629;</a>
-					<!--ADD NOTE BUTTON-->
-					<a class="btn btn-sm btn-dark" th:href="@{/tickets/show/{id}/addnote(id=${ticket.id})}"
-						style="width: 15rem;" data-toggle="tooltip" title="Add Note">&#43; &#128196;</a>
 					<!--EDIT TICKET BUTTON-->
 					<a sec:authorize="hasAuthority('ADMIN')" class=" btn btn-sm btn-dark" style="width: 15rem;"
 						th:href="@{/tickets/edit/{id}(id=${ticket.id})}" data-toggle="tooltip"
@@ -103,6 +100,38 @@
 							</div>
 						</div>
 					</div>
+				</div>
+
+				<!--STATE-->
+				<form sec:authorize="hasAuthority('USER')" class="col-12 text-center my-2" th:action="@{/tickets/{id}/changestatus(id=${ticket.id})}" method="POST">
+					<!--HIDDEN DATE FIELD-->
+					<input type="hidden" th:field="${ticket}"></input>
+					<!--Status-->
+					<label for="form-check1"><b>Change Statement:</b></label>
+					<div class="form-check1 my-2">
+						<th:block th:each="state : ${states}">
+							<input type="radio" class="btn-check" name="|options_${state}|" th:id="|option_${state}|"
+								autocomplete="off" th:value="${state}" th:field="${ticket.state}">
+							<th:block th:switch="${state}">
+								<label th:case="'Completed'" class="btn btn-sm btn-outline-success"
+									th:for="|option_${state}|">[[${state}]]</label>
+								<label th:case="'ToDo'" class="btn btn-sm btn-outline-danger"
+									th:for="|option_${state}|">[[${state}]]</label>
+								<label th:case="'InProgress'" class="btn btn-sm btn-outline-warning"
+									th:for="|option_${state}|">[[${state}]]</label>
+							</th:block>
+						</th:block>
+					</div>
+					<!--Send BUTTON-->
+					<button class="btn btn-sm btn-dark" type="submit" style="width: 15rem;" data-toggle="tooltip"
+						title="Status Change">Send Status</button>
+				</form>
+				<hr class="my-2">
+
+				<!--ADD NOTE BUTTON-->
+				<div class="col-12 mb-3 text-center">
+					<a class="btn btn-sm btn-dark" th:href="@{/tickets/show/{id}/addnote(id=${ticket.id})}"
+						style="width: 15rem;" data-toggle="tooltip" title="Add Note">&#43; &#128196;</a>
 				</div>
 
 				<!--NOTE CARD-->
