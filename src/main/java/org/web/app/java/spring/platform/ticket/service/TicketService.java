@@ -8,18 +8,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.web.app.java.spring.platform.ticket.model.Ticket;
-import org.web.app.java.spring.platform.ticket.model.User;
 import org.web.app.java.spring.platform.ticket.repository.TicketRepository;
-import org.web.app.java.spring.platform.ticket.repository.UserRepository;
 
 @Service
 public class TicketService {
 
 	@Autowired
 	private TicketRepository repo;
-
-	@Autowired
-	private UserRepository userRepo;	
 
 	public List<Ticket> getAll() {
 		return repo.findAll();
@@ -34,13 +29,13 @@ public class TicketService {
 		}
 		return tickets;
 	}
-	
-	public List<Ticket> getAllByType(String typeIn){
+
+	public List<Ticket> getAllByType(String typeIn) {
 
 		return repo.findByType(typeIn);
 	}
-	
-	public List<Ticket> getByState(String state){
+
+	public List<Ticket> getByState(String state) {
 		return repo.findByState(state);
 	}
 
@@ -53,17 +48,7 @@ public class TicketService {
 	}
 
 	public Ticket saveTicket(Ticket ticket) {
-
 		ticket.setCreatedAt(LocalDateTime.now());
-
-		if (ticket.getUser() == null) {
-			for (User user : userRepo.findAll()) {
-				if (!user.isNotAvailable()) {
-					ticket.setUser(user);
-					break;
-				}
-			}
-		}
 		return repo.save(ticket);
 
 	}
