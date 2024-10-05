@@ -106,7 +106,7 @@ public class TicketController {
 		model.addAttribute("types", typeService.getAll());
 		model.addAttribute("ticket", new Ticket());
 		model.addAttribute("states", this.TICKET_STATES);
-		model.addAttribute("availableUsers", userService.getUsersAvailable());
+		model.addAttribute("availableUsers", userService.getAllByRole("USER"));
 
 		return "/tickets/create";
 	}
@@ -138,7 +138,7 @@ public class TicketController {
 
 		model.addAttribute("ticket", ticketService.getById(id).get());
 		model.addAttribute("states", this.TICKET_STATES);
-		model.addAttribute("availableUsers", userService.getUsersAvailable());
+		model.addAttribute("availableUsers", userService.getAllByRole("USER"));
 		model.addAttribute("types", typeService.getAll());
 
 		return "/tickets/edit";

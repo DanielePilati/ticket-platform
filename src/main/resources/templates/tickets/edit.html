@@ -71,18 +71,16 @@
 					</div>
 					<hr>
 					<!--OPERATORS-->
-					<th:block th:if="${availableUsers.size()} > 0">
-						<label for="form-check2"><b>Available Operators:</b></label>
-						<div class="form-check2 my-2">
-							<th:block th:each="user : ${availableUsers}">
-								<input type="radio" class="btn-check" name="|options_${user.username}|"
-									th:id="|option_${user.username}|" autocomplete="off" th:value="${user.id}"
-									th:field="${ticket.user}">
-								<label class="btn btn-sm btn-outline-dark"
-									th:for="|option_${user.username}|">[[${user.username}]]</label>
-							</th:block>
-						</div>
-					</th:block>
+					<label for="form-check2"><b>Operator:</b></label>
+					<div class="form-check2 my-2">
+						<th:block th:each="user : ${availableUsers}">
+							<input type="radio" class="btn-check" name="|options_${user.username}|"
+								th:id="|option_${user.username}|" autocomplete="off" th:value="${user.id}"
+								th:field="${ticket.user}">
+							<label class="btn btn-sm btn-outline-dark"
+								th:for="|option_${user.username}|">[[${user.username}]]</label>
+						</th:block>
+					</div>
 					<hr>
 					<!--BUTTONS-->
 					<div>

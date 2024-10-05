@@ -24,5 +24,9 @@ public class UserService {
 	public User updateUser(User user) {
 		return repo.save(user);
 	}
+	
+	public List<User> getAllByRole(String role){	
+		return repo.findByRole(role);
+	}
 
 }
