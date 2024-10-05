@@ -50,7 +50,7 @@
 							<form th:if="${user.getOpenTickets().size() == 0 && !user.notAvailable}" class="form-check form-switch ms-3" th:action="@{/user/changestatus}" method="POST">
 								<button type="submit" class="btn btn-sm btn-dark" title="Not Available">Set Not Available</button>
 							</form>
-							<form th:ulness="${user.getOpenTickets().size() == 0 && !user.notAvailable}" class="form-check form-switch ms-3" th:action="@{/user/changestatus}" method="POST">
+							<form th:if="${user.notAvailable}" class="form-check form-switch ms-3" th:action="@{/user/changestatus}" method="POST">
 								<button type="submit" class="btn btn-sm btn-dark" title="Set Available">Set Available</button>
 							</form>
 						</h3>
