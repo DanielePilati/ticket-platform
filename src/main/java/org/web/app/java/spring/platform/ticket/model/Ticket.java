@@ -21,6 +21,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tickets")
@@ -42,6 +43,7 @@ public class Ticket {
 	@NotEmpty(message = "The content must not be empty")
 	private String state;
 
+	@NotNull(message = "The content must not be empty")
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
 	@JsonBackReference

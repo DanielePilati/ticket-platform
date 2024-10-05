@@ -121,9 +121,12 @@ public class TicketController {
 			model.addAttribute("types", typeService.getAll());
 			return "/tickets/create";
 		}
-
+		
+		if (formTicket.getUser().isNotAvailable()) {
+			formTicket.getUser().setNotAvailable(false);
+		} 
+		
 		ticketService.saveTicket(formTicket);
-
 		attributes.addFlashAttribute("tickets", ticketService.getAll());
 		// ALERT
 		attributes.addFlashAttribute("message", "Created");

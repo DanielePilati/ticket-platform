@@ -11,7 +11,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
 	Optional<User> findByUsername(String username);
 	
-	@Query(value = "SELECT * FROM users u WHERE u.not_available = 0 and not u.username = 'Operator Not Available'", nativeQuery = true)
+	@Query(value = "SELECT * FROM users u WHERE u.not_available = 0", nativeQuery = true)
 	List<User> findAvailableUser();
 	
 	@Query(value = "SELECT u.* FROM users u inner join users_roles ur on u.id = ur.user_id inner join roles r on r.id = ur.roles_id where r.name = :role", nativeQuery = true)

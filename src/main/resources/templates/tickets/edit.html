@@ -68,6 +68,9 @@
 									th:for="|option_${state}|">[[${state}]]</label>
 							</th:block>
 						</th:block>
+						<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
+							<li th:each="err : ${#fields.errors('state')}" th:text="${err}" class="error " />
+						</ul>
 					</div>
 					<hr>
 					<!--OPERATORS-->
@@ -80,6 +83,9 @@
 							<label class="btn btn-sm btn-outline-dark"
 								th:for="|option_${user.username}|">[[${user.username}]]</label>
 						</th:block>
+						<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
+							<li th:each="err : ${#fields.errors('user')}" th:text="${err}" class="error " />
+						</ul>
 					</div>
 					<hr>
 					<!--BUTTONS-->
