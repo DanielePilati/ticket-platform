@@ -9,7 +9,7 @@ import org.web.app.java.spring.platform.ticket.model.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-	Optional<User> findByUsername(String username);
+	Optional<User> findByUsernameContains(String username);
 
 	@Query(value = "SELECT * FROM users u WHERE u.not_available = 0", nativeQuery = true)
 	List<User> findAvailableUser();

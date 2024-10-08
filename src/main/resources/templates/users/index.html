@@ -24,16 +24,10 @@
 				</th:block>
 
 				<!--ACTION BAR-->
-				<form class="d-flex ms-auto row-wrap mb-3 gap-2" th:action="@{/tickets/search/}" method="get">
+				<form class="d-flex ms-auto row-wrap mb-3 gap-2 justify-content-end" th:action="@{/users/search/}" method="get">
 					<!--ADD TICKET BUTTON-->
-					<a class="col-auto btn btn-dark" th:href="@{/users/create}"
-						data-toggle="tooltip" title="Add Ticket">&#43; &#128100;</a>
-					<!--SEARCH BAR-->
-					<input class="form-control" placeholder="Insert a new user to search..." aria-label="Search"
-						value="Search" th:field="${search.username}">
-					<button class="btn btn-dark" type="submit">Search</button>
-					<a class="col-auto btn btn-dark" th:href="@{/users}" data-toggle="tooltip"
-						title="Reset Research">&#10227; Reset</a>
+					<a class="col-auto btn btn-dark" th:href="@{/users/create}" data-toggle="tooltip"
+						title="Add Ticket">&#43; &#128100;</a>
 				</form>
 
 				<!--CONDITION TRUE-->

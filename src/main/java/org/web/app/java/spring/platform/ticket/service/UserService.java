@@ -15,7 +15,7 @@ public class UserService {
 	private UserRepository repo;
 
 	public Optional<User> getByUsername(String username) {
-		return repo.findByUsername(username);
+		return repo.findByUsernameContains(username);
 	}
 	
 	public List<User> getUsersAvailable(){
