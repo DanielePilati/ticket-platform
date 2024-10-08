@@ -23,7 +23,7 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private RoleService roleService;
 
@@ -32,10 +32,10 @@ public class UserController {
 
 		model.addAttribute("search", new User());
 		model.addAttribute("users", userService.getAllByRole("USER"));
-	
+
 		return "/users/index";
 	}
-	
+
 	@PostMapping("/changestatus")
 	public String setNotAvailable(RedirectAttributes attributes, Authentication authentication) {
 
@@ -50,7 +50,7 @@ public class UserController {
 
 		return "redirect:/";
 	}
-	
+
 	@GetMapping("/create")
 	public String create(Model model) {
 
@@ -69,7 +69,7 @@ public class UserController {
 		if (br.hasErrors()) {
 			return "/users/create";
 		}
-		
+
 		userService.saveUser(formUser);
 		// ALERT
 		attributes.addFlashAttribute("message", "Created");
@@ -78,14 +78,14 @@ public class UserController {
 		return "redirect:/users";
 
 	}
-	
-	@GetMapping("/edit/{id}")
-	public String edit(@PathVariable(name = "id") Integer id, Model model) {
 
-		if(userService.getById(id).isPresent()) {
-			model.addAttribute("user", userService.getById(id).get());
+	@GetMapping("/edit/{id}")
+	public String edit(@PathVariable(name = "id") Integer id, Model model, Authentication authentication) {
+
+		if (authentication != null) {
+			model.addAttribute("user", userService.getByUsername(authentication.getName()).get());
 		}
-		
+
 		return "/users/edit";
 	}
 
@@ -105,7 +105,7 @@ public class UserController {
 
 		return "redirect:/users";
 	}
-	
+
 	@GetMapping("/delete/{id}")
 	public String delete(Model model, @PathVariable("id") Integer id, RedirectAttributes attributes) {
 
@@ -116,8 +116,5 @@ public class UserController {
 
 		return "redirect:/users";
 	}
-	
-	
-	
 
 }

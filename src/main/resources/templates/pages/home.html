@@ -45,27 +45,35 @@
 							<span>[[${user.getOpenTickets().size()}]]</span>
 						</h3>
 						<!-- is available -->
-						<h3 sec:authorize="hasAuthority('USER')">
-							<strong>Not Available:</strong>
-							<!--switich color-->
-							<th:block th:if="${user.notAvailable}">
-								<span class="text-danger">Not Available</span>
-							</th:block>
-							<th:block th:unless="${user.notAvailable}">
-								<span class="text-success">Available</span>
-							</th:block>
-							<form th:if="${user.getOpenTickets().size() == 0 && !user.notAvailable}"
-								class="form-check form-switch ms-3" th:action="@{/users/changestatus}" method="POST">
-								<button type="submit" class="btn btn-sm btn-dark" title="Not Available">Set Not
-									Available</button>
-							</form>
-							<form th:if="${user.notAvailable}" class="form-check form-switch ms-3"
-								th:action="@{/users/changestatus}" method="POST">
-								<button type="submit" class="btn btn-sm btn-dark" title="Set Available">Set
-									Available</button>
-							</form>
-						</h3>
-
+						<div sec:authorize="hasAuthority('USER')">
+							<h3> <strong>Not Available:</strong>
+								<!--switich color-->
+								<th:block th:if="${user.notAvailable}">
+									<span class="text-danger">Not Available</span>
+								</th:block>
+								<th:block th:unless="${user.notAvailable}">
+									<span class="text-success">Available</span>
+								</th:block>
+							</h3>
+							<div class="row wrap">
+								<form class="col-auto form-check form-switch ms-3" th:action="@{/users/edit/{id}(id=${user.id})}"
+									method="GET">
+									<button type="submit" class="btn btn-sm btn-dark" title="Set Available">Edit
+										Profile</button>
+								</form>
+								<form th:if="${user.getOpenTickets().size() == 0 && !user.notAvailable}"
+									class="col-auto form-check form-switch ms-3" th:action="@{/users/changestatus}"
+									method="POST">
+									<button type="submit" class="btn btn-sm btn-dark" title="Not Available">Set Not
+										Available</button>
+								</form>
+								<form th:if="${user.notAvailable}" class="col-auto form-check form-switch ms-3"
+									th:action="@{/users/changestatus}" method="POST">
+									<button type="submit" class="btn btn-sm btn-dark" title="Set Available">Set
+										Available</button>
+								</form>
+							</div>
+						</div>
 					</div>
 
 					<!--LOGOUT FORM-->

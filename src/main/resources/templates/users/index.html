@@ -69,9 +69,6 @@
 								<td th:text="${user.tickets.size()}"></td>
 								<!--ACTION BUTTONS-->
 								<td class="text-end">
-									<!--EDIT-->
-									<a th:href="@{/users/edit/{id}(id=${user.id})}" class="btn btn-sm ml-2"
-										data-toggle="tooltip" title="Edit">&#9998;</a>
 									<!--DELETE-->
 									<form class="d-inline  text-start" method="GET"
 										th:action="@{/users/delete/{id}(id=${user.id})}">
