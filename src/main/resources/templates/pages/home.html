@@ -30,9 +30,9 @@
 					<h1 class="col-12 text-center">Welcome to your Home</h1>
 					<hr>
 
-					<!--LOGIN ALERT-->
+					<!--ALERT-->
 					<div th:if="${message != null}">
-						<div th:replace="~{fragments/page-settings :: login-alert(${message}, ${class})}"></div>
+						<div th:replace="~{fragments/page-settings :: alert(${message}, ${class})}"></div>
 					</div>
 
 					<!--USER DETAILS-->
@@ -46,7 +46,7 @@
 						</h3>
 						<!-- is available -->
 						<div sec:authorize="hasAuthority('USER')">
-							<h3> <strong>Not Available:</strong>
+							<h3> <strong>Status:</strong>
 								<!--switich color-->
 								<th:block th:if="${user.notAvailable}">
 									<span class="text-danger">Not Available</span>
@@ -75,7 +75,7 @@
 									Available</button>
 							</form>
 							<!--PROFILE EDIT FORM-->
-							<form class="col-auto form-check" th:action="@{/users/edit/{id}(id=${user.id})}"
+							<form class="col-auto form-check" th:action="@{/users/edit}"
 								method="GET">
 								<button type="submit" style="width: 25rem;" class="btn btn-sm btn-dark"
 									title="Set Available">Edit

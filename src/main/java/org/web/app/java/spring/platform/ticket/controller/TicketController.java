@@ -30,7 +30,7 @@ public class TicketController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private TypeService typeService;
 
@@ -52,19 +52,19 @@ public class TicketController {
 	}
 
 	@GetMapping("/show/{id}")
-	public String show(@PathVariable(name = "id") Integer id, Model model) {
+	public String show(@PathVariable(name = "id") Integer id, Model model, Authentication authentication) {
 
 		model.addAttribute("ticket", ticketService.getById(id).get());
 		model.addAttribute("states", this.TICKET_STATES);
 
 		return "/tickets/show";
 	}
-	
+
 	@PostMapping("/{id}/changestatus")
-	public String changeStatus(@PathVariable(name="id")Integer id,@ModelAttribute("ticket") Ticket formTicket, BindingResult br, Model model,
-			RedirectAttributes attributes) {
-		
-		if(br.hasErrors()) {
+	public String changeStatus(@PathVariable(name = "id") Integer id, @ModelAttribute("ticket") Ticket formTicket,
+			BindingResult br, Model model, RedirectAttributes attributes) {
+
+		if (br.hasErrors()) {
 			model.addAttribute("ticket", ticketService.getById(id).get());
 			model.addAttribute("states", this.TICKET_STATES);
 			return "/tickets/show";
@@ -73,12 +73,11 @@ public class TicketController {
 		ticket.setState(formTicket.getState());
 		ticketService.updateTicket(ticket);
 		// ALERT
-		attributes.addFlashAttribute("message", "Updated");
-		attributes.addFlashAttribute("class", "warning");
+		attributes.addFlashAttribute("message", "Your Ticket Is Updated.");
+		attributes.addFlashAttribute("class", "success");
 
 		return "redirect:/tickets";
 	}
-	
 
 	@GetMapping("/show/{id}/addnote")
 	public String createNote(@PathVariable(name = "id") Integer id, Model model, Authentication authentication) {
@@ -121,15 +120,15 @@ public class TicketController {
 			model.addAttribute("types", typeService.getAll());
 			return "/tickets/create";
 		}
-		
+
 		if (formTicket.getUser().isNotAvailable()) {
 			formTicket.getUser().setNotAvailable(false);
-		} 
-		
+		}
+
 		ticketService.saveTicket(formTicket);
 		attributes.addFlashAttribute("tickets", ticketService.getAll());
 		// ALERT
-		attributes.addFlashAttribute("message", "Created");
+		attributes.addFlashAttribute("message", "Your Ticket is Created.");
 		attributes.addFlashAttribute("class", "success");
 
 		return "redirect:/tickets";
@@ -160,8 +159,8 @@ public class TicketController {
 
 		ticketService.updateTicket(formTicket);
 		// ALERT
-		attributes.addFlashAttribute("message", "Updated");
-		attributes.addFlashAttribute("class", "warning");
+		attributes.addFlashAttribute("message", "Your Ticket is Updated.");
+		attributes.addFlashAttribute("class", "success");
 
 		return "redirect:/tickets";
 	}
@@ -171,7 +170,7 @@ public class TicketController {
 
 		ticketService.deleteById(id);
 		// ALERT
-		attributes.addFlashAttribute("message", "Deleted");
+		attributes.addFlashAttribute("message", "Your Ticket is Deleted.");
 		attributes.addFlashAttribute("class", "danger");
 
 		return "redirect:/tickets";

@@ -27,6 +27,7 @@ public class UserService {
 	}
 
 	public User updateUser(User user) {
+		user.setPassword("{noop}"+user.getPassword());
 		return repo.save(user);
 	}
 

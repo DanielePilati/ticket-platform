@@ -18,10 +18,9 @@
 				<hr>
 
 				<!--ALERT-->
-				<th:block th:if="${message != null}">
-					<div th:insert="fragments/page-settings :: ticket-alert(${message},${class})">
-					</div>
-				</th:block>
+				<div th:if="${message != null}">
+					<div th:replace="~{fragments/page-settings :: alert(${message}, ${class})}"></div>
+				</div>
 
 				<!--ACTION BAR-->
 				<form class="d-flex ms-auto row-wrap mb-3 gap-2" th:action="@{/users/search/}" method="get">
@@ -39,6 +38,7 @@
 							<tr>
 								<th scope="col">#</th>
 								<th scope="col">Username</th>
+								<th scope="col">Password</th>
 								<th scope="col">Email</th>
 								<th scope="col">Not Available</th>
 								<th scope="col">Tickets</th>
@@ -50,6 +50,7 @@
 							<tr th:each="user : ${users}">
 								<th scope="row" th:text="${user.id}"></th>
 								<td th:text="${user.username}"></td>
+								<td th:text="${user.password}"></td>
 								<td th:text="${user.email}"></td>
 								<!--switich color-->
 								<th:block th:if="${user.notAvailable}">

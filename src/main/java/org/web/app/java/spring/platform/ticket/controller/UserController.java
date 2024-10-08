@@ -71,15 +71,15 @@ public class UserController {
 
 		userService.saveUser(formUser);
 		// ALERT
-		attributes.addFlashAttribute("message", "Created");
+		attributes.addFlashAttribute("message", "Your User is Created");
 		attributes.addFlashAttribute("class", "success");
 
 		return "redirect:/users";
 
 	}
 
-	@GetMapping("/edit/{id}")
-	public String edit(@PathVariable(name = "id") Integer id, Model model, Authentication authentication) {
+	@GetMapping("/edit")
+	public String edit(Model model, Authentication authentication) {
 
 		if (authentication != null) {
 			model.addAttribute("user", userService.getByUsername(authentication.getName()).get());
@@ -99,10 +99,10 @@ public class UserController {
 
 		userService.updateUser(formUser);
 		// ALERT
-		attributes.addFlashAttribute("message", "Updated");
-		attributes.addFlashAttribute("class", "warning");
+		attributes.addFlashAttribute("message", "Your Profile is updated");
+		attributes.addFlashAttribute("class", "success");
 
-		return "redirect:/users";
+		return "redirect:/";
 	}
 
 	@GetMapping("/delete/{id}")
@@ -110,7 +110,7 @@ public class UserController {
 
 		userService.deleteById(id);
 		// ALERT
-		attributes.addFlashAttribute("message", "Deleted");
+		attributes.addFlashAttribute("message", "Your User is Deleted");
 		attributes.addFlashAttribute("class", "danger");
 
 		return "redirect:/users";
