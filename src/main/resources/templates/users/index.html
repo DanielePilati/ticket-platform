@@ -24,7 +24,7 @@
 				</th:block>
 
 				<!--ACTION BAR-->
-				<form class="d-flex ms-auto row-wrap mb-3 gap-2 justify-content-end" th:action="@{/users/search/}" method="get">
+				<form class="d-flex ms-auto row-wrap mb-3 gap-2" th:action="@{/users/search/}" method="get">
 					<!--ADD TICKET BUTTON-->
 					<a class="col-auto btn btn-dark" th:href="@{/users/create}" data-toggle="tooltip"
 						title="Add Ticket">&#43; &#128100;</a>
@@ -39,7 +39,6 @@
 							<tr>
 								<th scope="col">#</th>
 								<th scope="col">Username</th>
-								<th scope="col">Password</th>
 								<th scope="col">Email</th>
 								<th scope="col">Not Available</th>
 								<th scope="col">Tickets</th>
@@ -51,7 +50,6 @@
 							<tr th:each="user : ${users}">
 								<th scope="row" th:text="${user.id}"></th>
 								<td th:text="${user.username}"></td>
-								<td th:text="${user.password}"></td>
 								<td th:text="${user.email}"></td>
 								<!--switich color-->
 								<th:block th:if="${user.notAvailable}">

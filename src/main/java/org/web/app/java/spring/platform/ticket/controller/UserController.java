@@ -63,8 +63,7 @@ public class UserController {
 	}
 
 	@PostMapping("/create")
-	public String store(@Valid @ModelAttribute("user") User formUser, BindingResult br, Model model,
-			RedirectAttributes attributes) {
+	public String store(@Valid @ModelAttribute("user") User formUser, BindingResult br, RedirectAttributes attributes) {
 
 		if (br.hasErrors()) {
 			return "/users/create";

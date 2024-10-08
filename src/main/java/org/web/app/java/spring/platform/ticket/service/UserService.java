@@ -17,29 +17,28 @@ public class UserService {
 	public Optional<User> getByUsername(String username) {
 		return repo.findByUsernameContains(username);
 	}
-	
-	public List<User> getUsersAvailable(){
+
+	public List<User> getUsersAvailable() {
 		return repo.findAvailableUser();
 	}
-	
-	public Optional<User> getById(Integer id){
+
+	public Optional<User> getById(Integer id) {
 		return repo.findById(id);
 	}
-	
+
 	public User updateUser(User user) {
 		return repo.save(user);
 	}
-	
-	public List<User> getAllByRole(String role){	
+
+	public List<User> getAllByRole(String role) {
 		return repo.findByRole(role);
 	}
-	
+
 	public User saveUser(User user) {
-		user = repo.save(user);
-		user.setPassword("{noop}"+ user.getPassword());
-		return user;
+		user.setPassword("{noop}"+user.getPassword());
+		return repo.save(user);
 	}
-	
+
 	public void deleteById(Integer id) {
 		repo.deleteById(id);
 	}
