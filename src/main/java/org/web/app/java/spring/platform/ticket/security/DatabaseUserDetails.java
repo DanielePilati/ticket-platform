@@ -12,6 +12,7 @@ import org.web.app.java.spring.platform.ticket.model.Role;
 import org.web.app.java.spring.platform.ticket.model.Ticket;
 import org.web.app.java.spring.platform.ticket.model.User;
 
+
 @SuppressWarnings("serial")
 public class DatabaseUserDetails implements UserDetails {
 

@@ -10,11 +10,13 @@ import org.web.app.java.spring.platform.ticket.model.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
 	Optional<User> findByUsername(String username);
-	
+
 	@Query(value = "SELECT * FROM users u WHERE u.not_available = 0", nativeQuery = true)
 	List<User> findAvailableUser();
-	
+
 	@Query(value = "SELECT u.* FROM users u inner join users_roles ur on u.id = ur.user_id inner join roles r on r.id = ur.roles_id where r.name = :role", nativeQuery = true)
-	List<User> findByRole(String role);
+	List<User> findByRole(String role);	
+	
+	Optional<User> findById(Integer id);
 
 }

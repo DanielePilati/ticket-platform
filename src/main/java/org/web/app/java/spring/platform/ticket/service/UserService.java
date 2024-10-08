@@ -21,12 +21,27 @@ public class UserService {
 	public List<User> getUsersAvailable(){
 		return repo.findAvailableUser();
 	}
+	
+	public Optional<User> getById(Integer id){
+		return repo.findById(id);
+	}
+	
 	public User updateUser(User user) {
 		return repo.save(user);
 	}
 	
 	public List<User> getAllByRole(String role){	
 		return repo.findByRole(role);
+	}
+	
+	public User saveUser(User user) {
+		user = repo.save(user);
+		user.setPassword("{noop}"+ user.getPassword());
+		return user;
+	}
+	
+	public void deleteById(Integer id) {
+		repo.deleteById(id);
 	}
 
 }

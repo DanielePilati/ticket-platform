@@ -49,6 +49,9 @@
 								[[${type.name}]]
 							</li>
 						</ul>
+						<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
+							<li th:each="err : ${#fields.errors('types')}" th:text="${err}" class="error"/>
+						</ul>
 					</th:block>
 					<hr>
 					<!--STATE-->

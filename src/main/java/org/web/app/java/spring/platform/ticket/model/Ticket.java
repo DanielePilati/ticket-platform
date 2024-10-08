@@ -53,6 +53,7 @@ public class Ticket {
 	@JsonBackReference
 	private List<Note> notes;
 
+
 	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable( 
 			name = "ticket_type", 
@@ -60,6 +61,7 @@ public class Ticket {
 			inverseJoinColumns = @JoinColumn(name = "type_id")
 			)
 	@JsonManagedReference
+	@NotEmpty(message = "The content must not be empty")
 	private List<Type> types;
 
 

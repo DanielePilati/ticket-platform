@@ -20,6 +20,7 @@ public class SecurityConfiguration {
         http.authorizeHttpRequests(requests -> requests
                 .requestMatchers("/tickets/**").hasAnyAuthority("USER", "ADMIN")
                 .requestMatchers("/notes/**").hasAnyAuthority("USER", "ADMIN")
+                .requestMatchers("/users/**").hasAnyAuthority("USER", "ADMIN")
                 .requestMatchers("/**").permitAll())
         .formLogin((login) -> login
                 .loginPage("/")

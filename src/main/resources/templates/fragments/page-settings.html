@@ -40,6 +40,11 @@
 					<a class="nav-link" th:href="@{/tickets}"
 						th:classappend="${route == 'tickets' ? 'active' : 'non-active'}">Tickets</a>
 				</li>
+				<!-- users -->
+				<li sec:authorize="hasAuthority('ADMIN')" class="nav-item">
+					<a class="nav-link" th:href="@{/users}"
+						th:classappend="${route == 'users' ? 'active' : 'non-active'}">Users</a>
+				</li>
 			</ul>
 		</div>
 		<!-- user authenticated -->

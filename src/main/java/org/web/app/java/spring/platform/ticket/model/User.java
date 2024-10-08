@@ -17,8 +17,8 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "users")
@@ -28,20 +28,18 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@NotNull
-	@NotEmpty
+	@NotBlank(message = "The content must contain at least one non-whitespace character")
 	@Column(unique = true)
 	private String username;
 
-	@NotNull
-	@NotEmpty
+	@NotBlank(message = "The content must contain at least one non-whitespace character")
 	private String password;
 
-	@NotNull
-	@NotEmpty
+	@NotBlank(message = "The content must contain at least one non-whitespace character")
 	@Email
 	private String email;
 
+	@NotEmpty(message = "The content must not be empty")
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JsonManagedReference
 	private Set<Role> roles;
@@ -118,5 +116,6 @@ public class User {
 		}
 		return openTickets;
 	}
+
 
 }

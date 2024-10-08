@@ -117,7 +117,7 @@ public class TicketController {
 
 		if (br.hasErrors()) {
 			model.addAttribute("states", this.TICKET_STATES);
-			model.addAttribute("availableUsers", userService.getUsersAvailable());
+			model.addAttribute("availableUsers", userService.getAllByRole("USER"));
 			model.addAttribute("types", typeService.getAll());
 			return "/tickets/create";
 		}
@@ -153,7 +153,7 @@ public class TicketController {
 
 		if (br.hasErrors()) {
 			model.addAttribute("states", this.TICKET_STATES);
-			model.addAttribute("availableUsers", userService.getUsersAvailable());
+			model.addAttribute("availableUsers", userService.getAllByRole("USER"));
 			model.addAttribute("types", typeService.getAll());
 			return "/tickets/edit";
 		}

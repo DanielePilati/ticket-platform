@@ -6,7 +6,7 @@
 <body>
 
 	<!--HEADER-->
-	<header th:replace="~{fragments/page-settings :: header('tickets')}"></header>
+	<header th:replace="~{fragments/page-settings :: header('users')}"></header>
 
 	<!--MAIN-->
 	<main>
@@ -26,71 +26,55 @@
 				<!--ACTION BAR-->
 				<form class="d-flex ms-auto row-wrap mb-3 gap-2" th:action="@{/tickets/search/}" method="get">
 					<!--ADD TICKET BUTTON-->
-					<a sec:authorize="hasAuthority('ADMIN')" class="col-auto btn btn-dark" th:href="@{/tickets/create}"
-						data-toggle="tooltip" title="Add Ticket">&#43; &#127915;</a>
+					<a class="col-auto btn btn-dark" th:href="@{/users/create}"
+						data-toggle="tooltip" title="Add Ticket">&#43; &#128100;</a>
 					<!--SEARCH BAR-->
-					<input class="form-control" placeholder="Insert a new ticket to search..." aria-label="Search"
-						value="Search" th:field="${search.title}">
+					<input class="form-control" placeholder="Insert a new user to search..." aria-label="Search"
+						value="Search" th:field="${search.username}">
 					<button class="btn btn-dark" type="submit">Search</button>
-					<a class="col-auto btn btn-dark" th:href="@{/tickets}" data-toggle="tooltip"
+					<a class="col-auto btn btn-dark" th:href="@{/users}" data-toggle="tooltip"
 						title="Reset Research">&#10227; Reset</a>
 				</form>
 
 				<!--CONDITION TRUE-->
-				<th:block th:if="${tickets.size()} > 0">
+				<th:block th:if="${users.size()} > 0">
 					<!--TABLE-->
 					<table class="table table-striped table-dark mb-3">
 						<!--THEAD-->
 						<thead>
 							<tr>
 								<th scope="col">#</th>
-								<th scope="col">Title</th>
-								<th scope="col">Operator</th>
-								<th scope="col">Notes</th>
-								<th scope="col">State</th>
-								<th scope="col">Date Create</th>
-								<th scope="col">Category</th>
+								<th scope="col">Username</th>
+								<th scope="col">Password</th>
+								<th scope="col">Email</th>
+								<th scope="col">Not Available</th>
+								<th scope="col">Tickets</th>
 								<th scope="col" class="text-end">Actions</th>
 							</tr>
 						</thead>
 						<!--TBODY-->
 						<tbody>
-							<tr th:each="ticket : ${tickets}">
-								<th scope="row" th:text="${ticket.id}"></th>
-								<td th:text="${ticket.title}"></td>
-								<td th:text="${ticket.user.username}"></td>
-								<td th:text="${ticket.notes.size()}"></td>
+							<tr th:each="user : ${users}">
+								<th scope="row" th:text="${user.id}"></th>
+								<td th:text="${user.username}"></td>
+								<td th:text="${user.password}"></td>
+								<td th:text="${user.email}"></td>
 								<!--switich color-->
-								<th:block th:switch="${ticket.state}">
-									<div th:case="'Completed'">
-										<td class="text-success" th:text="${ticket.state}"></td>
-									</div>
-									<div th:case="'ToDo'">
-										<td class="text-danger" th:text="${ticket.state}"></td>
-									</div>
-									<div th:case="'InProgress'">
-										<td class="text-warning" th:text="${ticket.state}"></td>
-									</div>
+								<th:block th:if="${user.notAvailable}">
+									<td class="text-danger">Not Available</td>
 								</th:block>
-								<td th:text="${ticket.getDateFormatted()}"></td>
-								<td>
-									<span th:each="type : ${ticket.types}">[[${type.name}]] </span>
-								</td>
+								<th:block th:unless="${user.notAvailable}">
+									<td class="text-success">Available</td>
+								</th:block>
+								<td th:text="${user.tickets.size()}"></td>
 								<!--ACTION BUTTONS-->
 								<td class="text-end">
-									<!--SHOW-->
-									<a th:href="@{/tickets/show/{id}(id=${ticket.id})}" class="btn btn-sm "
-										data-toggle="tooltip" title="View">&#128270;</a>
-									<!--ADD NOTE BUTTON-->
-									<a th:href="@{/tickets/show/{id}/addnote(id=${ticket.id})}" class="btn btn-sm"
-										data-toggle="tooltip" title="Add Note">&#128196;</a>
 									<!--EDIT-->
-									<a sec:authorize="hasAuthority('ADMIN')"
-										th:href="@{/tickets/edit/{id}(id=${ticket.id})}" class="btn btn-sm ml-2"
+									<a th:href="@{/users/edit/{id}(id=${user.id})}" class="btn btn-sm ml-2"
 										data-toggle="tooltip" title="Edit">&#9998;</a>
 									<!--DELETE-->
-									<form sec:authorize="hasAuthority('ADMIN')" class="d-inline  text-start"
-										method="GET" th:action="@{/tickets/delete/{id}(id=${ticket.id})}">
+									<form class="d-inline  text-start" method="GET"
+										th:action="@{/users/delete/{id}(id=${user.id})}">
 										<!-- Button trigger modal -->
 										<button type="button" class="btn btn-sm" data-bs-toggle="modal"
 											data-bs-target="#staticBackdrop" title="Delete">&#x1F5D1;</button>
@@ -110,7 +94,7 @@
 													</div>
 													<!-- body -->
 													<div class="modal-body text-black">
-														Are you shure you want remove "<b>[[${ticket.title}]]</b>"?
+														Are you shure you want remove "<b>[[${user.username}]]</b>"?
 													</div>
 													<!-- footer -->
 													<div class="modal-footer bg-dark">
@@ -129,8 +113,8 @@
 				</th:block>
 
 				<!--CONDITION FALSE-->
-				<th:block th:unless="${tickets.size()}">
-					<h2 class="text-center">No Tickets Found</b></h2>
+				<th:block th:unless="${users.size()}">
+					<h2 class="text-center">No Users Found</b></h2>
 				</th:block>
 
 			</div>
