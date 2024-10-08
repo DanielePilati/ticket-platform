@@ -9,7 +9,7 @@
 	<h2 class="col-12 text-center">Please Log in:</h2>
 	<!--ERROR ALERT-->
 	<div th:if="${class == 'danger'}">
-		<div th:replace="~{fragments/page-settings :: alert(${message}, ${class})}"></div>
+		<div th:replace="~{fragments/page-settings :: login-alert(${message}, ${class})}"></div>
 	</div>
 	<!--FORM-->
 	<form class="col-auto form-signin" method="POST" th:action="@{/process-login}">

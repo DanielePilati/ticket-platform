@@ -21,7 +21,6 @@ public class SecurityConfiguration {
                 .requestMatchers("/tickets/**").hasAnyAuthority("USER", "ADMIN")
                 .requestMatchers("/notes/**").hasAnyAuthority("USER", "ADMIN")
                 .requestMatchers("/users/edit/**").hasAnyAuthority("USER", "ADMIN")
-                .requestMatchers("/users/changestatus").hasAnyAuthority("USER", "ADMIN")
                 .requestMatchers("/users/**").hasAnyAuthority("ADMIN")
                 .requestMatchers("/**").permitAll())
         .formLogin((login) -> login
