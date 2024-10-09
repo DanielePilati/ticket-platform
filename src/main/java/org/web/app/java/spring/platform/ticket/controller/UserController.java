@@ -71,10 +71,11 @@ public class UserController {
 		if (br.hasErrors()) {
 			return "/users/create";
 		}
+		
 		Optional<User> user = userService.getByUsername(formUser.getUsername());
 		if (user.isPresent()) {
 			// ALERT
-			model.addAttribute("message", "This User Arleady exist");
+			model.addAttribute("message", "This Username Arleady exist");
 			model.addAttribute("class", "danger");
 			return "/users/create";
 		}
