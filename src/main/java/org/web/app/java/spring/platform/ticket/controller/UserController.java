@@ -2,6 +2,7 @@ package org.web.app.java.spring.platform.ticket.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,7 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.web.app.java.spring.platform.ticket.model.User;
 import org.web.app.java.spring.platform.ticket.service.UserService;
 import org.web.app.java.spring.platform.ticket.service.RoleService;
-
 import jakarta.validation.Valid;
 
 @Controller
@@ -64,17 +64,17 @@ public class UserController {
 
 	@PostMapping("/create")
 	public String store(@Valid @ModelAttribute("user") User formUser, BindingResult br, Model model,
-			RedirectAttributes attributes) {
+			RedirectAttributes attributes) throws AuthenticationException {
 
 		if (br.hasErrors()) {
 			return "/users/create";
 		}
-
-		userService.saveUser(formUser);
+		
+		userService.saveUser(formUser);	
+		
 		// ALERT
 		attributes.addFlashAttribute("message", "Your User has been Created");
 		attributes.addFlashAttribute("class", "success");
-
 		return "redirect:/users";
 
 	}
