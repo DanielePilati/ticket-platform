@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/page-settings :: head}"></head>
+
+<body>
+
+	<!--HEADER-->
+	<header th:replace="~{fragments/page-settings :: header('types')}"></header>
+
+	<!--MAIN-->
+	<main>
+		<div class="container">
+			<div class="row justify-content-center">
+
+				<!--TITLE-->
+				<h1 class="text-center mb-3">Categories List</h1>
+				<hr>
+
+				<!--ALERT-->
+				<th:block th:if="${message != null}">
+					<div th:insert="fragments/page-settings :: login-alert(${message},${class})">
+					</div>
+				</th:block>
+
+				<!--ACTION BAR-->
+				<form class="d-flex ms-auto row-wrap mb-3 gap-2 justify-content-start" th:action="@{/types/search/}"
+					method="get">
+					<!--ADD type BUTTON-->
+					<a class="col-auto btn btn-dark" th:href="@{/types/create}" data-toggle="tooltip"
+						title="Add Type">&#43;</a>
+				</form>
+
+				<!--CONDITION TRUE-->
+				<th:block th:if="${types.size()} > 0">
+					<!--TABLE-->
+					<table class="table table-striped table-dark mb-3">
+						<!--THEAD-->
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Name</th>
+								<th scope="col">Tickets</th>
+								<th scope="col" class="text-end">Actions</th>
+							</tr>
+						</thead>
+						<!--TBODY-->
+						<tbody>
+							<tr th:each="type : ${types}">
+								<th scope="row" th:text="${type.id}"></th>
+								<td th:text="${type.name}"></td>
+								<td th:text="${type.tickets.size()}"></td>
+								<!--ACTION BUTTONS-->
+								<td class="text-end">
+									<!--SHOW-->
+									<a th:href="@{/types/show/{id}(id=${type.id})}" class="btn btn-sm "
+										data-toggle="tooltip" title="View">&#128270;</a>
+									<!--EDIT-->
+									<a sec:authorize="hasAuthority('ADMIN')"
+										th:href="@{/types/edit/{id}(id=${type.id})}" class="btn btn-sm ml-2"
+										data-toggle="tooltip" title="Edit">&#9998;</a>
+									<!--DELETE-->
+									<form sec:authorize="hasAuthority('ADMIN')" class="d-inline  text-start"
+										method="GET" th:action="@{/types/delete/{id}(id=${type.id})}">
+										<!-- Button trigger modal -->
+										<button type="button" class="btn btn-white btn-sm ml-2" data-bs-toggle="modal"
+											th:data-bs-target="|#deleteModal-${type.id}|" data-toggle="tooltip"
+											title="Delete">
+											&#x1F5D1;
+										</button>
+										<!-- Modal -->
+										<div class="modal fade" th:id="|deleteModal-${type.id}|" tabindex="-1"
+											aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered">
+												<div class="modal-content">
+													<div class="justify-content-center modal-header bg-dark">
+														<h1 class="modal-title fs-5" id="exampleModalLabel">
+															&#x26A0;WARNING &#x26A0;
+														</h1>
+													</div>
+													<div class="modal-body text-start bg-dark">
+														Are you shure you want remove "<b>[[${type.name}]]</b>" ?
+													</div>
+													<div class="modal-footer bg-dark">
+														<button type="button" class="btn btn-success"
+															data-bs-dismiss="modal">Close</button>
+														<button type="submit" class="btn btn-danger">Continue</button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</form>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</th:block>
+
+				<!--CONDITION FALSE-->
+				<th:block th:unless="${types.size()}">
+					<h2 class="text-center">No Categories Found</b></h2>
+				</th:block>
+
+			</div>
+		</div>
+	</main>
+
+	<!--FOOTER-->
+	<footer></footer>
+
+	<!--SCRIPTS-->
+	<th:block th:replace="~{fragments/page-settings :: scripts}"></th:block>
+</body>
+
+</html>
