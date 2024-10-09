@@ -66,7 +66,7 @@
 				<div class="col-auto">
 					<div class="card text-center border-dark" style="width: 30rem;" th:object="${ticket}">
 						<!--TICKET CARD HEADER-->
-						<div class="card-header border-dark bg-white">
+						<div class="card-header border-dark bg-light">
 							<h6 class="card-title row justify-content-between">
 								<span class="col-auto">Operator: [[*{user.username}]]</span>
 								<span class="col-auto">Category:
@@ -81,7 +81,7 @@
 							<p class="card-text">[[*{text}]]</p>
 						</div>
 						<!--TICKET CARD FOOTER-->
-						<div class="card-footer border-dark bg-white text-muted">
+						<div class="card-footer border-dark bg-light text-muted">
 							<div class="row justify-content-between align-items-center">
 								<h6 class="col-auto m-0">Created at: [[*{getDateFormatted()}]]</h6>
 								<!--STATUS COLOR SWITCH-->
@@ -97,7 +97,7 @@
 						</div>
 						<!--STATE FOOTER-->
 						<form sec:authorize="hasAuthority('USER')"
-							class="border-dark bg-white card-footer col-12 text-center my-2"
+							class="border-dark bg-light card-footer col-12 text-center my-2"
 							th:action="@{/tickets/{id}/changestatus(id=${ticket.id})}" method="POST">
 							<!--HIDDEN DATE FIELD-->
 							<input type="hidden" th:field="${ticket}"></input>
@@ -130,7 +130,7 @@
 				<div class="col-auto">
 					<div class="card text-center border-dark" style="width: 30rem;" th:object="${ticket}">
 						<!--NOTE CARD HEADER-->
-						<div class="card-header border-dark bg-white mb-3">
+						<div class="card-header border-dark bg-light mb-3">
 							<h5>Notes</h5>
 						</div>
 						<!--NOTE CARD BODY-->

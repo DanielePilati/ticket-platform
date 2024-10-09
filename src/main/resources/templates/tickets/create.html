@@ -16,85 +16,90 @@
 				<h1 class="text-center mb-3">Ticket Creation</h1>
 				<hr>
 
-				<!--TICKET FORM-->
-				<form id="ticketform" method="POST" th:action="@{/tickets/create}" th:object="${ticket}"
-					style="width: 30rem;">
-					<!--TITLE-->
-					<div class="form-group mb-2">
-						<label for="inputTitle ms-2"><b>Title: </b></label>
-						<input type="text" class="form-control my-2" id="inputTitle" aria-describedby="emailHelp"
-							placeholder="Insert text..." th:field="*{title}">
-						<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
-							<li th:each="err : ${#fields.errors('title')}" th:text="${err}" class="error " />
-						</ul>
-					</div>
-					<!--TEXT-->
-					<div class="form-group">
-						<label for="ticketText"><b>Insert Text: </b></label>
-						<textarea class="form-control my-2" id="ticketText" rows="3" th:field="*{text}"></textarea>
-						<small id="inputTextHelp" class="form-text text-muted ms-3">Try to be clear in your
-							explanation.</small>
-						<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
-							<li th:each="err : ${#fields.errors('text')}" th:text="${err}" class="error " />
-						</ul>
-					</div>
-					<hr>
-					<!--TYPES-->
-					<th:block th:if="${types.size() > 0}">
-						<label for="type_list mb-2"><b>Select Category:</b></label>
-						<ul class="list-group" id="type_list">
-							<li class="list-group-item" th:each="type : ${types}">
-								<input class="form-check-input me-1" type="checkbox" th:id="|type_${type.id}|"
-									th:value="${type.id}" th:field="${ticket.types}">
-								[[${type.name}]]
-							</li>
-						</ul>
-						<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
-							<li th:each="err : ${#fields.errors('types')}" th:text="${err}" class="error"/>
-						</ul>
-					</th:block>
-					<hr>
-					<!--STATE-->
-					<label for="form-check1"><b>Select Statement:</b></label>
-					<div class="form-check1 my-2">
-						<th:block th:each="state : ${states}">
-							<input type="radio" class="btn-check" name="|options_${state}|" th:id="|option_${state}|"
-								autocomplete="off" th:value="${state}" th:field="${ticket.state}">
-							<th:block th:switch="${state}">
-								<label th:case="'Completed'" class="btn btn-sm btn-outline-success"
-									th:for="|option_${state}|">[[${state}]]</label>
-								<label th:case="'ToDo'" class="btn btn-sm btn-outline-danger"
-									th:for="|option_${state}|">[[${state}]]</label>
-								<label th:case="'InProgress'" class="btn btn-sm btn-outline-warning"
-									th:for="|option_${state}|">[[${state}]]</label>
+				
+				<div class="card bg-light col-auto p-3">
+					<!--TICKET FORM-->
+					<form id="ticketform" method="POST" th:action="@{/tickets/create}" th:object="${ticket}"
+						style="width: 30rem;">
+						<!--TITLE-->
+						<div class="form-group mb-2">
+							<label for="inputTitle ms-2"><b>Title: </b></label>
+							<input type="text" class="form-control my-2" id="inputTitle" aria-describedby="emailHelp"
+								placeholder="Insert text..." th:field="*{title}">
+							<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
+								<li th:each="err : ${#fields.errors('title')}" th:text="${err}" class="error " />
+							</ul>
+						</div>
+						<!--TEXT-->
+						<div class="form-group">
+							<label for="ticketText"><b>Insert Text: </b></label>
+							<textarea class="form-control my-2" id="ticketText" rows="3" th:field="*{text}"></textarea>
+							<small id="inputTextHelp" class="form-text text-muted ms-3">Try to be clear in your
+								explanation.</small>
+							<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
+								<li th:each="err : ${#fields.errors('text')}" th:text="${err}" class="error " />
+							</ul>
+						</div>
+						<hr>
+						<!--TYPES-->
+						<th:block th:if="${types.size() > 0}">
+							<label for="type_list mb-2"><b>Select Category:</b></label>
+							<ul class="list-group" id="type_list">
+								<li class="list-group-item" th:each="type : ${types}">
+									<input class="form-check-input me-1" type="checkbox" th:id="|type_${type.id}|"
+										th:value="${type.id}" th:field="${ticket.types}">
+									[[${type.name}]]
+								</li>
+							</ul>
+							<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
+								<li th:each="err : ${#fields.errors('types')}" th:text="${err}" class="error" />
+							</ul>
+						</th:block>
+						<hr>
+						<!--STATE-->
+						<label for="form-check1"><b>Select Statement:</b></label>
+						<div class="form-check1 my-2">
+							<th:block th:each="state : ${states}">
+								<input type="radio" class="btn-check" name="|options_${state}|"
+									th:id="|option_${state}|" autocomplete="off" th:value="${state}"
+									th:field="${ticket.state}">
+								<th:block th:switch="${state}">
+									<label th:case="'Completed'" class="btn btn-sm btn-outline-dark text-success"
+										th:for="|option_${state}|">[[${state}]]</label>
+									<label th:case="'ToDo'" class="btn btn-sm btn-outline-dark text-danger"
+										th:for="|option_${state}|">[[${state}]]</label>
+									<label th:case="'InProgress'" class="btn btn-sm btn-outline-dark text-warning"
+										th:for="|option_${state}|">[[${state}]]</label>
+								</th:block>
 							</th:block>
-						</th:block>
-						<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
-							<li th:each="err : ${#fields.errors('state')}" th:text="${err}" class="error " />
-						</ul>
-					</div>
-					<hr>
-					<!--OPERATORS-->
-					<label for="form-check2"><b>Operator:</b></label>
-					<div class="form-check2 my-2">
-						<th:block th:each="user : ${availableUsers}">
-							<input type="radio" class="btn-check" name="|options_${user.username}|"
-								th:id="|option_${user.username}|" autocomplete="off" th:value="${user.id}"
-								th:field="${ticket.user}">
-							<label class="btn btn-sm btn-outline-dark"
-								th:for="|option_${user.username}|">[[${user.username}]]</label>
-						</th:block>
-						<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
-							<li th:each="err : ${#fields.errors('user')}" th:text="${err}" class="error " />
-						</ul>
-					</div>
-					<hr>
-					<!--BUTTONS-->
-					<div>
-						<button type="submit" class="btn btn-dark">Create</button>
-						<a th:href="@{/tickets}" class="btn btn-dark" title="Back">&#8626;</a>
-					</div>
-				</form>
+							<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
+								<li th:each="err : ${#fields.errors('state')}" th:text="${err}" class="error " />
+							</ul>
+						</div>
+						<hr>
+						<!--OPERATORS-->
+						<label for="form-check2"><b>Operator:</b></label>
+						<div class="form-check2 my-2">
+							<th:block th:each="user : ${availableUsers}">
+								<input type="radio" class="btn-check" name="|options_${user.username}|"
+									th:id="|option_${user.username}|" autocomplete="off" th:value="${user.id}"
+									th:field="${ticket.user}">
+								<label class="btn btn-sm btn-outline-dark"
+									th:for="|option_${user.username}|">[[${user.username}]]</label>
+							</th:block>
+							<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
+								<li th:each="err : ${#fields.errors('user')}" th:text="${err}" class="error " />
+							</ul>
+						</div>
+						<hr>
+						<!--BUTTONS-->
+						<div>
+							<button type="submit" class="btn btn-dark">Create</button>
+							<a th:href="@{/tickets}" class="btn btn-dark" title="Back">&#8626;</a>
+						</div>
+					</form>
+
+				</div>
 
 			</div>
 		</div>
