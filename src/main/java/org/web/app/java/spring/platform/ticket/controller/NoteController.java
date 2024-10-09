@@ -1,6 +1,7 @@
 package org.web.app.java.spring.platform.ticket.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,6 +36,30 @@ public class NoteController {
 		noteService.saveNote(formNote);
 		// ALERT
 		attributes.addFlashAttribute("message", "Your Note has been Created");
+		attributes.addFlashAttribute("class", "success");
+
+		return "redirect:/tickets/show/" + formNote.getTicket().getId();
+	}
+	
+	@GetMapping("/edit/{id}")
+	public String edit(@PathVariable(name = "id") Integer id, Model model, Authentication authentication) {
+
+		model.addAttribute("note", noteService.getById(id).get());
+
+		return "/notes/edit";
+	}
+
+	@PostMapping("/edit/{id}")
+	public String update(@Valid @ModelAttribute("note") Note formNote, BindingResult br, Model model,
+			RedirectAttributes attributes) {
+
+		if (br.hasErrors()) {
+			return "/notes/edit";
+		}
+
+		noteService.updateNote(formNote);
+		// ALERT
+		attributes.addFlashAttribute("message", "Your Note has been Updated");
 		attributes.addFlashAttribute("class", "success");
 
 		return "redirect:/tickets/show/" + formNote.getTicket().getId();
