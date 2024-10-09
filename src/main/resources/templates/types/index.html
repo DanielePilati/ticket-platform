@@ -51,13 +51,6 @@
 								<td th:text="${type.tickets.size()}"></td>
 								<!--ACTION BUTTONS-->
 								<td class="text-end">
-									<!--SHOW-->
-									<a th:href="@{/types/show/{id}(id=${type.id})}" class="btn btn-sm "
-										data-toggle="tooltip" title="View">&#128270;</a>
-									<!--EDIT-->
-									<a sec:authorize="hasAuthority('ADMIN')"
-										th:href="@{/types/edit/{id}(id=${type.id})}" class="btn btn-sm ml-2"
-										data-toggle="tooltip" title="Edit">&#9998;</a>
 									<!--DELETE-->
 									<form sec:authorize="hasAuthority('ADMIN')" class="d-inline  text-start"
 										method="GET" th:action="@{/types/delete/{id}(id=${type.id})}">

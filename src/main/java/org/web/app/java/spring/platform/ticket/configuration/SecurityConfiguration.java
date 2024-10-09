@@ -23,6 +23,7 @@ public class SecurityConfiguration {
                 .requestMatchers("/users/edit/**").hasAnyAuthority("USER", "ADMIN")
                 .requestMatchers("/users/changestatus").hasAnyAuthority("USER","ADMIN")
                 .requestMatchers("/users/**").hasAnyAuthority("ADMIN")
+                .requestMatchers("/types/**").hasAnyAuthority("ADMIN")
                 .requestMatchers("/**").permitAll())
         .formLogin((login) -> login
                 .loginPage("/")

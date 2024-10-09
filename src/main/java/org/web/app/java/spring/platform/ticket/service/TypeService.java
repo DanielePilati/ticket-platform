@@ -17,4 +17,12 @@ public class TypeService {
 		return repo.findAll();
 	}
 
+	public Type saveType(Type type) {
+		return repo.save(type);
+	}
+
+	public void deleteById(Integer id) {
+		repo.deleteById(id);
+	}
+
 }
