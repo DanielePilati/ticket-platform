@@ -12,50 +12,54 @@
 
 		<div class="container">
 			<div class="row justify-content-center">
+
 				<!--TITLE-->
 				<h1 class="text-center mb-3">User Update</h1>
 				<hr>
-				<!--NOTE FORM-->
-				<form id="ticketform" method="POST" th:action="@{/users/edit/{id}(id=*{id})}" th:object="${user}"
-					style="width: 30rem;">
-					<!--HIDDEN FIELDS-->
-					<input type="hidden" th:field="*{roles}"></input>
-					<input type="hidden" th:field="*{notAvailable}"></input>
-					<!--USERNAME FIELD-->
-					<div class="form-group">
-						<label for="usernameField">Username</label>
-						<input type="text" class="form-control" id="usernameField" aria-describedby="emailHelp"
-							placeholder="Username..." th:value="*{username}" th:field="*{username}">
-						<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
-							<li th:each="err : ${#fields.errors('username')}" th:text="${err}" class="error " />
-						</ul>
-					</div>
-					<hr>
-					<!--PASSWORD FIELD-->
-					<div class="form-group">
-						<label for="passwordField">Password</label>
-						<input type="password" class="form-control" id="passwordField" placeholder="Password..."
-							th:value="*{password}" th:field="*{password}">
-						<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
-							<li th:each="err : ${#fields.errors('password')}" th:text="${err}" class="error " />
-						</ul>
-					</div>
-					<hr>
-					<!--EMAIL FIELD-->
-					<div class="form-group">
-						<label for="emailField">Email</label>
-						<input type="email" class="form-control" id="emailField" placeholder="example@bool.com"
-							th:value="*{email}" th:field="*{email}">
-						<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
-							<li th:each="err : ${#fields.errors('email')}" th:text="${err}" class="error " />
-						</ul>
-					</div>
-					<hr>
-					<!--BUTTONS-->
-					<div>
-						<button type="submit" class="btn btn-dark">Submit</button>
-					</div>
-				</form>
+
+				<div class="card bg-light col-auto p-3">
+					<!--NOTE FORM-->
+					<form id="ticketform" method="POST" th:action="@{/users/edit/{id}(id=*{id})}" th:object="${user}"
+						style="width: 30rem;">
+						<!--HIDDEN FIELDS-->
+						<input type="hidden" th:field="*{roles}"></input>
+						<input type="hidden" th:field="*{notAvailable}"></input>
+						<!--USERNAME FIELD-->
+						<div class="form-group">
+							<label for="usernameField">Username</label>
+							<input type="text" class="form-control" id="usernameField" aria-describedby="emailHelp"
+								placeholder="Username..." th:value="*{username}" th:field="*{username}">
+							<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
+								<li th:each="err : ${#fields.errors('username')}" th:text="${err}" class="error " />
+							</ul>
+						</div>
+						<hr>
+						<!--PASSWORD FIELD-->
+						<div class="form-group">
+							<label for="passwordField">Password</label>
+							<input type="password" class="form-control" id="passwordField" placeholder="Password..."
+								th:value="*{password}" th:field="*{password}">
+							<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
+								<li th:each="err : ${#fields.errors('password')}" th:text="${err}" class="error " />
+							</ul>
+						</div>
+						<hr>
+						<!--EMAIL FIELD-->
+						<div class="form-group">
+							<label for="emailField">Email</label>
+							<input type="email" class="form-control" id="emailField" placeholder="example@bool.com"
+								th:value="*{email}" th:field="*{email}">
+							<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
+								<li th:each="err : ${#fields.errors('email')}" th:text="${err}" class="error " />
+							</ul>
+						</div>
+						<hr>
+						<!--BUTTONS-->
+						<div>
+							<button type="submit" class="btn btn-dark">Submit</button>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
 	</main>

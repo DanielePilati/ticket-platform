@@ -38,7 +38,7 @@
 				<!--CONDITION TRUE-->
 				<th:block th:if="${tickets.size()} > 0">
 					<!--TABLE-->
-					<table class="table table-striped table-dark mb-3">
+					<table class="table table-striped table-dark mb-3 cornerRound">
 						<!--THEAD-->
 						<thead>
 							<tr>
@@ -101,7 +101,7 @@
 											aria-labelledby="exampleModalLabel" aria-hidden="true">
 											<div class="modal-dialog modal-dialog-centered">
 												<div class="modal-content">
-													<div class="justify-content-center modal-header bg-dark">
+													<div class="justify-content-center modal-header border-dark bg-dark">
 														<h1 class="modal-title fs-5" id="exampleModalLabel">
 															&#x26A0;WARNING &#x26A0;
 														</h1>
@@ -109,7 +109,7 @@
 													<div class="modal-body text-start bg-dark">
 														Are you shure you want remove "<b>[[${ticket.title}]]</b>" ?
 													</div>
-													<div class="modal-footer bg-dark">
+													<div class="modal-footer border-dark bg-dark">
 														<button type="button" class="btn btn-success"
 															data-bs-dismiss="modal">Close</button>
 														<button type="submit" class="btn btn-danger">Continue</button>

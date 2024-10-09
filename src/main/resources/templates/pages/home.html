@@ -48,7 +48,7 @@
 							<h5 sec:authorize="hasAuthority('USER')" class="card-text">
 								<strong>Open Tickets: </strong><span>[[${user.getOpenTickets().size()}]]</span>
 							</h5>
-							
+
 							<!-- is available -->
 							<div sec:authorize="hasAuthority('USER')">
 								<h5 class="card-text"> <strong>Status: </strong>
@@ -61,7 +61,7 @@
 									</th:block>
 								</h5>
 							</div>
-							
+
 							<!--FORM BUTTONS-->
 							<div class="card-footer bg-light border-dark row mt-3 pt-4 justify-content-between">
 								<th:block sec:authorize="hasAuthority('USER')">
@@ -84,7 +84,7 @@
 											Available</button>
 									</form>
 								</th:block>
-								
+
 								<!--LOGOUT FORM-->
 								<form sec:authorize="isAuthenticated()" class="p-0  col-auto form-signin" method="POST"
 									th:action="@{/login/logout}">
@@ -98,7 +98,7 @@
 										<div class="modal-dialog modal-dialog-centered modal-sm">
 											<div class="modal-content">
 												<!-- header -->
-												<div class="modal-header bg-dark text-white">
+												<div class="modal-header border-dark bg-dark text-white">
 													<h5 class="modal-title fs-5" id="staticBackdropLabel">
 														Logging out..
 													</h5>
@@ -110,16 +110,16 @@
 													Are you shure you want log out?
 												</div>
 												<!-- footer -->
-												<div class="modal-footer bg-dark">
-													<button type="button" class="btn btn-success"
+												<div class="modal-footer border-dark bg-dark">
+													<button type="button" class="btn btn-dark"
 														data-bs-dismiss="modal">Return</button>
-													<button type="submit" class="btn btn-warning">Log out</button>
+													<button type="submit" class="btn btn-info">Log out</button>
 												</div>
 											</div>
 										</div>
 									</div>
 								</form>
-								
+
 							</div>
 						</div>
 					</div>

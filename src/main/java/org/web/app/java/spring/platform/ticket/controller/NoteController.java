@@ -44,7 +44,8 @@ public class NoteController {
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable(name = "id") Integer id, Model model, Authentication authentication) {
 
-		model.addAttribute("note", noteService.getById(id).get());
+		Note note = noteService.getById(id).get();
+		model.addAttribute("note", note);
 
 		return "/notes/edit";
 	}
