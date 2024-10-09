@@ -27,7 +27,11 @@ public class UserService {
 	}
 	
 	public User updateUser(User user) {
-		return repo.save(user);
+		if(!user.getPassword().contains("{noop}")) {
+			user.setPassword("{noop}"+ user.getPassword());
+		}
+		user = repo.save(user);	
+		return user;
 	}
 	
 	public List<User> getAllByRole(String role){	
@@ -35,8 +39,10 @@ public class UserService {
 	}
 	
 	public User saveUser(User user) {
-		user = repo.save(user);
-		user.setPassword("{noop}"+ user.getPassword());
+		if(!user.getPassword().contains("{noop}")) {
+			user.setPassword("{noop}"+ user.getPassword());
+		}
+		user = repo.save(user);	
 		return user;
 	}
 	
