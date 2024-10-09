@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -71,7 +72,7 @@ public class UserController {
 		if (br.hasErrors()) {
 			return "/users/create";
 		}
-		
+
 		Optional<User> user = userService.getByUsername(formUser.getUsername());
 		if (user.isPresent()) {
 			// ALERT
@@ -99,7 +100,7 @@ public class UserController {
 
 	@PostMapping("/edit/{id}")
 	public String update(@Valid @ModelAttribute("user") User formUser, BindingResult br, Model model,
-			RedirectAttributes attributes) {
+			RedirectAttributes attributes, Authentication authentication) {
 
 		if (br.hasErrors()) {
 
@@ -111,7 +112,14 @@ public class UserController {
 		attributes.addFlashAttribute("message", "Your User has been Updated");
 		attributes.addFlashAttribute("class", "success");
 
-		return "redirect:/users";
+		for (GrantedAuthority authority : authentication.getAuthorities()) {
+			if (authority.getAuthority().equals("ADMIN")) {
+				return "redirect:/users";
+			} else if (authority.getAuthority().equals("USER")) {
+				return "redirect:/";
+			}
+		}
+		return "redirect:/";
 	}
 
 	@GetMapping("/delete/{id}")

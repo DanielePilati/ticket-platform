@@ -143,7 +143,8 @@
 										<h6><b>Note:</b> [[${note.text}]]</h6>
 										<h6><b>Created at:</b> [[${note.getDateFormatted()}]]</h6>
 									</div>
-									<div th:if="${user.equals(note.author)}" class="col-auto">
+									<div th:if="${user.username.equals(note.author)}"
+										class="col-auto">
 										<!--EDIT-->
 										<a th:href="@{/notes/edit/{id}(id=${note.id})}" class="btn btn-sm ml-2"
 											data-toggle="tooltip" title="Edit">&#9998;</a>

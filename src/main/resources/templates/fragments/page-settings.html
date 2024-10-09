@@ -73,8 +73,8 @@
 <!-- fragments/page-settings :: alert('message', 'class') -->
 <div th:fragment="alert(message, class)" th:class="|alert alert-${class} text-center|" role="alert">
 	<strong th:switch="${class}">
-		<span th:case="'danger'">WARNING!! </span>
-		<span th:case="'success'">SUCCESS!! </span>
+		<span th:case="'danger'">WARNING!! : </span>
+		<span th:case="'success'">SUCCESS!! : </span>
 	</strong>[[${message}]]
 </div>
 

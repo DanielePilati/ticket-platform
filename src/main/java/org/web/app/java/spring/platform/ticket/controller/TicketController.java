@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.web.app.java.spring.platform.ticket.model.Note;
 import org.web.app.java.spring.platform.ticket.model.Ticket;
+import org.web.app.java.spring.platform.ticket.service.RoleService;
 import org.web.app.java.spring.platform.ticket.service.TicketService;
 import org.web.app.java.spring.platform.ticket.service.TypeService;
 import org.web.app.java.spring.platform.ticket.service.UserService;
@@ -56,7 +57,7 @@ public class TicketController {
 
 		model.addAttribute("ticket", ticketService.getById(id).get());
 		model.addAttribute("states", this.TICKET_STATES);
-		model.addAttribute("user", authentication.getName());
+		model.addAttribute("user", userService.getByUsername(authentication.getName()).get());
 
 		return "/tickets/show";
 	}
