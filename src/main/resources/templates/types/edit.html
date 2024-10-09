@@ -34,7 +34,8 @@
 					<!--PASSWORD FIELD-->
 					<div class="form-group">
 						<label for="passwordField">Password</label>
-						<input type="password" class="form-control" id="passwordField" placeholder="Password..." th:value="*{password}" th:field="*{password}">
+						<input type="password" class="form-control" id="passwordField" placeholder="Password..."
+							th:value="*{password}" th:field="*{password}">
 						<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
 							<li th:each="err : ${#fields.errors('password')}" th:text="${err}" class="error " />
 						</ul>
@@ -43,7 +44,8 @@
 					<!--EMAIL FIELD-->
 					<div class="form-group">
 						<label for="emailField">Email</label>
-						<input type="email" class="form-control" id="emailField" placeholder="example@bool.com" th:value="*{email}" th:field="*{email}">
+						<input type="email" class="form-control" id="emailField" placeholder="example@bool.com"
+							th:value="*{email}" th:field="*{email}">
 						<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">
 							<li th:each="err : ${#fields.errors('email')}" th:text="${err}" class="error " />
 						</ul>
@@ -58,8 +60,7 @@
 		</div>
 	</main>
 
-	<footer>
-	</footer>
+	<footer th:replace="~{fragments/page-settings :: footer}"></footer>
 
 	<!--SCRIPTS-->
 	<th:block th:replace="~{fragments/page-settings :: scripts}"></th:block>
