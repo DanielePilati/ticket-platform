@@ -81,7 +81,7 @@
 							<p class="card-text">[[*{text}]]</p>
 						</div>
 						<!--TICKET CARD FOOTER-->
-						<div class="card-footer border-dark bg-light text-muted">
+						<div class="card-footer border-dark bg-light text-muted ">
 							<div class="row justify-content-between align-items-center">
 								<h6 class="col-auto m-0">Created at: [[*{getDateFormatted()}]]</h6>
 								<!--STATUS COLOR SWITCH-->
@@ -97,12 +97,12 @@
 						</div>
 						<!--STATE FOOTER-->
 						<form sec:authorize="hasAuthority('USER')"
-							class="border-dark bg-light card-footer col-12 text-center my-2"
+							class="border-dark bg-light card-footer col-12 text-center p-2"
 							th:action="@{/tickets/{id}/changestatus(id=${ticket.id})}" method="POST">
 							<!--HIDDEN DATE FIELD-->
 							<input type="hidden" th:field="${ticket}"></input>
 							<!--Status-->
-							<div class="form-check1 my-2">
+							<div class="form-check1 mb-2">
 								<th:block th:each="state : ${states}">
 									<input type="radio" class="btn-check" name="|options_${state}|"
 										th:id="|option_${state}|" autocomplete="off" th:value="${state}"
@@ -136,10 +136,51 @@
 						<!--NOTE CARD BODY-->
 						<div class="card-body">
 							<th:block th:if="*{notes.size()} > 0">
-								<div class="text-start" th:each="note : *{notes}">
-									<h5><b>Author:</b> [[${note.author}]]</h5>
-									<h6><b>Note:</b> [[${note.text}]]</h6>
-									<h6><b>Created at:</b> [[${note.getDateFormatted()}]]</h6>
+								<div class="text-start row justify-content-between align-items-center"
+									th:each="note : *{notes}">
+									<div class="col-auto">
+										<h5><b>Author:</b> [[${note.author}]]</h5>
+										<h6><b>Note:</b> [[${note.text}]]</h6>
+										<h6><b>Created at:</b> [[${note.getDateFormatted()}]]</h6>
+									</div>
+									<div th:if="${user.equals(note.author)}" class="col-auto">
+										<!--EDIT-->
+										<a th:href="@{/notes/edit/{id}(id=${note.id})}" class="btn btn-sm ml-2"
+											data-toggle="tooltip" title="Edit">&#9998;</a>
+										<!--DELETE-->
+										<form class="d-inline  text-start" method="GET"
+											th:action="@{/notes/delete/{id}(id=${note.id})}">
+											<!-- Button trigger modal -->
+											<button type="button" class="btn btn-white btn-sm ml-2"
+												data-bs-toggle="modal" th:data-bs-target="|#deleteModal-${note.id}|"
+												data-toggle="tooltip" title="Delete">
+												&#x1F5D1;
+											</button>
+											<!-- Modal -->
+											<div class="modal fade" th:id="|deleteModal-${note.id}|" tabindex="-1"
+												aria-labelledby="exampleModalLabel" aria-hidden="true">
+												<div class="modal-dialog modal-dialog-centered">
+													<div class="modal-content">
+														<div
+															class="justify-content-center text-white modal-header bg-dark">
+															<h1 class="modal-title fs-5" id="exampleModalLabel">
+																&#x26A0;WARNING &#x26A0;
+															</h1>
+														</div>
+														<div class="modal-body text-white text-start bg-dark">
+															Are you shure you want remove "<b>[[${note.text}]]</b>" ?
+														</div>
+														<div class="modal-footer text-white bg-dark">
+															<button type="button" class="btn btn-success"
+																data-bs-dismiss="modal">Close</button>
+															<button type="submit"
+																class="btn btn-danger">Continue</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</form>
+									</div>
 									<hr th:if="*{notes.size() > 1}">
 								</div>
 							</th:block>

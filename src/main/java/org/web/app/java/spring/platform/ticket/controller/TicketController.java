@@ -52,10 +52,11 @@ public class TicketController {
 	}
 
 	@GetMapping("/show/{id}")
-	public String show(@PathVariable(name = "id") Integer id, Model model) {
+	public String show(@PathVariable(name = "id") Integer id, Model model, Authentication authentication) {
 
 		model.addAttribute("ticket", ticketService.getById(id).get());
 		model.addAttribute("states", this.TICKET_STATES);
+		model.addAttribute("user", authentication.getName());
 
 		return "/tickets/show";
 	}
