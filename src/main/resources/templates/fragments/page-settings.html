@@ -69,12 +69,11 @@
 <!-- ALERTS -->
 
 <!-- fragments/page-settings :: alert('message', 'class') -->
-<div th:fragment="alert(message, class)" th:class="|alert alert-${class} alert-dismissible fade show text-center|"
-	role="alert">
-	<p><strong th:switch="${class}">
-			<span th:case="'danger'">WARNING!! </span>
-			<span th:case="'success'">SUCCESS!! </span>
-		</strong>[[${message}]]</p>
+<div th:fragment="alert(message, class)" th:class="|alert alert-${class} text-center|" role="alert">
+	<strong th:switch="${class}">
+		<span th:case="'danger'">WARNING!! </span>
+		<span th:case="'success'">SUCCESS!! </span>
+	</strong>[[${message}]]
 </div>
 
 <!-- SCRIPTS -->
