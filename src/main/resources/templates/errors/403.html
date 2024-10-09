@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/page-settings :: head}"></head>
+
+<body>
+
+	<!--HEADER-->
+	<header th:replace="~{fragments/page-settings :: header('error')}"></header>
+
+	<main>
+		<div class="container">
+			<div class="row justify-content-center align-items-center">
+
+				<!--TITLE-->
+				<h1 class="col-auto text-center d-inline">Error 403 - Forbidden!</h1>
+				<hr>
+
+				<!--BACK BUTTON-->
+				<div class="col-auto">
+					<a class="btn btn-sm btn-dark" th:href="@{/}" style="width: 15rem;" data-toggle="tooltip"
+						title="Go Home">&#8629; Back Home</a>
+				</div>
+
+			</div>
+		</div>
+	</main>
+
+	<footer></footer>
+
+	<!--SCRIPTS-->
+	<th:block th:replace="~{fragments/page-settings :: scripts}"></th:block>
+</body>
+
+</html>

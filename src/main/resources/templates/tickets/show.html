@@ -22,12 +22,9 @@
 				</div>
 
 				<!--ACTION BAR-->
-				<div class="col-12 text-center mb-3">
-					<!--BACK BUTTON-->
-					<a class="btn btn-sm btn-dark" th:href="@{/tickets}" style="width: 15rem;" data-toggle="tooltip"
-						title="Back">&#8629;</a>
+				<div sec:authorize="hasAuthority('ADMIN')" class="col-12 text-center mb-3">
 					<!--EDIT TICKET BUTTON-->
-					<a sec:authorize="hasAuthority('ADMIN')" class=" btn btn-sm btn-dark" style="width: 15rem;"
+					<a class=" btn btn-sm btn-dark" style="width: 15rem;"
 						th:href="@{/tickets/edit/{id}(id=${ticket.id})}" data-toggle="tooltip"
 						title="Edit Ticket">&#9998;</a>
 					<!--DELETE TICKET FORM-->
@@ -122,12 +119,12 @@
 							</div>
 							<!--Send BUTTON-->
 							<button class="btn btn-sm btn-dark" type="submit" style="width: 15rem;"
-								data-toggle="tooltip" title="Status Change">Send Status</button>
+								data-toggle="tooltip" title="Status Change">Update Status</button>
 						</form>
 					</div>
 				</div>
 
-				<hr class="my-2">
+				<hr class="my-3">
 
 				<!--NOTE CARD-->
 				<div class="col-auto">
@@ -152,7 +149,8 @@
 							<!--ADD NOTE BUTTON-->
 							<div class="col-12 mb-3 text-center">
 								<a class="btn btn-sm btn-dark" th:href="@{/tickets/show/{id}/addnote(id=${ticket.id})}"
-									style="width: 15rem;" data-toggle="tooltip" title="Add Note">&#43; &#128196;</a>
+									style="width: 15rem;" data-toggle="tooltip" title="Add Note">&#43; &#128196; Add
+									Note</a>
 							</div>
 						</div>
 					</div>

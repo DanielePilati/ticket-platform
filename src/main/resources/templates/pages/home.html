@@ -48,6 +48,7 @@
 							<h5 sec:authorize="hasAuthority('USER')" class="card-text">
 								<strong>Open Tickets: </strong><span>[[${user.getOpenTickets().size()}]]</span>
 							</h5>
+							
 							<!-- is available -->
 							<div sec:authorize="hasAuthority('USER')">
 								<h5 class="card-text"> <strong>Status: </strong>
@@ -60,6 +61,7 @@
 									</th:block>
 								</h5>
 							</div>
+							
 							<!--FORM BUTTONS-->
 							<div class="card-footer bg-white border-dark row mt-3 pt-4 justify-content-between">
 								<th:block sec:authorize="hasAuthority('USER')">
@@ -82,6 +84,7 @@
 											Available</button>
 									</form>
 								</th:block>
+								
 								<!--LOGOUT FORM-->
 								<form sec:authorize="isAuthenticated()" class="p-0  col-auto form-signin" method="POST"
 									th:action="@{/login/logout}">
@@ -116,6 +119,7 @@
 										</div>
 									</div>
 								</form>
+								
 							</div>
 						</div>
 					</div>

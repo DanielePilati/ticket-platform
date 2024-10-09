@@ -24,9 +24,10 @@ public class CustomErrorController implements ErrorController {
 
 			if (statusCode == HttpStatus.NOT_FOUND.value()) {
 				return "/errors/404";
-			}
-			if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
+			} else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
 				return "/errors/500";
+			} else if (statusCode == HttpStatus.FORBIDDEN.value()) {
+				return "/errors/403";
 			}
 
 			model.addAttribute("statuscode", Integer.valueOf(status.toString()));
