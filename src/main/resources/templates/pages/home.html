@@ -30,9 +30,9 @@
 					<h1 class="col-12 text-center">Welcome to your Home</h1>
 					<hr>
 
-					<!--LOGIN ALERT-->
+					<!--ALERT-->
 					<div th:if="${message != null}">
-						<div th:replace="~{fragments/page-settings :: login-alert(${message}, ${class})}"></div>
+						<div th:replace="~{fragments/page-settings :: alert(${message}, ${class})}"></div>
 					</div>
 
 					<!--USER DETAILS-->

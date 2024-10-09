@@ -72,7 +72,7 @@ public class UserController {
 
 		userService.saveUser(formUser);
 		// ALERT
-		attributes.addFlashAttribute("message", "Created");
+		attributes.addFlashAttribute("message", "Your User has been Created");
 		attributes.addFlashAttribute("class", "success");
 
 		return "redirect:/users";
@@ -100,8 +100,8 @@ public class UserController {
 
 		userService.updateUser(formUser);
 		// ALERT
-		attributes.addFlashAttribute("message", "Updated");
-		attributes.addFlashAttribute("class", "warning");
+		attributes.addFlashAttribute("message", "Your User has been Updated");
+		attributes.addFlashAttribute("class", "success");
 
 		return "redirect:/users";
 	}
@@ -111,7 +111,7 @@ public class UserController {
 
 		userService.deleteById(id);
 		// ALERT
-		attributes.addFlashAttribute("message", "Deleted");
+		attributes.addFlashAttribute("message", "Your User has been Deleted");
 		attributes.addFlashAttribute("class", "danger");
 
 		return "redirect:/users";

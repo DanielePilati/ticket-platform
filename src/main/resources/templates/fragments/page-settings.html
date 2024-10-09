@@ -68,23 +68,11 @@
 
 <!-- ALERTS -->
 
-<!-- fragments/page-settings :: ticket-alert('message', 'class') -->
-<div th:fragment="ticket-alert(message, class)" th:class="|alert alert-${class} alert-dismissible fade show|"
-	role="alert">
-	<p><strong>[[${message}]]!!</strong> Your ticket is [[${message}]] successfully. </p>
-</div>
-
-<!-- fragments/page-settings :: note-alert('message', 'class') -->
-<div th:fragment="note-alert(message, class)" th:class="|alert alert-${class} alert-dismissible fade show|"
-	role="alert">
-	<p><strong>[[${message}]]!!</strong> Your note is [[${message}]] successfully. </p>
-</div>
-
-<!-- fragments/page-settings :: login-alert('message', 'class') -->
-<div th:fragment="login-alert(message, class)" th:class="|alert alert-${class} alert-dismissible fade show text-center|"
+<!-- fragments/page-settings :: alert('message', 'class') -->
+<div th:fragment="alert(message, class)" th:class="|alert alert-${class} alert-dismissible fade show text-center|"
 	role="alert">
 	<p><strong th:switch="${class}">
-			<span th:case="'danger'">ERROR!! </span>
+			<span th:case="'danger'">WARNING!! </span>
 			<span th:case="'success'">SUCCESS!! </span>
 		</strong>[[${message}]]</p>
 </div>

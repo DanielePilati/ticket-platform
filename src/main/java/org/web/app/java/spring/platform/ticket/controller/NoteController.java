@@ -32,7 +32,7 @@ public class NoteController {
 
 		noteService.saveNote(formNote);
 		// ALERT
-		attributes.addFlashAttribute("message", "Created");
+		attributes.addFlashAttribute("message", "Your Note has been Created");
 		attributes.addFlashAttribute("class", "success");
 
 		return "redirect:/tickets/show/" + formNote.getTicket().getId();

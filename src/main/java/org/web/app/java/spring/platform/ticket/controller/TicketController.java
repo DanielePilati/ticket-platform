@@ -73,8 +73,8 @@ public class TicketController {
 		ticket.setState(formTicket.getState());
 		ticketService.updateTicket(ticket);
 		// ALERT
-		attributes.addFlashAttribute("message", "Updated");
-		attributes.addFlashAttribute("class", "warning");
+		attributes.addFlashAttribute("message", "Your Ticket has been Updated");
+		attributes.addFlashAttribute("class", "success");
 
 		return "redirect:/tickets";
 	}
@@ -129,7 +129,7 @@ public class TicketController {
 		ticketService.saveTicket(formTicket);
 		attributes.addFlashAttribute("tickets", ticketService.getAll());
 		// ALERT
-		attributes.addFlashAttribute("message", "Created");
+		attributes.addFlashAttribute("message", "Your Ticket has been Created");
 		attributes.addFlashAttribute("class", "success");
 
 		return "redirect:/tickets";
@@ -160,8 +160,8 @@ public class TicketController {
 
 		ticketService.updateTicket(formTicket);
 		// ALERT
-		attributes.addFlashAttribute("message", "Updated");
-		attributes.addFlashAttribute("class", "warning");
+		attributes.addFlashAttribute("message", "Your Ticket has been Updated");
+		attributes.addFlashAttribute("class", "success");
 
 		return "redirect:/tickets";
 	}
@@ -171,7 +171,7 @@ public class TicketController {
 
 		ticketService.deleteById(id);
 		// ALERT
-		attributes.addFlashAttribute("message", "Deleted");
+		attributes.addFlashAttribute("message", "Your Ticket has been Deleted");
 		attributes.addFlashAttribute("class", "danger");
 
 		return "redirect:/tickets";
