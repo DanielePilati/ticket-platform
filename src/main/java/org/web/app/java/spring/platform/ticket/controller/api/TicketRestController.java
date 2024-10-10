@@ -3,6 +3,8 @@ package org.web.app.java.spring.platform.ticket.controller.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,22 +20,34 @@ public class TicketRestController {
 	private TicketService ticketService;
 
 	@GetMapping()
-	public List<Ticket> index() {
+	public ResponseEntity<List<Ticket>> index() {
+		List<Ticket> tickets = ticketService.getAll();
 
-		return ticketService.getAll();
+		if (tickets.size() <= 0) {
+			return new ResponseEntity<List<Ticket>>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<Ticket>>(tickets, HttpStatus.OK);
 	}
 
-	@GetMapping("/{state}")
-	public List<Ticket> showByState(@PathVariable(name = "state") String state) {
+	@GetMapping("/state/{state}")
+	public ResponseEntity<List<Ticket>> showByState(@PathVariable(name = "state") String state) {
 
-		return ticketService.getByState(state);
+		List<Ticket> tickets = ticketService.getByState(state);
+		if (tickets.size() <= 0) {
+			return new ResponseEntity<List<Ticket>>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<Ticket>>(tickets, HttpStatus.OK);
 
 	}
-	
+
 	@GetMapping("/category/{type}")
-	public List<Ticket> showByType(@PathVariable(name = "type") String type) {
+	public ResponseEntity<List<Ticket>> showByType(@PathVariable(name = "type") String type) {
 
-		return ticketService.getAllByType(type);
+		List<Ticket> tickets = ticketService.getAllByType(type);
+		if (tickets.size() <= 0) {
+			return new ResponseEntity<List<Ticket>>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<List<Ticket>>(tickets, HttpStatus.OK);
 
 	}
 
