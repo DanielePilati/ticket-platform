@@ -24,7 +24,7 @@ public class TicketRestController {
 		List<Ticket> tickets = ticketService.getAll();
 
 		if (tickets.size() <= 0) {
-			return new ResponseEntity<List<Ticket>>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<List<Ticket>>(tickets,HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<Ticket>>(tickets, HttpStatus.OK);
 	}
@@ -34,7 +34,7 @@ public class TicketRestController {
 
 		List<Ticket> tickets = ticketService.getByState(state);
 		if (tickets.size() <= 0) {
-			return new ResponseEntity<List<Ticket>>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<List<Ticket>>(tickets,HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<Ticket>>(tickets, HttpStatus.OK);
 
@@ -45,7 +45,7 @@ public class TicketRestController {
 
 		List<Ticket> tickets = ticketService.getAllByType(type);
 		if (tickets.size() <= 0) {
-			return new ResponseEntity<List<Ticket>>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<List<Ticket>>(tickets,HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<Ticket>>(tickets, HttpStatus.OK);
 
