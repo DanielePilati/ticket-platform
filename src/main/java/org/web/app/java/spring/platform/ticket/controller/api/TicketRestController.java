@@ -23,7 +23,7 @@ public class TicketRestController {
 	public ResponseEntity<List<Ticket>> index() {
 		List<Ticket> tickets = ticketService.getAll();
 
-		if (tickets.size() <= 0) {
+		if (tickets.isEmpty()) {
 			return new ResponseEntity<List<Ticket>>(tickets,HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<Ticket>>(tickets, HttpStatus.OK);
@@ -33,7 +33,7 @@ public class TicketRestController {
 	public ResponseEntity<List<Ticket>> showByState(@PathVariable(name = "state") String state) {
 
 		List<Ticket> tickets = ticketService.getByState(state);
-		if (tickets.size() <= 0) {
+		if (tickets.isEmpty()) {
 			return new ResponseEntity<List<Ticket>>(tickets,HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<Ticket>>(tickets, HttpStatus.OK);
@@ -44,7 +44,7 @@ public class TicketRestController {
 	public ResponseEntity<List<Ticket>> showByType(@PathVariable(name = "type") String type) {
 
 		List<Ticket> tickets = ticketService.getAllByType(type);
-		if (tickets.size() <= 0) {
+		if (tickets.isEmpty()) {
 			return new ResponseEntity<List<Ticket>>(tickets,HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<Ticket>>(tickets, HttpStatus.OK);
