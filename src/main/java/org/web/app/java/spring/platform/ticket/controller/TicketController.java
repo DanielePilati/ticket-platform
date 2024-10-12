@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.web.app.java.spring.platform.ticket.model.Note;
 import org.web.app.java.spring.platform.ticket.model.Ticket;
+import org.web.app.java.spring.platform.ticket.service.StateService;
 import org.web.app.java.spring.platform.ticket.service.TicketService;
 import org.web.app.java.spring.platform.ticket.service.TypeService;
 import org.web.app.java.spring.platform.ticket.service.UserService;
@@ -30,11 +31,12 @@ public class TicketController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private TypeService typeService;
 
-	private final String[] TICKET_STATES = { "ToDo", "InProgress", "Completed" };
+	@Autowired
+	private StateService stateService;
 
 	@GetMapping()
 	public String index(Model model, Authentication authentication) {
@@ -55,19 +57,19 @@ public class TicketController {
 	public String show(@PathVariable(name = "id") Integer id, Model model, Authentication authentication) {
 
 		model.addAttribute("ticket", ticketService.getById(id).get());
-		model.addAttribute("states", this.TICKET_STATES);
+		model.addAttribute("states", stateService.getAll());
 		model.addAttribute("user", userService.getByUsername(authentication.getName()).get());
 
 		return "/tickets/show";
 	}
-	
+
 	@PostMapping("/{id}/changestatus")
-	public String changeStatus(@PathVariable(name="id")Integer id,@ModelAttribute("ticket") Ticket formTicket, BindingResult br, Model model,
-			RedirectAttributes attributes) {
-		
-		if(br.hasErrors()) {
+	public String changeStatus(@PathVariable(name = "id") Integer id, @ModelAttribute("ticket") Ticket formTicket,
+			BindingResult br, Model model, RedirectAttributes attributes) {
+
+		if (br.hasErrors()) {
 			model.addAttribute("ticket", ticketService.getById(id).get());
-			model.addAttribute("states", this.TICKET_STATES);
+			model.addAttribute("states", stateService.getAll());
 			return "/tickets/show";
 		}
 		Ticket ticket = ticketService.getById(id).get();
@@ -79,7 +81,6 @@ public class TicketController {
 
 		return "redirect:/tickets";
 	}
-	
 
 	@GetMapping("/show/{id}/addnote")
 	public String createNote(@PathVariable(name = "id") Integer id, Model model, Authentication authentication) {
@@ -106,7 +107,7 @@ public class TicketController {
 
 		model.addAttribute("types", typeService.getAll());
 		model.addAttribute("ticket", new Ticket());
-		model.addAttribute("states", this.TICKET_STATES);
+		model.addAttribute("states", stateService.getAll());
 		model.addAttribute("availableUsers", userService.getAllByRole("USER"));
 
 		return "/tickets/create";
@@ -117,16 +118,16 @@ public class TicketController {
 			RedirectAttributes attributes) {
 
 		if (br.hasErrors()) {
-			model.addAttribute("states", this.TICKET_STATES);
+			model.addAttribute("states", stateService.getAll());
 			model.addAttribute("availableUsers", userService.getAllByRole("USER"));
 			model.addAttribute("types", typeService.getAll());
 			return "/tickets/create";
 		}
-		
+
 		if (formTicket.getUser().isNotAvailable()) {
 			formTicket.getUser().setNotAvailable(false);
-		} 
-		
+		}
+
 		ticketService.saveTicket(formTicket);
 		attributes.addFlashAttribute("tickets", ticketService.getAll());
 		// ALERT
@@ -141,7 +142,7 @@ public class TicketController {
 	public String edit(@PathVariable(name = "id") Integer id, Model model) {
 
 		model.addAttribute("ticket", ticketService.getById(id).get());
-		model.addAttribute("states", this.TICKET_STATES);
+		model.addAttribute("states", stateService.getAll());
 		model.addAttribute("availableUsers", userService.getAllByRole("USER"));
 		model.addAttribute("types", typeService.getAll());
 
@@ -153,7 +154,7 @@ public class TicketController {
 			RedirectAttributes attributes) {
 
 		if (br.hasErrors()) {
-			model.addAttribute("states", this.TICKET_STATES);
+			model.addAttribute("states", stateService.getAll());
 			model.addAttribute("availableUsers", userService.getAllByRole("USER"));
 			model.addAttribute("types", typeService.getAll());
 			return "/tickets/edit";

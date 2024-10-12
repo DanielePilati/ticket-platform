@@ -110,7 +110,7 @@ public class User {
 	public List<Ticket> getOpenTickets() {
 		List<Ticket> openTickets = new ArrayList<Ticket>();
 		for (Ticket ticket : this.tickets) {
-			if (!ticket.getState().equals("Completed")) {
+			if (!ticket.getState().getName().equals("Completed")) {
 				openTickets.add(ticket);
 			}
 		}

@@ -2,3 +2,4 @@ INSERT INTO users (username, password, email, not_available) VALUES ('admin','{n
 INSERT INTO roles (name) VALUES ('ADMIN'),('USER');
 INSERT INTO users_roles (roles_id, user_id) VALUES (1, 1),(2, 2),(2, 3);
 INSERT INTO types (name) VALUES ('Assistance'),('Info'),('Other');
+INSERT INTO states (name) VALUES ('ToDo'),('InProgress'),('Completed');

@@ -39,9 +39,11 @@ public class Ticket {
 	private String text;
 
 	private LocalDateTime createdAt;
-
-	@NotEmpty(message = "The content must not be empty")
-	private String state;
+	
+	@ManyToOne
+	@JoinColumn( name = "state_id", nullable = false)
+	@NotNull(message = "The content must not be empty")
+	private State state;
 
 	@NotNull(message = "The content must not be empty")
 	@ManyToOne
@@ -105,14 +107,6 @@ public class Ticket {
 		this.notes = notes;
 	}
 
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
 	public String getText() {
 		return text;
 	}
@@ -135,5 +129,14 @@ public class Ticket {
 	public void setTypes(List<Type> types) {
 		this.types = types;
 	}
+
+	public State getState() {
+		return state;
+	}
+
+	public void setState(State state) {
+		this.state = state;
+	}
+	
 
 }

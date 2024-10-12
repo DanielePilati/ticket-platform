@@ -58,16 +58,16 @@
 						<label for="form-check1"><b>Select Statement:</b></label>
 						<div class="form-check1 my-2">
 							<th:block th:each="state : ${states}">
-								<input type="radio" class="btn-check" name="|options_${state}|"
-									th:id="|option_${state}|" autocomplete="off" th:value="${state}"
+								<input type="radio" class="btn-check" name="|options_${state.name}|"
+									th:id="|option_${state.name}|" autocomplete="off" th:value="${state.id}"
 									th:field="${ticket.state}">
-								<th:block th:switch="${state}">
+								<th:block th:switch="${state.name}">
 									<label th:case="'Completed'" class="btn btn-sm btn-outline-dark text-success"
-										th:for="|option_${state}|">[[${state}]]</label>
+										th:for="|option_${state.name}|">[[${state.name}]]</label>
 									<label th:case="'ToDo'" class="btn btn-sm btn-outline-dark text-danger"
-										th:for="|option_${state}|">[[${state}]]</label>
+										th:for="|option_${state.name}|">[[${state.name}]]</label>
 									<label th:case="'InProgress'" class="btn btn-sm btn-outline-dark text-warning"
-										th:for="|option_${state}|">[[${state}]]</label>
+										th:for="|option_${state.name}|">[[${state.name}]]</label>
 								</th:block>
 							</th:block>
 							<ul th:if="${#fields.hasErrors()}" class="text-danger mt-2 ps-4">

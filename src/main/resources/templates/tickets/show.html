@@ -85,13 +85,13 @@
 							<div class="row justify-content-between align-items-center">
 								<h6 class="col-auto m-0">Created at: [[*{getDateFormatted()}]]</h6>
 								<!--STATUS COLOR SWITCH-->
-								<th:block th:switch="${ticket.state}">
+								<th:block th:switch="${ticket.state.name}">
 									<span th:case="'Completed'" class="col-auto">Status: <b
-											class="text-success">[[*{state}]]</b></span>
+											class="text-success">[[*{state.name}]]</b></span>
 									<span th:case="'ToDo'" class="col-auto">Status: <b
-											class="text-danger">[[*{state}]]</b></span>
+											class="text-danger">[[*{state.name}]]</b></span>
 									<span th:case="'InProgress'" class="col-auto">Status: <b
-											class="text-warning">[[*{state}]]</b></span>
+											class="text-warning">[[*{state.name}]]</b></span>
 								</th:block>
 							</div>
 						</div>
@@ -104,16 +104,16 @@
 							<!--Status-->
 							<div class="form-check1 mb-2">
 								<th:block th:each="state : ${states}">
-									<input type="radio" class="btn-check" name="|options_${state}|"
-										th:id="|option_${state}|" autocomplete="off" th:value="${state}"
+									<input type="radio" class="btn-check" name="|options_${state.name}|"
+										th:id="|option_${state.name}|" autocomplete="off" th:value="${state.id}"
 										th:field="${ticket.state}">
-									<th:block th:switch="${state}">
+									<th:block th:switch="${state.name}">
 										<label th:case="'Completed'" class="btn btn-sm btn-outline-dark text-success"
-											th:for="|option_${state}|">[[${state}]]</label>
+											th:for="|option_${state.name}|">[[${state.name}]]</label>
 										<label th:case="'ToDo'" class="btn btn-sm btn-outline-dark text-danger"
-											th:for="|option_${state}|">[[${state}]]</label>
+											th:for="|option_${state.name}|">[[${state.name}]]</label>
 										<label th:case="'InProgress'" class="btn btn-sm btn-outline-dark text-warning"
-											th:for="|option_${state}|">[[${state}]]</label>
+											th:for="|option_${state.name}|">[[${state.name}]]</label>
 									</th:block>
 								</th:block>
 							</div>

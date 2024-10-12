@@ -60,15 +60,15 @@
 								<td th:text="${ticket.user.username}"></td>
 								<td th:text="${ticket.notes.size()}"></td>
 								<!--switich color-->
-								<th:block th:switch="${ticket.state}">
+								<th:block th:switch="${ticket.state.name}">
 									<div th:case="'Completed'">
-										<td class="text-success" th:text="${ticket.state}"></td>
+										<td class="text-success" th:text="${ticket.state.name}"></td>
 									</div>
 									<div th:case="'ToDo'">
-										<td class="text-danger" th:text="${ticket.state}"></td>
+										<td class="text-danger" th:text="${ticket.state.name}"></td>
 									</div>
 									<div th:case="'InProgress'">
-										<td class="text-warning" th:text="${ticket.state}"></td>
+										<td class="text-warning" th:text="${ticket.state.name}"></td>
 									</div>
 								</th:block>
 								<td th:text="${ticket.getDateFormatted()}"></td>
