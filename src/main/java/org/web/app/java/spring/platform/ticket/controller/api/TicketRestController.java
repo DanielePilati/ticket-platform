@@ -29,8 +29,8 @@ public class TicketRestController {
 
 	@GetMapping()
 	public ResponseEntity<List<Ticket>> index() {
+		
 		List<Ticket> tickets = ticketService.getAll();
-
 		if (tickets.isEmpty()) {
 			return new ResponseEntity<List<Ticket>>(tickets, HttpStatus.NO_CONTENT);
 		}

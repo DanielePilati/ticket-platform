@@ -43,6 +43,7 @@ public class Ticket {
 	@ManyToOne
 	@JoinColumn( name = "state_id", nullable = false)
 	@NotNull(message = "The content must not be empty")
+	@JsonBackReference
 	private State state;
 
 	@NotNull(message = "The content must not be empty")
