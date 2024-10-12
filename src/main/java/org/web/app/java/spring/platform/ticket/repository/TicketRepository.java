@@ -11,7 +11,7 @@ public interface TicketRepository extends JpaRepository<Ticket, Integer> {
 
 	Optional<Ticket> findById(Integer id);
 	
-	@Query(value = "SELECT t.* FROM tickets t left join ticket_state ts on t.id = ts.ticket_id left join states s on s.id = ts.state_id WHERE s.name = :state", nativeQuery = true)
+	@Query(value = "SELECT t.* FROM tickets t left join states s on s.id = t.state_id WHERE s.name = :state", nativeQuery = true)
 	List<Ticket> findByState(String state);
 	
 	@Query(value = "SELECT t.* FROM tickets t left join ticket_type tt on t.id = tt.ticket_id left join types t2 on t2.id = tt.type_id where t2.name = :type", nativeQuery = true)
